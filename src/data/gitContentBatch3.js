@@ -478,7 +478,7 @@ export const gitContentBatch3 = {
     codeExample: '# Best pinning strategy:\n- Pin 2-3 completed, deployed projects\n- Pin 1 active open-source contribution\n- Avoid pinning empty/boilerplate test folders',
     expectedOutput: 'Your selected projects displayed as elegant card panels at the top of your profile.',
     explanation: [
-      { code: Pins, desc: 'A custom order of cards showing repositories with their programming language, star counts, and descriptions.' }
+      { code: 'Pins', desc: 'A custom order of cards showing repositories with their programming language, star counts, and descriptions.' }
     ],
     realWorldExample: 'A candidate has 50 repositories (most are tutorial copycats). They customize their profile pins to show only their 3 major real-world projects.',
     commonMistakes: [
