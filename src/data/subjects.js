@@ -450,7 +450,8 @@ public class HelloWorld {
       { id: 'git_cheat_sheet', title: '88. GitHub Cheat Sheet' },
       { id: 'git_workflow_recap', title: '89. GitHub Workflow Recap' }
     ],
-    content: gitContent,
+    content: gitContent
+  },
 
   ai: {
     id: 'ai',
