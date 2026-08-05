@@ -673,5 +673,6 @@ Object.assign(
   mysqlContentBatch4,
   mysqlContentBatch5,
   mysqlContentBatch6,
-  mysqlContentBatch7
+  mysqlContentBatch7,
+  mysqlPatch
 );

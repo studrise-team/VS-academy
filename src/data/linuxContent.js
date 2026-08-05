@@ -21,5 +21,6 @@ Object.assign(
   linuxContentBatch6,
   linuxContentBatch7,
   linuxContentBatch8,
-  linuxContentBatch9
+  linuxContentBatch9,
+  linuxPatch
 );
