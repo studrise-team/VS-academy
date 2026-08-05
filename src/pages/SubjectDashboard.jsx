@@ -8,7 +8,7 @@ const subjects = [
   { id: 'java', name: 'Java', chapters: 28, difficulty: 'Intermediate', time: '45h', icon: Code2, color: 'text-red-500', bg: 'bg-red-500/10' },
   { id: 'mysql', name: 'MySQL', chapters: 16, difficulty: 'Intermediate', time: '25h', icon: Database, color: 'text-blue-600', bg: 'bg-blue-600/10' },
   { id: 'linux', name: 'Linux', chapters: 10, difficulty: 'Beginner', time: '15h', icon: Terminal, color: 'text-yellow-500', bg: 'bg-yellow-500/10' },
-  { id: 'git', name: 'Git & GitHub', chapters: 14, difficulty: 'Beginner', time: '12h', icon: GitBranch, color: 'text-slate-800 dark:text-slate-200', bg: 'bg-slate-500/10' },
+  { id: 'git', name: 'Git & GitHub', chapters: 89, difficulty: 'Beginner', time: '25h', icon: GitBranch, color: 'text-slate-800 dark:text-slate-200', bg: 'bg-slate-500/10' },
   { id: 'ai', name: 'Artificial Intelligence', chapters: 8, difficulty: 'Advanced', time: '30h', icon: BrainCircuit, color: 'text-purple-500', bg: 'bg-purple-500/10' },
 ];
 

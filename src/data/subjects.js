@@ -1,6 +1,7 @@
 import { htmlContent } from './htmlContent';
 import { mysqlContent } from './mysqlContent';
 import { linuxContent } from './linuxContent';
+import { gitContent } from './gitContent';
 
 export const subjectsData = {
   java: {
@@ -324,5 +325,130 @@ public class HelloWorld {
       { id: 'linux_command_practice', title: '132. Linux Command Practice' }
     ],
     content: linuxContent
+  },
+
+  git: {
+    id: 'git',
+    name: 'Git & GitHub',
+    description: 'Master version control with Git and collaboration with GitHub.',
+    chapters: [
+      // Module 1: Introduction to GitHub
+      { id: 'git_what_is_github', title: '1. What is GitHub?' },
+      { id: 'git_why_use', title: '2. Why Use GitHub?' },
+      { id: 'git_vs_github', title: '3. Git vs GitHub' },
+      { id: 'git_features', title: '4. Features of GitHub' },
+      { id: 'git_create_account', title: '5. Creating a GitHub Account' },
+      { id: 'git_dashboard_overview', title: '6. GitHub Dashboard Overview' },
+      { id: 'git_install', title: '7. Installing Git' },
+
+      // Module 2: Getting Started
+      { id: 'git_create_repo', title: '8. Creating Your First Repository' },
+      { id: 'git_public_private', title: '9. Public vs Private Repositories' },
+      { id: 'git_repo_structure', title: '10. Repository Structure' },
+      { id: 'git_readme', title: '11. README.md' },
+      { id: 'git_gitignore', title: '12. .gitignore' },
+      { id: 'git_license', title: '13. LICENSE File' },
+      { id: 'git_repo_settings', title: '14. Repository Settings' },
+
+      // Module 3: Connecting Git with GitHub
+      { id: 'git_auth', title: '15. GitHub Authentication' },
+      { id: 'git_pat', title: '16. Personal Access Token (PAT)' },
+      { id: 'git_ssh_keys', title: '17. SSH Keys' },
+      { id: 'git_connect_local', title: '18. Connecting Local Repository' },
+      { id: 'git_first_push', title: '19. First Push to GitHub' },
+      { id: 'git_cloning', title: '20. Cloning a Repository' },
+
+      // Module 4: Daily GitHub Workflow
+      { id: 'git_status', title: '21. git status' },
+      { id: 'git_add', title: '22. git add' },
+      { id: 'git_commit', title: '23. git commit' },
+      { id: 'git_push', title: '24. git push' },
+      { id: 'git_pull', title: '25. git pull' },
+      { id: 'git_fetch', title: '26. git fetch' },
+      { id: 'git_log', title: '27. git log' },
+      { id: 'git_diff', title: '28. git diff' },
+
+      // Module 5: Branching
+      { id: 'git_what_is_branch', title: '29. What is a Branch?' },
+      { id: 'git_create_branch', title: '30. Creating Branches' },
+      { id: 'git_switch_branch', title: '31. Switching Branches' },
+      { id: 'git_merge_branch', title: '32. Merging Branches' },
+      { id: 'git_merge_conflicts', title: '33. Resolving Merge Conflicts' },
+      { id: 'git_delete_branch', title: '34. Deleting Branches' },
+
+      // Module 6: Collaboration
+      { id: 'git_forking', title: '35. Forking Repositories' },
+      { id: 'git_create_pr', title: '36. Creating Pull Requests' },
+      { id: 'git_review_pr', title: '37. Reviewing Pull Requests' },
+      { id: 'git_merge_pr', title: '38. Merging Pull Requests' },
+      { id: 'git_issues', title: '39. Issues' },
+      { id: 'git_discussions', title: '40. Discussions' },
+      { id: 'git_projects_board', title: '41. Projects Board' },
+
+      // Module 7: Portfolio Building
+      { id: 'git_portfolio_profile', title: '42. Creating an Attractive GitHub Profile' },
+      { id: 'git_profile_readme', title: '43. GitHub Profile README' },
+      { id: 'git_pin_repos', title: '44. Pinning Repositories' },
+      { id: 'git_contrib_graph', title: '45. GitHub Contribution Graph' },
+      { id: 'git_add_badges', title: '46. Adding Badges' },
+      { id: 'git_stats_cards', title: '47. GitHub Stats Cards' },
+
+      // Module 8: GitHub Pages
+      { id: 'git_what_is_pages', title: '48. What is GitHub Pages?' },
+      { id: 'git_deploy_html', title: '49. Deploying HTML Website' },
+      { id: 'git_deploy_react', title: '50. Deploying React Website' },
+      { id: 'git_custom_domain', title: '51. Custom Domain' },
+      { id: 'git_update_live_site', title: '52. Updating Live Website' },
+
+      // Module 9: GitHub Actions
+      { id: 'git_intro_ci_cd', title: '53. Introduction to CI/CD' },
+      { id: 'git_actions_overview', title: '54. GitHub Actions Overview' },
+      { id: 'git_first_workflow', title: '55. Creating First Workflow' },
+      { id: 'git_auto_build', title: '56. Automatic Build' },
+      { id: 'git_auto_deploy', title: '57. Automatic Deployment' },
+
+      // Module 10: Open Source
+      { id: 'git_what_is_open_source', title: '58. What is Open Source?' },
+      { id: 'git_find_projects', title: '59. Finding Beginner-Friendly Projects' },
+      { id: 'git_good_first_issue', title: '60. Good First Issue' },
+      { id: 'git_fork_workflow', title: '61. Fork Workflow' },
+      { id: 'git_first_contribution', title: '62. Making Your First Contribution' },
+      { id: 'git_pr_etiquette', title: '63. Pull Request Etiquette' },
+      { id: 'git_code_review_process', title: '64. Code Review Process' },
+
+      // Module 11: Advanced GitHub
+      { id: 'git_releases', title: '65. Releases' },
+      { id: 'git_tags', title: '66. Tags' },
+      { id: 'git_packages', title: '67. GitHub Packages' },
+      { id: 'git_wikis', title: '68. Wikis' },
+      { id: 'git_security_tab', title: '69. Security Tab' },
+      { id: 'git_dependabot', title: '70. Dependabot' },
+      { id: 'git_code_scanning', title: '71. Code Scanning' },
+
+      // Module 12: Best Practices
+      { id: 'git_writing_commits', title: '72. Writing Good Commits' },
+      { id: 'git_organize_repos', title: '73. Organizing Repositories' },
+      { id: 'git_readme_practices', title: '74. README Best Practices' },
+      { id: 'git_documentation', title: '75. Documentation' },
+      { id: 'git_versioning', title: '76. Versioning' },
+      { id: 'git_backup_strategies', title: '77. Backup Strategies' },
+
+      // Module 13: Real-World Projects
+      { id: 'git_project_portfolio', title: '78. Portfolio Repository' },
+      { id: 'git_project_html', title: '79. HTML Project' },
+      { id: 'git_project_java', title: '80. Java Project' },
+      { id: 'git_project_fullstack', title: '81. Full Stack Project' },
+      { id: 'git_project_team', title: '82. Team Collaboration Project' },
+      { id: 'git_project_opensource', title: '83. Open Source Contribution Project' },
+
+      // Module 14: Interview Preparation
+      { id: 'git_interview_questions', title: '84. Top 50 GitHub Interview Questions' },
+      { id: 'git_vs_github_questions', title: '85. Git vs GitHub Questions' },
+      { id: 'git_scenario_questions', title: '86. Scenario-Based Questions' },
+      { id: 'git_common_mistakes', title: '87. Common GitHub Mistakes' },
+      { id: 'git_cheat_sheet', title: '88. GitHub Cheat Sheet' },
+      { id: 'git_workflow_recap', title: '89. GitHub Workflow Recap' }
+    ],
+    content: gitContent
   }
 };
