@@ -182,7 +182,8 @@ public class HelloWorld {
       { id: 'mysql_common_mistakes',  title: '99. Common SQL Mistakes' },
       { id: 'mysql_cheat_sheet',      title: '100. MySQL Cheat Sheet' },
     ],
-    content: mysqlContent,
+    content: mysqlContent
+  },
 
   linux: {
     id: 'linux',
