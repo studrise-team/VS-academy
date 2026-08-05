@@ -37,8 +37,8 @@ export function SubjectDashboard() {
                 <h3 className="text-xl font-bold mb-2">{subject.name}</h3>
                 
                 <div className="flex flex-wrap gap-2 mb-6 text-sm text-textSecondary">
-                  <span className="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md">{subject.chapters} Chapters</span>
-                  <span className="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md">{subject.difficulty}</span>
+                  <span className="bg-slate-500/10 px-2 py-1 rounded-md">{subject.chapters} Chapters</span>
+                  <span className="bg-slate-500/10 px-2 py-1 rounded-md">{subject.difficulty}</span>
                 </div>
                 
                 <div className="mt-auto">
@@ -46,7 +46,7 @@ export function SubjectDashboard() {
                     <span>Progress</span>
                     <span>0%</span>
                   </div>
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div className="w-full bg-slate-500/20 h-2 rounded-full overflow-hidden">
                     <div className="bg-primary h-full w-0 rounded-full"></div>
                   </div>
                 </div>

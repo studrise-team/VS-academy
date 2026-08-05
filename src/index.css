@@ -49,10 +49,10 @@
 
 @layer utilities {
   .glass {
-    @apply bg-opacity-20 backdrop-blur-lg bg-white dark:bg-card dark:bg-opacity-30 border border-[color:var(--border)] shadow-soft;
+    @apply bg-[color:var(--card)] bg-opacity-20 backdrop-blur-lg border border-[color:var(--border)] shadow-soft;
   }
   .glass-card {
-    @apply bg-white dark:bg-card backdrop-blur-md bg-opacity-80 dark:bg-opacity-80 border border-[color:var(--border)] shadow-soft rounded-xl transition-all duration-300;
+    @apply bg-[color:var(--card)] backdrop-blur-md bg-opacity-80 border border-[color:var(--border)] shadow-soft rounded-xl transition-all duration-300;
   }
 }
 

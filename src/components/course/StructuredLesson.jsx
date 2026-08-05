@@ -102,8 +102,8 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end border-b border-borderGlass pb-2 gap-4">
             <h2 className="text-xl font-bold">Code Example</h2>
             <div className="flex space-x-2 no-print">
-              <button onClick={handleCopy} className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm font-semibold transition-all text-foreground">
-                {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+              <button onClick={handleCopy} className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm font-semibold transition-all text-slate-900 dark:text-slate-100">
+                {copied ? <Check className="w-4 h-4 text-green-600 dark:text-green-400" /> : <Copy className="w-4 h-4" />}
                 <span>{copied ? 'Copied!' : 'Copy Code'}</span>
               </button>
             </div>
@@ -230,7 +230,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
             <div className="space-y-4">
               <div>
                 <h3 className="font-semibold text-textSecondary uppercase tracking-wider text-sm mb-2">Your Task</h3>
-                <div className="prose prose-slate dark:prose-invert">
+                <div className="text-slate-900 dark:text-slate-100 font-medium">
                   {(content.practiceExercise || content.miniExercise).task.split('\\n').map((line, i) => (
                     <p key={i} className="my-1">{line}</p>
                   ))}
@@ -240,7 +240,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
                 <div className="pt-4 border-t border-borderGlass">
                   <button 
                     onClick={() => setShowSolution(!showSolution)}
-                    className="px-4 py-2 bg-primary/10 text-primary hover:bg-primary/20 rounded-xl font-semibold transition-all text-sm"
+                    className="px-4 py-2 bg-primary text-white hover:bg-primary/90 rounded-xl font-semibold transition-all text-sm shadow-md"
                   >
                     {showSolution ? 'Hide Solution' : 'Show Solution'}
                   </button>
@@ -255,8 +255,8 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
             </div>
             <div className="space-y-2">
               <h3 className="font-semibold text-textSecondary uppercase tracking-wider text-sm mb-2">Expected Output</h3>
-              <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 overflow-x-auto shadow-inner">
-                 <pre className="text-sm text-amber-300 font-mono leading-relaxed whitespace-pre">
+              <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 overflow-x-auto shadow-inner">
+                 <pre className="text-sm text-green-400 font-mono leading-relaxed whitespace-pre">
                    {((content.practiceExercise && content.practiceExercise.expectedOutput) || (content.miniExercise && content.miniExercise.expectedOutput) || '').split('\\n').join('\n')}
                  </pre>
               </div>
@@ -299,7 +299,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-sm shrink-0">
                       {idx + 1}
                     </span>
-                    <span className="text-foreground font-medium flex-1">{questionText}</span>
+                    <span className="text-slate-900 dark:text-slate-100 font-medium flex-1">{questionText}</span>
                     {answerText && (
                       <ChevronRight className={`w-5 h-5 text-textSecondary shrink-0 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
                     )}
@@ -336,7 +336,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
                 <div className="grid sm:grid-cols-2 gap-4">
                   {q.options.map((option, idx) => {
                     const isSelected = quizAnswers[qIdx] === option;
-                    const isCorrect = option === q.answer;
+                    const isCorrect = option === (q.answer || q.correctAnswer);
                     
                     let buttonStyle = "bg-card border-borderGlass hover:border-primary hover:bg-primary/5 text-foreground";
                     if (showQuizResults) {
@@ -382,7 +382,10 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
               <>
                 <div className="text-lg font-bold">
                   Score: <span className="text-indigo-500">
-                    {Object.keys(quizAnswers).filter(k => quizAnswers[k] === (content.quiz || [content.quickQuiz])[k].answer).length}
+                    {Object.keys(quizAnswers).filter(k => {
+                      const quizItem = (content.quiz || [content.quickQuiz])[k];
+                      return quizAnswers[k] === (quizItem.answer || quizItem.correctAnswer);
+                    }).length}
                   </span> / {(content.quiz || [content.quickQuiz]).length}
                 </div>
                 <button 

@@ -1,40 +1,536 @@
+import { javaContent } from './javaContent';
 import { htmlContent } from './htmlContent';
 import { mysqlContent } from './mysqlContent';
 import { linuxContent } from './linuxContent';
 import { gitContent } from './gitContent';
 
 export const subjectsData = {
-  java: {
+    java: {
     id: 'java',
     name: 'Java',
     chapters: [
-      { id: 'intro', title: 'Introduction' },
-      { id: 'history', title: 'History' },
-      { id: 'variables', title: 'Variables' },
-      { id: 'oop', title: 'Object Oriented Programming' },
+          {
+                "id": "java_introduction_to_java",
+                "title": "1. Introduction to Java"
+          },
+          {
+                "id": "java_history_of_java",
+                "title": "2. History of Java"
+          },
+          {
+                "id": "java_features_of_java",
+                "title": "3. Features of Java"
+          },
+          {
+                "id": "java_java_architecture_jdk_jre_jvm",
+                "title": "4. Java Architecture (JDK, JRE, JVM)"
+          },
+          {
+                "id": "java_installing_java",
+                "title": "5. Installing Java"
+          },
+          {
+                "id": "java_installing_vs_code_intellij_idea",
+                "title": "6. Installing VS Code / IntelliJ IDEA"
+          },
+          {
+                "id": "java_writing_your_first_java_program",
+                "title": "7. Writing Your First Java Program"
+          },
+          {
+                "id": "java_java_program_structure",
+                "title": "8. Java Program Structure"
+          },
+          {
+                "id": "java_compilation_execution_process",
+                "title": "9. Compilation & Execution Process"
+          },
+          {
+                "id": "java_variables",
+                "title": "10. Variables"
+          },
+          {
+                "id": "java_data_types",
+                "title": "11. Data Types"
+          },
+          {
+                "id": "java_type_casting",
+                "title": "12. Type Casting"
+          },
+          {
+                "id": "java_operators",
+                "title": "13. Operators"
+          },
+          {
+                "id": "java_user_input_scanner",
+                "title": "14. User Input (Scanner)"
+          },
+          {
+                "id": "java_comments",
+                "title": "15. Comments"
+          },
+          {
+                "id": "java_keywords",
+                "title": "16. Keywords"
+          },
+          {
+                "id": "java_identifiers",
+                "title": "17. Identifiers"
+          },
+          {
+                "id": "java_literals",
+                "title": "18. Literals"
+          },
+          {
+                "id": "java_if_statement",
+                "title": "19. if Statement"
+          },
+          {
+                "id": "java_if_else_statement",
+                "title": "20. if-else Statement"
+          },
+          {
+                "id": "java_nested_if",
+                "title": "21. Nested if"
+          },
+          {
+                "id": "java_switch_statement",
+                "title": "22. switch Statement"
+          },
+          {
+                "id": "java_for_loop",
+                "title": "23. for Loop"
+          },
+          {
+                "id": "java_while_loop",
+                "title": "24. while Loop"
+          },
+          {
+                "id": "java_do_while_loop",
+                "title": "25. do-while Loop"
+          },
+          {
+                "id": "java_break_statement",
+                "title": "26. break Statement"
+          },
+          {
+                "id": "java_continue_statement",
+                "title": "27. continue Statement"
+          },
+          {
+                "id": "java_one_dimensional_arrays",
+                "title": "28. One-Dimensional Arrays"
+          },
+          {
+                "id": "java_two_dimensional_arrays",
+                "title": "29. Two-Dimensional Arrays"
+          },
+          {
+                "id": "java_array_operations",
+                "title": "30. Array Operations"
+          },
+          {
+                "id": "java_enhanced_for_loop",
+                "title": "31. Enhanced for Loop"
+          },
+          {
+                "id": "java_array_sorting",
+                "title": "32. Array Sorting"
+          },
+          {
+                "id": "java_searching_in_arrays",
+                "title": "33. Searching in Arrays"
+          },
+          {
+                "id": "java_array_practice_problems",
+                "title": "34. Array Practice Problems"
+          },
+          {
+                "id": "java_introduction_to_methods",
+                "title": "35. Introduction to Methods"
+          },
+          {
+                "id": "java_method_parameters",
+                "title": "36. Method Parameters"
+          },
+          {
+                "id": "java_return_type",
+                "title": "37. Return Type"
+          },
+          {
+                "id": "java_method_overloading",
+                "title": "38. Method Overloading"
+          },
+          {
+                "id": "java_recursion",
+                "title": "39. Recursion"
+          },
+          {
+                "id": "java_variable_scope",
+                "title": "40. Variable Scope"
+          },
+          {
+                "id": "java_introduction_to_oop",
+                "title": "41. Introduction to OOP"
+          },
+          {
+                "id": "java_classes_objects",
+                "title": "42. Classes & Objects"
+          },
+          {
+                "id": "java_constructors",
+                "title": "43. Constructors"
+          },
+          {
+                "id": "java_this_keyword",
+                "title": "44. this Keyword"
+          },
+          {
+                "id": "java_static_keyword",
+                "title": "45. static Keyword"
+          },
+          {
+                "id": "java_final_keyword",
+                "title": "46. final Keyword"
+          },
+          {
+                "id": "java_encapsulation",
+                "title": "47. Encapsulation"
+          },
+          {
+                "id": "java_inheritance",
+                "title": "48. Inheritance"
+          },
+          {
+                "id": "java_polymorphism",
+                "title": "49. Polymorphism"
+          },
+          {
+                "id": "java_method_overriding",
+                "title": "50. Method Overriding"
+          },
+          {
+                "id": "java_method_overloading_oop",
+                "title": "51. Method Overloading"
+          },
+          {
+                "id": "java_abstraction",
+                "title": "52. Abstraction"
+          },
+          {
+                "id": "java_interfaces",
+                "title": "53. Interfaces"
+          },
+          {
+                "id": "java_string_class",
+                "title": "54. String Class"
+          },
+          {
+                "id": "java_string_methods",
+                "title": "55. String Methods"
+          },
+          {
+                "id": "java_stringbuilder",
+                "title": "56. StringBuilder"
+          },
+          {
+                "id": "java_stringbuffer",
+                "title": "57. StringBuffer"
+          },
+          {
+                "id": "java_string_comparison",
+                "title": "58. String Comparison"
+          },
+          {
+                "id": "java_string_practice_problems",
+                "title": "59. String Practice Problems"
+          },
+          {
+                "id": "java_introduction_to_exceptions",
+                "title": "60. Introduction to Exceptions"
+          },
+          {
+                "id": "java_try_catch",
+                "title": "61. try-catch"
+          },
+          {
+                "id": "java_finally",
+                "title": "62. finally"
+          },
+          {
+                "id": "java_throw",
+                "title": "63. throw"
+          },
+          {
+                "id": "java_throws",
+                "title": "64. throws"
+          },
+          {
+                "id": "java_custom_exceptions",
+                "title": "65. Custom Exceptions"
+          },
+          {
+                "id": "java_introduction_to_collections",
+                "title": "66. Introduction to Collections"
+          },
+          {
+                "id": "java_arraylist",
+                "title": "67. ArrayList"
+          },
+          {
+                "id": "java_linkedlist",
+                "title": "68. LinkedList"
+          },
+          {
+                "id": "java_vector",
+                "title": "69. Vector"
+          },
+          {
+                "id": "java_stack",
+                "title": "70. Stack"
+          },
+          {
+                "id": "java_queue",
+                "title": "71. Queue"
+          },
+          {
+                "id": "java_priorityqueue",
+                "title": "72. PriorityQueue"
+          },
+          {
+                "id": "java_hashset",
+                "title": "73. HashSet"
+          },
+          {
+                "id": "java_linkedhashset",
+                "title": "74. LinkedHashSet"
+          },
+          {
+                "id": "java_treeset",
+                "title": "75. TreeSet"
+          },
+          {
+                "id": "java_hashmap",
+                "title": "76. HashMap"
+          },
+          {
+                "id": "java_linkedhashmap",
+                "title": "77. LinkedHashMap"
+          },
+          {
+                "id": "java_treemap",
+                "title": "78. TreeMap"
+          },
+          {
+                "id": "java_iterator",
+                "title": "79. Iterator"
+          },
+          {
+                "id": "java_reading_files",
+                "title": "80. Reading Files"
+          },
+          {
+                "id": "java_writing_files",
+                "title": "81. Writing Files"
+          },
+          {
+                "id": "java_bufferedreader",
+                "title": "82. BufferedReader"
+          },
+          {
+                "id": "java_bufferedwriter",
+                "title": "83. BufferedWriter"
+          },
+          {
+                "id": "java_file_class",
+                "title": "84. File Class"
+          },
+          {
+                "id": "java_threads",
+                "title": "85. Threads"
+          },
+          {
+                "id": "java_thread_lifecycle",
+                "title": "86. Thread Lifecycle"
+          },
+          {
+                "id": "java_runnable_interface",
+                "title": "87. Runnable Interface"
+          },
+          {
+                "id": "java_synchronization",
+                "title": "88. Synchronization"
+          },
+          {
+                "id": "java_executor_framework",
+                "title": "89. Executor Framework"
+          },
+          {
+                "id": "java_lambda_expressions",
+                "title": "90. Lambda Expressions"
+          },
+          {
+                "id": "java_functional_interfaces",
+                "title": "91. Functional Interfaces"
+          },
+          {
+                "id": "java_stream_api",
+                "title": "92. Stream API"
+          },
+          {
+                "id": "java_method_references",
+                "title": "93. Method References"
+          },
+          {
+                "id": "java_optional_class",
+                "title": "94. Optional Class"
+          },
+          {
+                "id": "java_date_time_api",
+                "title": "95. Date & Time API"
+          },
+          {
+                "id": "java_jdbc_introduction",
+                "title": "96. JDBC Introduction"
+          },
+          {
+                "id": "java_connecting_java_with_mysql",
+                "title": "97. Connecting Java with MySQL"
+          },
+          {
+                "id": "java_crud_operations_using_jdbc",
+                "title": "98. CRUD Operations using JDBC"
+          },
+          {
+                "id": "java_preparedstatement",
+                "title": "99. PreparedStatement"
+          },
+          {
+                "id": "java_resultset",
+                "title": "100. ResultSet"
+          },
+          {
+                "id": "java_student_management_system",
+                "title": "101. Student Management System"
+          },
+          {
+                "id": "java_bank_management_system",
+                "title": "102. Bank Management System"
+          },
+          {
+                "id": "java_library_management_system",
+                "title": "103. Library Management System"
+          },
+          {
+                "id": "java_atm_simulation",
+                "title": "104. ATM Simulation"
+          },
+          {
+                "id": "java_employee_management_system",
+                "title": "105. Employee Management System"
+          },
+          {
+                "id": "java_quiz_application",
+                "title": "106. Quiz Application"
+          },
+          {
+                "id": "java_expense_tracker",
+                "title": "107. Expense Tracker"
+          },
+          {
+                "id": "java_contact_management_system",
+                "title": "108. Contact Management System"
+          },
+          {
+                "id": "java_time_complexity_basics",
+                "title": "109. Time Complexity Basics"
+          },
+          {
+                "id": "java_common_coding_patterns",
+                "title": "110. Common Coding Patterns"
+          },
+          {
+                "id": "java_string_problems",
+                "title": "111. String Problems"
+          },
+          {
+                "id": "java_array_problems",
+                "title": "112. Array Problems"
+          },
+          {
+                "id": "java_oop_interview_questions",
+                "title": "113. OOP Interview Questions"
+          },
+          {
+                "id": "java_collections_interview_questions",
+                "title": "114. Collections Interview Questions"
+          },
+          {
+                "id": "java_exception_handling_interview_questions",
+                "title": "115. Exception Handling Interview Questions"
+          },
+          {
+                "id": "java_java_coding_interview_questions",
+                "title": "116. Java Coding Interview Questions"
+          },
+          {
+                "id": "java_servlet_basics",
+                "title": "117. Servlet Basics"
+          },
+          {
+                "id": "java_jsp_basics",
+                "title": "118. JSP Basics"
+          },
+          {
+                "id": "java_maven",
+                "title": "119. Maven"
+          },
+          {
+                "id": "java_spring_boot_introduction",
+                "title": "120. Spring Boot Introduction"
+          },
+          {
+                "id": "java_rest_apis",
+                "title": "121. REST APIs"
+          },
+          {
+                "id": "java_json_handling",
+                "title": "122. JSON Handling"
+          },
+          {
+                "id": "java_dependency_injection",
+                "title": "123. Dependency Injection"
+          },
+          {
+                "id": "java_spring_data_jpa",
+                "title": "124. Spring Data JPA"
+          },
+          {
+                "id": "java_hibernate_basics",
+                "title": "125. Hibernate Basics"
+          },
+          {
+                "id": "java_top_100_java_interview_questions",
+                "title": "126. Top 100 Java Interview Questions"
+          },
+          {
+                "id": "java_scenario_based_questions",
+                "title": "127. Scenario-Based Questions"
+          },
+          {
+                "id": "java_java_cheat_sheet",
+                "title": "128. Java Cheat Sheet"
+          },
+          {
+                "id": "java_coding_challenges",
+                "title": "129. Coding Challenges"
+          },
+          {
+                "id": "java_java_roadmap",
+                "title": "130. Java Roadmap"
+          }
     ],
-    content: {
-      'intro': `
-# Introduction to Java
-Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.
-
-## Why Learn Java?
-- **Platform Independent:** Write Once, Run Anywhere (WORA).
-- **Object-Oriented:** Allows you to create modular programs and reusable code.
-- **Large Community:** Massive support and open-source libraries.
-
-### Basic Syntax Example
-Here is a simple Hello World program in Java:
-
-\`\`\`java
-public class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-}
-\`\`\`
-      `
-    }
+    content: javaContent
   },
   html: {
     id: 'html',
