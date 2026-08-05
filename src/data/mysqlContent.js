@@ -662,3 +662,11 @@ export const mysqlContent = {
     references: commonReferences
   }
 };
+
+Object.assign(
+  mysqlContent,
+  mysqlContentBatch2,
+  mysqlContentBatch3,
+  mysqlContentBatch4,
+  mysqlContentBatch5
+);
