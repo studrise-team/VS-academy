@@ -189,7 +189,7 @@ public class HelloWorld {
     id: 'linux',
     name: 'Linux',
     description: 'Master Linux fundamentals, commands, bash scripting, and DevOps essentials.',
-    topics: [
+    chapters: [
       { id: 'linux_what_is', title: '1. What is Linux?' },
       { id: 'linux_history', title: '2. History of Linux' },
       { id: 'linux_distributions', title: '3. Linux Distributions' },
