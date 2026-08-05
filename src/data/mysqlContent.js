@@ -1,3 +1,4 @@
+import { mysqlPatch } from './mysqlPatch';
 import { mysqlContentBatch2 } from './mysqlContentBatch2';
 import { mysqlContentBatch3 } from './mysqlContentBatch3';
 import { mysqlContentBatch4 } from './mysqlContentBatch4';
