@@ -19,7 +19,7 @@ export function Navbar() {
           <input
             type="text"
             placeholder="Search topics, code, interview questions..."
-            className="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border border-borderGlass rounded-full text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+            className="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border border-borderGlass rounded-full text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
           />
         </div>
 

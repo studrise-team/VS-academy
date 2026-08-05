@@ -18,10 +18,11 @@ export function CodeBlock({ node, inline, className, children, ...props }) {
           <span className="text-xs font-mono text-slate-400">{match[1]}</span>
           <button
             onClick={handleCopy}
-            className="text-slate-400 hover:text-white transition-colors"
+            className="inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded-lg transition-colors border border-slate-700"
             title="Copy code"
           >
-            {copied ? <Check className="w-4 h-4 text-success" /> : <Copy className="w-4 h-4" />}
+            {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
+            <span>{copied ? 'Copied' : 'Copy'}</span>
           </button>
         </div>
         <div className="p-4 overflow-x-auto text-sm font-mono text-slate-50">

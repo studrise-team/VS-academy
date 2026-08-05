@@ -42,7 +42,8 @@ export function SubjectView() {
   }
 
   const rawContent = subject.content[activeChapter];
-  const isStructured = rawContent?.isStructured;
+  // Structured if content is a plain object (AI/Git lessons), markdown if it's a string
+  const isStructured = rawContent !== null && typeof rawContent === 'object';
   const markdownContent = !isStructured && (rawContent || "# Content Coming Soon\nWe are working hard to bring you this content.");
 
   const currentIdx = subject.chapters.findIndex(c => c.id === activeChapter);

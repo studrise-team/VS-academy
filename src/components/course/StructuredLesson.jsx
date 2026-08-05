@@ -102,8 +102,8 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end border-b border-borderGlass pb-2 gap-4">
             <h2 className="text-xl font-bold">Code Example</h2>
             <div className="flex space-x-2 no-print">
-              <button onClick={handleCopy} className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm font-semibold transition-all text-slate-900 dark:text-slate-100">
-                {copied ? <Check className="w-4 h-4 text-green-600 dark:text-green-400" /> : <Copy className="w-4 h-4" />}
+              <button onClick={handleCopy} className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 text-sm font-semibold transition-all shadow-sm">
+                {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-primary" />}
                 <span>{copied ? 'Copied!' : 'Copy Code'}</span>
               </button>
             </div>
@@ -269,11 +269,15 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
       {content.summary && (
         <section className="space-y-4">
           <h2 className="text-xl font-bold border-b border-borderGlass pb-2">Summary</h2>
-          <ul className="list-disc list-inside space-y-2 text-textSecondary marker:text-primary">
-            {content.summary.map((item, idx) => (
-              <li key={idx} className="leading-relaxed">{item}</li>
-            ))}
-          </ul>
+          {Array.isArray(content.summary) ? (
+            <ul className="list-disc list-inside space-y-2 text-textSecondary marker:text-primary">
+              {content.summary.map((item, idx) => (
+                <li key={idx} className="leading-relaxed">{item}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-textSecondary leading-relaxed">{content.summary}</p>
+          )}
         </section>
       )}
 
@@ -416,7 +420,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-card border border-borderGlass hover:border-primary hover:text-primary transition-all text-textSecondary font-medium"
               >
-                <span>{ref.label}</span>
+                <span>{ref.name || ref.label}</span>
                 <ExternalLink className="w-4 h-4" />
               </a>
             ))}
