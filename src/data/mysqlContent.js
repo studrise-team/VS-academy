@@ -2,6 +2,8 @@ import { mysqlContentBatch2 } from './mysqlContentBatch2';
 import { mysqlContentBatch3 } from './mysqlContentBatch3';
 import { mysqlContentBatch4 } from './mysqlContentBatch4';
 import { mysqlContentBatch5 } from './mysqlContentBatch5';
+import { mysqlContentBatch6 } from './mysqlContentBatch6';
+import { mysqlContentBatch7 } from './mysqlContentBatch7';
 
 const commonReferences = [
   { label: 'W3Schools MySQL', url: 'https://www.w3schools.com/mysql/' },
@@ -668,5 +670,7 @@ Object.assign(
   mysqlContentBatch2,
   mysqlContentBatch3,
   mysqlContentBatch4,
-  mysqlContentBatch5
+  mysqlContentBatch5,
+  mysqlContentBatch6,
+  mysqlContentBatch7
 );
