@@ -327,8 +327,8 @@ public class HelloWorld {
     content: linuxContent
   },
 
-  git: {
-    id: 'git',
+  github: {
+    id: 'github',
     name: 'Git & GitHub',
     description: 'Master version control with Git and collaboration with GitHub.',
     chapters: [
