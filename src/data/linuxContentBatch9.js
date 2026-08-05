@@ -431,7 +431,7 @@ export const linuxContentBatch9 = {
     interviewQuestions: [
       { q: 'What is the difference between `Ctrl+C` and `Ctrl+Z`?', a: '`Ctrl+C` sends the SIGINT signal, cleanly terminating/killing the process. `Ctrl+Z` sends the SIGTSTP signal, which PAUSES the process and throws it into the background. You can resume it later with the `fg` command.' }
     ],
-    summary: ['Ctrl+C kills.', 'Ctrl+L clears.', `/etc` = config, `/var` = logs.'],
+    summary: ['Ctrl+C kills.', 'Ctrl+L clears.', '`/etc` = config, `/var` = logs.'],
     references: commonReferences
   },
 
