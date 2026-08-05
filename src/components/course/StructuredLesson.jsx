@@ -10,9 +10,11 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
   const [notes, setNotes] = useState(() => localStorage.getItem(notesKey) || '');
   const [isCompleted, setIsCompleted] = useState(() => localStorage.getItem(completedKey) === 'true');
   const [isBookmarked, setIsBookmarked] = useState(() => localStorage.getItem(bookmarkKey) === 'true');
-  const [showPreview, setShowPreview] = useState(false);
-  const [selectedQuizOption, setSelectedQuizOption] = useState(null);
+  const [quizAnswers, setQuizAnswers] = useState({});
+  const [showQuizResults, setShowQuizResults] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [showSolution, setShowSolution] = useState(false);
+  const [expandedInterviewQ, setExpandedInterviewQ] = useState(null);
 
   // Sync to local storage
   useEffect(() => { localStorage.setItem(notesKey, notes); }, [notes, notesKey]);
@@ -25,8 +27,10 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
 
   // Reset states when content changes
   useEffect(() => {
-    setShowPreview(false);
-    setSelectedQuizOption(null);
+    setQuizAnswers({});
+    setShowQuizResults(false);
+    setShowSolution(false);
+    setExpandedInterviewQ(null);
   }, [content]);
 
   const handleCopy = () => {
@@ -217,24 +221,44 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
         </section>
       )}
 
-      {/* Mini Exercise */}
-      {content.miniExercise && (
+      {/* Practice Exercise */}
+      {(content.practiceExercise || content.miniExercise) && (
         <section className="space-y-4 p-8 bg-card border border-borderGlass rounded-3xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-2 h-full bg-primary"></div>
-          <h2 className="text-2xl font-bold mb-4">Mini Exercise</h2>
+          <h2 className="text-2xl font-bold mb-4">Practice Exercise</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-2">
-              <h3 className="font-semibold text-textSecondary uppercase tracking-wider text-sm">Your Task</h3>
-              <div className="prose prose-slate dark:prose-invert">
-                {content.miniExercise.task.split('\\n').map((line, i) => (
-                  <p key={i} className="my-1">{line}</p>
-                ))}
+            <div className="space-y-4">
+              <div>
+                <h3 className="font-semibold text-textSecondary uppercase tracking-wider text-sm mb-2">Your Task</h3>
+                <div className="prose prose-slate dark:prose-invert">
+                  {(content.practiceExercise || content.miniExercise).task.split('\\n').map((line, i) => (
+                    <p key={i} className="my-1">{line}</p>
+                  ))}
+                </div>
               </div>
+              {(content.practiceExercise?.solution) && (
+                <div className="pt-4 border-t border-borderGlass">
+                  <button 
+                    onClick={() => setShowSolution(!showSolution)}
+                    className="px-4 py-2 bg-primary/10 text-primary hover:bg-primary/20 rounded-xl font-semibold transition-all text-sm"
+                  >
+                    {showSolution ? 'Hide Solution' : 'Show Solution'}
+                  </button>
+                  
+                  {showSolution && (
+                    <div className="mt-4 bg-slate-900 rounded-xl p-4 border border-slate-800">
+                      <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap">{content.practiceExercise.solution}</pre>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
             <div className="space-y-2">
-              <h3 className="font-semibold text-textSecondary uppercase tracking-wider text-sm">Expected Output</h3>
-              <div className="bg-slate-100 dark:bg-slate-900 border border-borderGlass rounded-xl p-4 overflow-hidden relative">
-                <div className="pointer-events-none opacity-50 prose prose-slate dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: content.miniExercise.expectedOutput }} />
+              <h3 className="font-semibold text-textSecondary uppercase tracking-wider text-sm mb-2">Expected Output</h3>
+              <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 overflow-x-auto shadow-inner">
+                 <pre className="text-sm text-amber-300 font-mono leading-relaxed whitespace-pre">
+                   {((content.practiceExercise && content.practiceExercise.expectedOutput) || (content.miniExercise && content.miniExercise.expectedOutput) || '').split('\\n').join('\n')}
+                 </pre>
               </div>
             </div>
           </div>
@@ -258,72 +282,121 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
         <section className="space-y-4">
           <h2 className="text-xl font-bold border-b border-borderGlass pb-2">Interview Questions</h2>
           <div className="space-y-3">
-            {content.interviewQuestions.map((q, idx) => (
-              <div key={idx} className="flex items-start space-x-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-borderGlass">
-                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-sm shrink-0">
-                  {idx + 1}
-                </span>
-                <span className="text-foreground font-medium">{q}</span>
-              </div>
-            ))}
+            {content.interviewQuestions.map((q, idx) => {
+              // Support both old string format and new object {q, a} format
+              const isObject = typeof q === 'object';
+              const questionText = isObject ? q.q : q;
+              const answerText = isObject ? q.a : null;
+              const isExpanded = expandedInterviewQ === idx;
+
+              return (
+                <div key={idx} className="bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-borderGlass overflow-hidden transition-all">
+                  <button 
+                    onClick={() => setExpandedInterviewQ(isExpanded ? null : idx)}
+                    className="w-full flex items-start space-x-3 p-4 text-left hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    disabled={!answerText}
+                  >
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-sm shrink-0">
+                      {idx + 1}
+                    </span>
+                    <span className="text-foreground font-medium flex-1">{questionText}</span>
+                    {answerText && (
+                      <ChevronRight className={`w-5 h-5 text-textSecondary shrink-0 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                    )}
+                  </button>
+                  {isExpanded && answerText && (
+                    <div className="px-4 pb-4 pt-2 ml-9 border-t border-borderGlass border-dashed">
+                      <p className="text-textSecondary leading-relaxed whitespace-pre-line">{answerText}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </section>
       )}
 
-      {/* Quick Quiz */}
-      {content.quickQuiz && (
+      {/* Quiz Section (5 MCQs) */}
+      {(content.quiz || content.quickQuiz) && (
         <section className="space-y-6 p-8 bg-indigo-500/5 border border-indigo-500/20 rounded-3xl no-print">
           <div className="flex items-center space-x-3 mb-6">
             <div className="p-2 bg-indigo-500/20 rounded-lg text-indigo-600 dark:text-indigo-400">
               <AlertCircle className="w-6 h-6" />
             </div>
-            <h2 className="text-2xl font-bold">Quick Quiz</h2>
+            <h2 className="text-2xl font-bold">Concept Quiz</h2>
           </div>
-          <p className="text-lg font-medium text-foreground mb-6">{content.quickQuiz.question}</p>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {content.quickQuiz.options.map((option, idx) => {
-              const isSelected = selectedQuizOption === option;
-              const isCorrect = option === content.quickQuiz.answer;
-              const showResult = selectedQuizOption !== null;
-              
-              let buttonStyle = "bg-card border-borderGlass hover:border-primary hover:bg-primary/5 text-foreground";
-              if (showResult) {
-                if (isCorrect) {
-                  buttonStyle = "bg-green-500/10 border-green-500 text-green-700 dark:text-green-300 ring-2 ring-green-500/20";
-                } else if (isSelected) {
-                  buttonStyle = "bg-red-500/10 border-red-500 text-red-700 dark:text-red-300 ring-2 ring-red-500/20";
-                } else {
-                  buttonStyle = "bg-card border-borderGlass opacity-50";
-                }
-              }
+          
+          <div className="space-y-8">
+            {(content.quiz || [content.quickQuiz]).map((q, qIdx) => (
+              <div key={qIdx} className="space-y-4">
+                <p className="text-lg font-medium text-foreground">
+                  <span className="text-indigo-500 font-bold mr-2">{qIdx + 1}.</span> 
+                  {q.question}
+                </p>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {q.options.map((option, idx) => {
+                    const isSelected = quizAnswers[qIdx] === option;
+                    const isCorrect = option === q.answer;
+                    
+                    let buttonStyle = "bg-card border-borderGlass hover:border-primary hover:bg-primary/5 text-foreground";
+                    if (showQuizResults) {
+                      if (isCorrect) {
+                        buttonStyle = "bg-green-500/10 border-green-500 text-green-700 dark:text-green-300 ring-2 ring-green-500/20";
+                      } else if (isSelected) {
+                        buttonStyle = "bg-red-500/10 border-red-500 text-red-700 dark:text-red-300 ring-2 ring-red-500/20";
+                      } else {
+                        buttonStyle = "bg-card border-borderGlass opacity-50";
+                      }
+                    } else if (isSelected) {
+                      buttonStyle = "bg-indigo-500/10 border-indigo-500 text-indigo-700 dark:text-indigo-300 ring-2 ring-indigo-500/20";
+                    }
 
-              return (
-                <button
-                  key={idx}
-                  disabled={showResult}
-                  onClick={() => setSelectedQuizOption(option)}
-                  className={`p-4 rounded-xl border-2 text-left font-semibold transition-all ${buttonStyle} flex justify-between items-center`}
-                >
-                  <span>{option}</span>
-                  {showResult && isCorrect && <CheckCircle2 className="w-5 h-5 text-green-500" />}
-                  {showResult && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-500" />}
-                </button>
-              );
-            })}
+                    return (
+                      <button
+                        key={idx}
+                        disabled={showQuizResults}
+                        onClick={() => setQuizAnswers(prev => ({ ...prev, [qIdx]: option }))}
+                        className={`p-4 rounded-xl border-2 text-left font-semibold transition-all ${buttonStyle} flex justify-between items-center`}
+                      >
+                        <span>{option}</span>
+                        {showQuizResults && isCorrect && <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 ml-2" />}
+                        {showQuizResults && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-500 shrink-0 ml-2" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
-          {selectedQuizOption !== null && (
-            <div className="mt-6 pt-4 border-t border-indigo-500/20 flex items-center justify-between">
-              <p className={`font-semibold ${selectedQuizOption === content.quickQuiz.answer ? 'text-green-600' : 'text-red-600'}`}>
-                {selectedQuizOption === content.quickQuiz.answer ? '🎉 Correct!' : '❌ Not quite right. Try again next time!'}
-              </p>
+
+          <div className="mt-8 pt-6 border-t border-indigo-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+            {!showQuizResults ? (
               <button 
-                onClick={() => setSelectedQuizOption(null)}
-                className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 underline"
+                onClick={() => setShowQuizResults(true)}
+                disabled={Object.keys(quizAnswers).length < (content.quiz?.length || 1)}
+                className="w-full sm:w-auto px-8 py-3 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-colors"
               >
-                Reset Quiz
+                Submit Answers
               </button>
-            </div>
-          )}
+            ) : (
+              <>
+                <div className="text-lg font-bold">
+                  Score: <span className="text-indigo-500">
+                    {Object.keys(quizAnswers).filter(k => quizAnswers[k] === (content.quiz || [content.quickQuiz])[k].answer).length}
+                  </span> / {(content.quiz || [content.quickQuiz]).length}
+                </div>
+                <button 
+                  onClick={() => {
+                    setQuizAnswers({});
+                    setShowQuizResults(false);
+                  }}
+                  className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 underline"
+                >
+                  Retake Quiz
+                </button>
+              </>
+            )}
+          </div>
         </section>
       )}
 

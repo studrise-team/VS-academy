@@ -1,48 +1,48 @@
-// Batch 2: Module 3 (CRUD) + Module 4 (Filtering) — Topics 17-34
+const commonReferences = [
+  { label: 'W3Schools MySQL', url: 'https://www.w3schools.com/mysql/' },
+  { label: 'MySQL Official Docs', url: 'https://dev.mysql.com/doc/refman/8.0/en/' }
+];
+
 export const mysqlContentBatch2 = {
-
-  // ─── MODULE 3: CRUD Operations ────────────────────────────────────────────────
-
   'mysql_insert': {
     isStructured: true,
     title: '17. INSERT Statement',
     difficulty: 'Beginner',
     readingTime: '5 min',
-    definition: 'INSERT INTO adds new rows of data into a table.',
-    whyUseIt: 'INSERT is the "C" in CRUD. Without it, you cannot add any data to your database.',
-    syntax: 'INSERT INTO table_name (col1, col2) VALUES (val1, val2);\\nINSERT INTO table_name VALUES (val1, val2, ...); -- all columns\\nINSERT INTO table_name (col1) VALUES (v1),(v2),(v3); -- multiple rows',
-    codeExample: '-- Insert one row:\\nINSERT INTO students (name, email, age, grade)\\nVALUES (\'Ravi Kumar\', \'ravi@example.com\', 20, \'A\');\\n\\n-- Insert multiple rows at once:\\nINSERT INTO students (name, email, age, grade) VALUES\\n  (\'Priya Sharma\', \'priya@example.com\', 21, \'B\'),\\n  (\'Arjun Patel\',  \'arjun@example.com\', 19, \'A\'),\\n  (\'Sneha Reddy\',  \'sneha@example.com\', 22, \'C\');\\n\\n-- Verify:\\nSELECT * FROM students;',
-    hasLiveOutput: false, expectedOutput: 'Query OK, 1 row affected (0.01 sec)\\nQuery OK, 3 rows affected (0.01 sec)\\nRecords: 3  Duplicates: 0  Warnings: 0',
+    definition: 'The INSERT INTO statement is used to add new rows of data into a table.',
+    whyUseIt: 'Without INSERT, your tables would be completely empty.',
+    syntax: '-- Insert all columns:\nINSERT INTO table_name VALUES (value1, value2);\n\n-- Insert specific columns (Recommended):\nINSERT INTO table_name (col1, col2) VALUES (val1, val2);\n\n-- Insert multiple rows:\nINSERT INTO table_name (col1) VALUES (val1), (val2);',
+    codeExample: '-- Create a table to insert into:\n-- CREATE TABLE users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), age INT);\n\n-- Insert a single row:\nINSERT INTO users (name, age) VALUES (\'Alice\', 22);\n\n-- Insert multiple rows at once:\nINSERT INTO users (name, age) \nVALUES \n  (\'Bob\', 25),\n  (\'Charlie\', 20),\n  (\'David\', 30);\n\nSELECT * FROM users;',
+    hasLiveOutput: false,
+    expectedOutput: 'Query OK, 1 row affected (0.01 sec)\nQuery OK, 3 rows affected (0.01 sec)\nRecords: 3  Duplicates: 0  Warnings: 0\n\n+----+---------+-----+\n| id | name    | age |\n+----+---------+-----+\n|  1 | Alice   |  22 |\n|  2 | Bob     |  25 |\n|  3 | Charlie |  20 |\n|  4 | David   |  30 |\n+----+---------+-----+',
     explanation: [
-      { code: 'INSERT INTO', desc: 'Specifies which table to insert into.' },
-      { code: '(col1, col2)', desc: 'Lists the columns you are providing values for.' },
-      { code: 'VALUES', desc: 'The actual data to insert, in the same order as the columns.' }
+      { code: 'INSERT INTO', desc: 'Command to add data.' },
+      { code: '(name, age)', desc: 'Specifies which columns you are providing data for. ID is auto-generated.' },
+      { code: 'VALUES', desc: 'The actual data being inserted. Strings must be in quotes.' }
     ],
-    realWorldExample: 'Every time you register on a website, an INSERT statement adds your email and hashed password to the users table.',
+    realWorldExample: 'When you submit a registration form, an INSERT statement saves your details to the database.',
     commonMistakes: [
-      { error: 'Mismatching column count with values count.', code: '', suffix: 'If you list 3 columns, you must provide exactly 3 values.' },
-      { error: 'Inserting duplicate values in UNIQUE columns.', code: '', suffix: 'Will cause: ERROR 1062 Duplicate entry.' }
+      { error: 'Forgetting quotes around strings.', code: 'VALUES (Alice)', suffix: 'String and Date values must be wrapped in single quotes: \'Alice\'.' }
     ],
-    bestPractices: [
-      'Always specify column names — never rely on column order',
-      'Use multi-row INSERT for bulk data loading (much faster)',
-      'Validate data before inserting to maintain integrity'
-    ],
-    summary: [
-      'INSERT INTO adds one or more rows to a table.',
-      'Always specify column names to avoid errors.',
-      'Multiple rows can be inserted in a single statement.'
+    bestPractices: ['Always specify column names to prevent errors if table structure changes', 'Insert multiple rows in a single query for better performance'],
+    practiceExercise: {
+      task: 'Write a query to insert two new users into the `employees` table: "Sarah" (age 28) and "Tom" (age 35). Assume the columns are `name` and `age`.',
+      expectedOutput: 'Query OK, 2 rows affected.',
+      solution: 'INSERT INTO employees (name, age) VALUES (\'Sarah\', 28), (\'Tom\', 35);'
+    },
+    quiz: [
+      { question: 'Which SQL statement is used to insert new data into a database?', options: ['ADD RECORD', 'INSERT NEW', 'INSERT INTO', 'UPDATE INTO'], answer: 'INSERT INTO' },
+      { question: 'Do you need to provide a value for an AUTO_INCREMENT column?', options: ['Yes, always', 'No, the database generates it automatically', 'Only if it is a primary key', 'Yes, but it must be 0'], answer: 'No, the database generates it automatically' },
+      { question: 'How do you insert multiple rows in one query?', options: ['Use multiple INSERT statements separated by commas', 'Separate value sets with commas: VALUES (v1), (v2)', 'You cannot insert multiple rows', 'Use a LOOP'], answer: 'Separate value sets with commas: VALUES (v1), (v2)' },
+      { question: 'Why is it recommended to specify column names in an INSERT statement?', options: ['It runs faster', 'It prevents errors if columns are added or reordered later', 'It takes up less space', 'MySQL requires it'], answer: 'It prevents errors if columns are added or reordered later' },
+      { question: 'Which characters should surround text values in an INSERT statement?', options: ['Double quotes', 'No quotes', 'Single quotes', 'Backticks'], answer: 'Single quotes' }
     ],
     interviewQuestions: [
-      'How do you insert multiple rows in a single SQL statement?',
-      'What error occurs when you insert a duplicate UNIQUE value?',
-      'What happens to AUTO_INCREMENT after INSERT?'
+      { q: 'Is it mandatory to specify column names in an INSERT statement?', a: 'No, it is not mandatory. If you omit column names, you must provide a value for every single column in the exact order they were defined in the table. However, specifying column names is highly recommended for safety and maintainability.' },
+      { q: 'How do you insert multiple rows in a single query?', a: 'By separating multiple value groups with commas: `INSERT INTO table (col) VALUES (val1), (val2), (val3);`' }
     ],
-    quickQuiz: {
-      question: 'Which statement is used to add new data to a MySQL table?',
-      options: ['ADD INTO', 'INSERT INTO', 'UPDATE INTO', 'CREATE ROW'],
-      answer: 'INSERT INTO'
-    }
+    summary: ['INSERT INTO adds rows.', 'Always specify columns.', 'You can insert multiple rows at once.'],
+    references: commonReferences
   },
 
   'mysql_select': {
@@ -50,41 +50,39 @@ export const mysqlContentBatch2 = {
     title: '18. SELECT Statement',
     difficulty: 'Beginner',
     readingTime: '5 min',
-    definition: 'SELECT retrieves data from one or more tables. It is the most frequently used SQL statement.',
-    whyUseIt: 'SELECT is the "R" in CRUD. Every report, dashboard, and data display on any application runs on SELECT.',
-    syntax: 'SELECT * FROM table_name;\\nSELECT col1, col2 FROM table_name;\\nSELECT DISTINCT col FROM table_name;\\nSELECT col FROM table_name WHERE condition;',
-    codeExample: '-- Select ALL columns:\\nSELECT * FROM students;\\n\\n-- Select specific columns:\\nSELECT name, email, grade FROM students;\\n\\n-- Rename columns in output:\\nSELECT name AS "Student Name", grade AS "Score" FROM students;\\n\\n-- Select with calculation:\\nSELECT name, age, (age + 5) AS "Age in 5 Years" FROM students;\\n\\n-- Select from multiple conditions:\\nSELECT * FROM students WHERE grade = \'A\' AND age < 21;',
-    hasLiveOutput: false, expectedOutput: '+----+-------+-----+\\n| id | name  | age |\\n+----+-------+-----+\\n|  1 | Alice |  20 |\\n|  2 | Bob   |  22 |\\n|  3 | Charlie| 21 |\\n+----+-------+-----+',
+    definition: 'The SELECT statement is used to fetch data from a database.',
+    whyUseIt: 'SELECT is the most frequently used SQL command. It allows you to read and view your data.',
+    syntax: '-- Select specific columns:\nSELECT col1, col2 FROM table_name;\n\n-- Select all columns:\nSELECT * FROM table_name;',
+    codeExample: '-- Given a table "products" (id, name, price, stock)\n\n-- View everything:\nSELECT * FROM products;\n\n-- View specific columns only (better for performance):\nSELECT name, price FROM products;',
+    hasLiveOutput: false,
+    expectedOutput: '+-------------+-------+\n| name        | price |\n+-------------+-------+\n| Laptop      |  999  |\n| Smartphone  |  699  |\n| Headphones  |  149  |\n+-------------+-------+',
     explanation: [
-      { code: 'SELECT *', desc: 'Retrieves ALL columns. Avoid in production — specify columns.' },
-      { code: 'SELECT col1, col2', desc: 'Retrieves only specific columns. More efficient.' },
-      { code: 'AS', desc: 'Renames a column in the output (alias). Does not change the table.' },
-      { code: 'WHERE', desc: 'Filters rows based on a condition. Without it, ALL rows are returned.' }
+      { code: 'SELECT', desc: 'Determines WHICH columns to show.' },
+      { code: '*', desc: 'Wildcard meaning "All columns".' },
+      { code: 'FROM', desc: 'Specifies the table to pull data from.' }
     ],
-    realWorldExample: 'SELECT name, profile_pic, followers FROM users ORDER BY followers DESC LIMIT 10; — This is how Twitter shows the most followed accounts.',
+    realWorldExample: 'Viewing a list of products on an e-commerce store runs a SELECT query behind the scenes.',
     commonMistakes: [
-      { error: 'Using SELECT * in production.', code: '', suffix: 'Always specify columns — SELECT * fetches unnecessary data and slows queries.' }
+      { error: 'Using SELECT * in production.', code: 'SELECT * FROM big_table;', suffix: 'Fetching unneeded columns slows down the database and network. Only select what you need.' }
     ],
-    bestPractices: [
-      'Specify column names instead of using SELECT *',
-      'Use aliases (AS) to make output more readable',
-      'Always add WHERE to limit the data returned'
-    ],
-    summary: [
-      'SELECT retrieves data from one or more tables.',
-      'Use SELECT * for quick inspection, specify columns for production.',
-      'AS creates readable column aliases in the output.'
+    bestPractices: ['Avoid SELECT * in application code', 'Only request the specific columns you need to process'],
+    practiceExercise: {
+      task: 'Write a query to retrieve only the `title` and `author` columns from a `books` table.',
+      expectedOutput: '+----------------+----------------+\n| title          | author         |\n+----------------+----------------+',
+      solution: 'SELECT title, author FROM books;'
+    },
+    quiz: [
+      { question: 'Which SQL statement is used to extract data from a database?', options: ['EXTRACT', 'GET', 'OPEN', 'SELECT'], answer: 'SELECT' },
+      { question: 'What does the asterisk (*) mean in a SELECT statement?', options: ['Multiply', 'Select all columns', 'Select all rows', 'Include deleted data'], answer: 'Select all columns' },
+      { question: 'Why should you avoid SELECT * in production applications?', options: ['It is invalid syntax', 'It retrieves unnecessary data, slowing down performance', 'It deletes data', 'It requires root privileges'], answer: 'It retrieves unnecessary data, slowing down performance' },
+      { question: 'Which clause specifies the table to retrieve data from?', options: ['WHERE', 'FROM', 'INTO', 'TABLE'], answer: 'FROM' },
+      { question: 'Can you select a single column using SELECT?', options: ['Yes', 'No, you must select at least two', 'Only if it is a Primary Key', 'No, you must use SELECT *'], answer: 'Yes' }
     ],
     interviewQuestions: [
-      'What is the difference between SELECT * and selecting specific columns?',
-      'How does the WHERE clause work with SELECT?',
-      'What is a column alias in SQL?'
+      { q: 'Why is `SELECT *` considered a bad practice in production?', a: 'Because it fetches every column, including large text or blob data that the application might not need. This wastes memory, CPU, and network bandwidth. It also makes the code brittle if the table schema changes (e.g., adding a new column).' }
     ],
-    quickQuiz: {
-      question: 'What does SELECT * FROM students return?',
-      options: ['Only the first row', 'All columns and all rows from the students table', 'The structure of the table', 'The column names only'],
-      answer: 'All columns and all rows from the students table'
-    }
+    summary: ['SELECT retrieves data.', 'Avoid SELECT * in production apps.'],
+    references: commonReferences
   },
 
   'mysql_where': {
@@ -92,124 +90,119 @@ export const mysqlContentBatch2 = {
     title: '19. WHERE Clause',
     difficulty: 'Beginner',
     readingTime: '5 min',
-    definition: 'WHERE filters records and retrieves/modifies only those that satisfy a given condition.',
-    whyUseIt: 'Without WHERE, every SELECT returns all rows and every UPDATE/DELETE affects every row. WHERE makes queries precise and safe.',
-    syntax: 'SELECT col FROM table WHERE condition;\\nUPDATE table SET col = val WHERE condition;\\nDELETE FROM table WHERE condition;',
-    codeExample: '-- Filter by exact value:\\nSELECT * FROM students WHERE grade = \'A\';\\n\\n-- Filter by number range:\\nSELECT * FROM students WHERE age >= 18 AND age <= 25;\\n\\n-- Filter with multiple conditions:\\nSELECT * FROM students\\nWHERE grade = \'A\' OR grade = \'B\';\\n\\n-- Combine AND + OR (use parentheses!):\\nSELECT * FROM students\\nWHERE (grade = \'A\' OR grade = \'B\') AND age > 18;\\n\\n-- Use in UPDATE (very important!):\\nUPDATE students SET grade = \'A+\' WHERE name = \'Ravi Kumar\';\\n\\n-- Use in DELETE (very important!):\\nDELETE FROM students WHERE id = 5;',
-    hasLiveOutput: false, expectedOutput: '+----+-------+-----+\\n| id | name  | age |\\n+----+-------+-----+\\n|  2 | Bob   |  22 |\\n|  3 | Charlie| 21 |\\n+----+-------+-----+',
+    definition: 'The WHERE clause filters rows based on a specific condition. It is used to extract only those records that fulfill a specified requirement.',
+    whyUseIt: 'Without WHERE, SELECT returns every row in the table, UPDATE updates every row, and DELETE deletes every row.',
+    syntax: 'SELECT columns FROM table WHERE condition;\n\n-- Operators: =, >, <, >=, <=, <>, !=',
+    codeExample: '-- Select users over 18:\nSELECT name, age FROM users WHERE age > 18;\n\n-- Select a specific user by name:\nSELECT * FROM users WHERE name = \'Alice\';\n\n-- Not equal (!= or <>):\nSELECT name, country FROM users WHERE country != \'USA\';',
+    hasLiveOutput: false,
+    expectedOutput: '+-------+-----+\n| name  | age |\n+-------+-----+\n| Alice |  22 |\n| Bob   |  25 |\n+-------+-----+',
     explanation: [
-      { code: '= != < > <= >=', desc: 'Comparison operators used in WHERE conditions.' },
-      { code: 'AND', desc: 'Both conditions must be true.' },
-      { code: 'OR', desc: 'At least one condition must be true.' },
-      { code: 'NOT', desc: 'Reverses the condition.' }
+      { code: 'WHERE', desc: 'The filter keyword.' },
+      { code: 'age > 18', desc: 'The condition to evaluate for each row.' },
+      { code: '=', desc: 'Equality operator in SQL (not ==).' }
     ],
-    realWorldExample: 'SELECT * FROM orders WHERE status = "pending" AND total > 1000; — An e-commerce app uses this to find high-value pending orders for priority processing.',
+    realWorldExample: 'Logging in: SELECT * FROM users WHERE email = \'user@mail.com\' AND password = \'hash\';',
     commonMistakes: [
-      { error: 'Running DELETE or UPDATE without WHERE.', code: 'DELETE FROM students;', suffix: 'This deletes EVERY row! Always use WHERE with DELETE and UPDATE.' },
-      { error: 'Mixing AND/OR without parentheses.', code: '', suffix: 'SQL evaluates AND before OR. Always use parentheses to be explicit.' }
+      { error: 'Using == instead of =.', code: 'WHERE age == 18', suffix: 'SQL uses a single = for equality.' }
     ],
-    bestPractices: [
-      'ALWAYS use WHERE with DELETE and UPDATE',
-      'Use parentheses when combining AND and OR',
-      'Test WHERE conditions with SELECT before using with UPDATE/DELETE'
-    ],
-    summary: [
-      'WHERE filters rows based on one or more conditions.',
-      'It works with SELECT, UPDATE, and DELETE.',
-      'Always use WHERE with UPDATE/DELETE to avoid modifying all rows.'
+    bestPractices: ['Use WHERE to filter data at the database level, not in your application code'],
+    practiceExercise: {
+      task: 'Write a query to find all products in the `inventory` table where the `price` is exactly 100.',
+      expectedOutput: '+-------+-------+\n| name  | price |\n+-------+-------+\n| Item1 | 100   |\n+-------+-------+',
+      solution: 'SELECT * FROM inventory WHERE price = 100;'
+    },
+    quiz: [
+      { question: 'Which clause is used to filter records?', options: ['FILTER', 'WHERE', 'HAVING', 'SELECT IF'], answer: 'WHERE' },
+      { question: 'Which operator is used to check for equality in SQL?', options: ['==', '=', '===', 'EQUALS'], answer: '=' },
+      { question: 'What happens if you run an UPDATE statement without a WHERE clause?', options: ['It returns an error', 'It updates only the first row', 'It updates every row in the table', 'Nothing happens'], answer: 'It updates every row in the table' },
+      { question: 'Which of the following is NOT a valid SQL comparison operator?', options: ['!=', '<>', '>=', '=>'], answer: '=>' },
+      { question: 'Can the WHERE clause be used with DELETE statements?', options: ['Yes', 'No', 'Only on views', 'Only with Triggers'], answer: 'Yes' }
     ],
     interviewQuestions: [
-      'What happens if you run DELETE without a WHERE clause?',
-      'What is the order of evaluation for AND and OR?',
-      'Can WHERE be used with UPDATE?'
+      { q: 'What is the purpose of the WHERE clause?', a: 'The WHERE clause is used to filter records and extract only those that fulfill a specified condition. It is essential for SELECT, UPDATE, and DELETE operations to prevent modifying or fetching the entire table.' }
     ],
-    quickQuiz: {
-      question: 'What happens if you run UPDATE students SET grade = \'A\'; without WHERE?',
-      options: ['It updates only the first row', 'It updates no rows', 'It updates ALL rows in the table', 'It gives an error'],
-      answer: 'It updates ALL rows in the table'
-    }
+    summary: ['WHERE filters rows based on a condition.', 'Crucial for UPDATE and DELETE to avoid data loss.'],
+    references: commonReferences
   },
 
   'mysql_update': {
     isStructured: true,
     title: '20. UPDATE Statement',
-    difficulty: 'Beginner',
-    readingTime: '4 min',
-    definition: 'UPDATE modifies existing data in a table. It is the "U" in CRUD.',
-    whyUseIt: 'Data changes over time. UPDATE lets you change specific records without deleting and reinserting them.',
-    syntax: 'UPDATE table_name\\nSET column1 = value1, column2 = value2\\nWHERE condition;',
-    codeExample: '-- Update a single column:\\nUPDATE students SET grade = \'A+\' WHERE id = 1;\\n\\n-- Update multiple columns at once:\\nUPDATE students\\nSET email = \'ravi.new@example.com\', age = 21\\nWHERE id = 1;\\n\\n-- Update based on calculation:\\nUPDATE products SET price = price * 1.10\\nWHERE category = \'electronics\';  -- 10% price increase\\n\\n-- Safe UPDATE: First SELECT to verify:\\nSELECT * FROM students WHERE id = 1;\\n-- Then update:\\nUPDATE students SET grade = \'B\' WHERE id = 1;',
-    hasLiveOutput: false, expectedOutput: 'Query OK, 1 row affected (0.01 sec)\\nRows matched: 1  Changed: 1  Warnings: 0\\n\\nQuery OK, 3 rows affected (0.01 sec)\\nRows matched: 3  Changed: 3  Warnings: 0',
+    difficulty: 'Intermediate',
+    readingTime: '5 min',
+    definition: 'The UPDATE statement is used to modify existing records in a table.',
+    whyUseIt: 'To correct errors, update statuses, or change user information without deleting and re-inserting.',
+    syntax: 'UPDATE table_name\nSET column1 = value1, column2 = value2\nWHERE condition;',
+    codeExample: '-- Update one column for a specific user:\nUPDATE users\nSET age = 26\nWHERE name = \'Alice\';\n\n-- Update multiple columns:\nUPDATE users\nSET age = 31, country = \'Canada\'\nWHERE name = \'David\';\n\n-- Danger: No WHERE clause (updates EVERY row)\n-- UPDATE users SET age = 0;',
+    hasLiveOutput: false,
+    expectedOutput: 'Query OK, 1 row affected (0.01 sec)\nRows matched: 1  Changed: 1  Warnings: 0\n\nQuery OK, 1 row affected (0.01 sec)\nRows matched: 1  Changed: 1  Warnings: 0',
     explanation: [
-      { code: 'SET', desc: 'Specifies which columns to change and their new values.' },
-      { code: 'WHERE', desc: 'Restricts the update to specific rows. Without it, ALL rows are updated.' },
-      { code: 'Multiple columns', desc: 'Separate multiple SET assignments with commas.' }
+      { code: 'UPDATE', desc: 'Identifies the table to modify.' },
+      { code: 'SET', desc: 'Assigns new values to specific columns.' },
+      { code: 'WHERE', desc: 'Ensures only the correct rows are changed.' }
     ],
-    realWorldExample: 'When you change your profile picture on Instagram, an UPDATE users SET profile_pic = "new_path.jpg" WHERE user_id = 12345; runs in the backend.',
+    realWorldExample: 'Changing a password, updating a shipping address, or marking an order as "Shipped".',
     commonMistakes: [
-      { error: 'Forgetting WHERE in UPDATE.', code: '', suffix: 'Without WHERE, every row gets updated. This is almost never what you want.' }
+      { error: 'Forgetting the WHERE clause.', code: '', suffix: 'This is a catastrophic error that overwrites data for the entire table.' }
     ],
-    bestPractices: [
-      'Always test with SELECT first before UPDATE',
-      'Use the primary key in WHERE for precise targeting',
-      'Always include WHERE clause'
-    ],
-    summary: [
-      'UPDATE modifies existing rows in a table.',
-      'SET specifies columns and new values.',
-      'Always use WHERE to target specific rows.'
+    bestPractices: ['Always write the SELECT query first to test your WHERE clause before changing it to UPDATE', 'Always backup before running bulk updates'],
+    practiceExercise: {
+      task: 'Write a query to change the `status` column to "Active" for the user with `id` 5 in the `accounts` table.',
+      expectedOutput: 'Query OK, 1 row affected.',
+      solution: 'UPDATE accounts SET status = \'Active\' WHERE id = 5;'
+    },
+    quiz: [
+      { question: 'Which statement is used to modify existing data?', options: ['MODIFY', 'CHANGE', 'UPDATE', 'ALTER'], answer: 'UPDATE' },
+      { question: 'Which keyword is used to specify the new values in an UPDATE statement?', options: ['VALUES', 'SET', 'LET', 'ASSIGN'], answer: 'SET' },
+      { question: 'What is the most critical part of an UPDATE statement to avoid catastrophic data loss?', options: ['The SET clause', 'The Table Name', 'The WHERE clause', 'The LIMIT clause'], answer: 'The WHERE clause' },
+      { question: 'How do you update multiple columns in a single statement?', options: ['Use multiple SET keywords', 'Separate the column=value pairs with commas', 'Use the AND keyword between them', 'It cannot be done'], answer: 'Separate the column=value pairs with commas' },
+      { question: 'What happens if you omit the WHERE clause in an UPDATE statement?', options: ['Syntax Error', 'Nothing is updated', 'The first row is updated', 'Every row in the table is updated'], answer: 'Every row in the table is updated' }
     ],
     interviewQuestions: [
-      'How do you update multiple columns in one statement?',
-      'What is the danger of UPDATE without WHERE?',
-      'How do you update based on a calculation?'
+      { q: 'How do you update a record safely?', a: 'Always include a specific WHERE clause (preferably using the Primary Key). A good practice is to write a SELECT statement with the WHERE clause first to verify which rows will be affected, then change the SELECT to an UPDATE.' }
     ],
-    quickQuiz: {
-      question: 'Which keyword in UPDATE specifies the new values?',
-      options: ['VALUES', 'INTO', 'SET', 'CHANGE'],
-      answer: 'SET'
-    }
+    summary: ['UPDATE modifies existing data.', 'SET defines new values.', 'ALWAYS use a WHERE clause.'],
+    references: commonReferences
   },
 
   'mysql_delete': {
     isStructured: true,
     title: '21. DELETE Statement',
-    difficulty: 'Beginner',
+    difficulty: 'Intermediate',
     readingTime: '4 min',
-    definition: 'DELETE removes specific rows from a table. It is the "D" in CRUD.',
-    whyUseIt: 'DELETE removes individual records that are no longer needed, unlike TRUNCATE which removes all data.',
-    syntax: 'DELETE FROM table_name WHERE condition;\\nDELETE FROM table_name; -- deletes ALL rows!',
-    codeExample: '-- Delete a specific row by ID (safest):\\nDELETE FROM students WHERE id = 5;\\n\\n-- Delete based on condition:\\nDELETE FROM students WHERE grade = \'F\';\\n\\n-- Delete with multiple conditions:\\nDELETE FROM orders\\nWHERE status = \'cancelled\' AND created_at < \'2024-01-01\';\\n\\n-- SAFE method: check first:\\nSELECT COUNT(*) FROM students WHERE grade = \'F\';\\n-- If count looks right, then delete:\\nDELETE FROM students WHERE grade = \'F\';',
-    hasLiveOutput: false, expectedOutput: 'Query OK, 1 row affected (0.01 sec)\\n\\nQuery OK, 5 rows affected (0.01 sec)',
+    definition: 'The DELETE statement is used to remove existing rows from a table.',
+    whyUseIt: 'To permanently remove data that is no longer needed (like a cancelled order or deleted account).',
+    syntax: 'DELETE FROM table_name WHERE condition;',
+    codeExample: '-- Delete a specific row:\nDELETE FROM users WHERE id = 3;\n\n-- Delete multiple rows based on a condition:\nDELETE FROM users WHERE age < 18;\n\n-- Danger: Delete ALL rows (but keeps the table structure)\n-- DELETE FROM users;',
+    hasLiveOutput: false,
+    expectedOutput: 'Query OK, 1 row affected (0.01 sec)\n\nQuery OK, 5 rows affected (0.01 sec)',
     explanation: [
-      { code: 'DELETE FROM', desc: 'Specifies the table to delete from.' },
-      { code: 'WHERE', desc: 'Specifies which rows to delete. CRITICAL — without this, all rows are deleted.' },
-      { code: 'vs TRUNCATE', desc: 'DELETE logs each deletion and can use WHERE. TRUNCATE is faster but removes all rows.' }
+      { code: 'DELETE FROM', desc: 'The command to remove rows.' },
+      { code: 'WHERE', desc: 'Specifies EXACTLY which rows to delete.' }
     ],
-    realWorldExample: 'DELETE FROM sessions WHERE expires_at < NOW(); — Web apps use this regularly to clean up expired login sessions.',
+    realWorldExample: 'When a user clicks "Delete Account", a DELETE statement removes their record.',
     commonMistakes: [
-      { error: 'DELETE FROM table without WHERE.', code: '', suffix: 'This removes ALL data. Always double-check your WHERE clause.' }
+      { error: 'Forgetting the WHERE clause.', code: 'DELETE FROM users;', suffix: 'This deletes every single row in the table.' }
     ],
-    bestPractices: [
-      'Always verify with SELECT before DELETE',
-      'Use the primary key in WHERE for safety',
-      'Consider "soft delete" — add an is_deleted column instead of truly deleting'
-    ],
-    summary: [
-      'DELETE removes specific rows based on a WHERE condition.',
-      'Without WHERE, ALL rows are deleted.',
-      'Use SELECT first to verify what will be deleted.'
+    bestPractices: ['Soft Delete: Instead of DELETE, use an UPDATE to set an `is_deleted = TRUE` flag. This allows data recovery.'],
+    practiceExercise: {
+      task: 'Write a query to remove all products from the `inventory` table where the `stock` is 0.',
+      expectedOutput: 'Query OK, X rows affected.',
+      solution: 'DELETE FROM inventory WHERE stock = 0;'
+    },
+    quiz: [
+      { question: 'Which statement is used to remove rows from a table?', options: ['REMOVE', 'DROP', 'TRUNCATE', 'DELETE'], answer: 'DELETE' },
+      { question: 'What happens if you run DELETE FROM users; without a WHERE clause?', options: ['The table is dropped', 'Syntax error', 'All rows in the table are deleted', 'Only the first row is deleted'], answer: 'All rows in the table are deleted' },
+      { question: 'What is a "Soft Delete"?', options: ['Deleting data slowly', 'Updating a flag (like is_deleted) instead of actually running a DELETE statement', 'Using a small WHERE clause', 'Deleting non-primary key data'], answer: 'Updating a flag (like is_deleted) instead of actually running a DELETE statement' },
+      { question: 'Does DELETE reset the AUTO_INCREMENT counter?', options: ['Yes, always', 'No, the counter continues from where it left off', 'Only if you delete the last row', 'Only on MyISAM tables'], answer: 'No, the counter continues from where it left off' },
+      { question: 'Which is faster for removing all rows: DELETE without WHERE, or TRUNCATE?', options: ['DELETE', 'TRUNCATE', 'They are the same speed', 'It depends on the OS'], answer: 'TRUNCATE' }
     ],
     interviewQuestions: [
-      'What is the difference between DELETE and TRUNCATE?',
-      'Can DELETE be rolled back?',
-      'What is a "soft delete" in database design?'
+      { q: 'What is a "soft delete"?', a: 'Instead of physically deleting a record with the DELETE command (hard delete), a soft delete involves updating a column (like `is_deleted` or `deleted_at`) to indicate the record is inactive. This allows the data to be recovered easily.' },
+      { q: 'Difference between DELETE and DROP?', a: 'DELETE removes rows from a table but keeps the table structure intact. DROP removes the entire table structure and all its data permanently.' }
     ],
-    quickQuiz: {
-      question: 'What is the safest way to delete specific rows in MySQL?',
-      options: ['DELETE FROM table; then undo if wrong', 'Run SELECT with the same WHERE first, then DELETE', 'Use TRUNCATE with WHERE clause', 'Use DROP TABLE and recreate'],
-      answer: 'Run SELECT with the same WHERE first, then DELETE'
-    }
+    summary: ['DELETE removes rows.', 'ALWAYS use a WHERE clause.', 'Consider soft-deletes for critical data.'],
+    references: commonReferences
   },
 
   'mysql_limit': {
@@ -217,81 +210,78 @@ export const mysqlContentBatch2 = {
     title: '22. LIMIT Clause',
     difficulty: 'Beginner',
     readingTime: '3 min',
-    definition: 'LIMIT restricts the number of rows returned by a SELECT query. OFFSET determines where to start.',
-    whyUseIt: 'Without LIMIT, a SELECT on a large table returns millions of rows, crashing your app. LIMIT is essential for pagination.',
-    syntax: 'SELECT * FROM table LIMIT count;\\nSELECT * FROM table LIMIT offset, count;\\nSELECT * FROM table LIMIT count OFFSET offset;',
-    codeExample: '-- Get first 5 students:\\nSELECT * FROM students LIMIT 5;\\n\\n-- Get next 5 students (pagination page 2):\\nSELECT * FROM students LIMIT 5 OFFSET 5;\\n-- or equivalently:\\nSELECT * FROM students LIMIT 5, 5; -- offset=5, count=5\\n\\n-- Get the top scorer:\\nSELECT * FROM students ORDER BY score DESC LIMIT 1;\\n\\n-- Pagination formula:\\n-- Page N, page_size P:\\n-- LIMIT P OFFSET (N-1)*P\\n-- Page 3, size 10: LIMIT 10 OFFSET 20',
-    hasLiveOutput: false, expectedOutput: '+----+-------+-----+\\n| id | name  | age |\\n+----+-------+-----+\\n|  1 | Alice |  20 |\\n|  2 | Bob   |  22 |\\n|  3 | Charlie| 21 |\\n+----+-------+-----+',
+    definition: 'The LIMIT clause is used to specify the maximum number of records to return.',
+    whyUseIt: 'Essential for pagination (e.g., showing 10 results per page) and performance (don\'t load 1 million rows if you only need the top 5).',
+    syntax: '-- Limit to N rows:\nSELECT * FROM table LIMIT N;\n\n-- Pagination (Offset, N rows):\nSELECT * FROM table LIMIT offset, N;',
+    codeExample: '-- Get the first 3 users:\nSELECT name FROM users LIMIT 3;\n\n-- Pagination: Skip 10 rows, then get the next 5 (Page 3):\nSELECT name FROM users LIMIT 10, 5;',
+    hasLiveOutput: false,
+    expectedOutput: '+---------+\n| name    |\n+---------+\n| Alice   |\n| Bob     |\n| Charlie |\n+---------+',
     explanation: [
-      { code: 'LIMIT n', desc: 'Returns at most n rows.' },
-      { code: 'OFFSET n', desc: 'Skips the first n rows before returning results.' },
-      { code: 'LIMIT 5 OFFSET 10', desc: 'Skips first 10, then returns next 5. Used for pagination.' }
+      { code: 'LIMIT 3', desc: 'Returns only the first 3 matching rows.' },
+      { code: 'LIMIT 10, 5', desc: 'Skips the first 10 rows, then returns 5 rows.' }
     ],
-    realWorldExample: 'Google search results show 10 per page. The SQL behind page 3 is: SELECT * FROM results LIMIT 10 OFFSET 20;',
+    realWorldExample: 'Google search results: Page 1 uses LIMIT 0, 10. Page 2 uses LIMIT 10, 10.',
     commonMistakes: [
-      { error: 'Using LIMIT without ORDER BY for pagination.', code: '', suffix: 'Without ORDER BY, the "page 2" results could overlap with "page 1" because row order is not guaranteed.' }
+      { error: 'Using LIMIT without ORDER BY.', code: '', suffix: 'Without ORDER BY, the "first 3" rows are arbitrary and unpredictable.' }
     ],
-    bestPractices: [
-      'Always combine LIMIT with ORDER BY for consistent pagination',
-      'Use LIMIT 1 to find the max/min record efficiently',
-      'Calculate OFFSET as: (page - 1) × page_size'
-    ],
-    summary: [
-      'LIMIT restricts the number of rows returned.',
-      'OFFSET skips rows, enabling pagination.',
-      'Always use ORDER BY with LIMIT for consistent results.'
+    bestPractices: ['Always pair LIMIT with ORDER BY for predictable results', 'Use LIMIT to test queries on large tables without crashing your client'],
+    practiceExercise: {
+      task: 'Write a query to fetch exactly 1 record from the `settings` table.',
+      expectedOutput: '+---------+\n| setting |\n+---------+\n| theme   |\n+---------+',
+      solution: 'SELECT * FROM settings LIMIT 1;'
+    },
+    quiz: [
+      { question: 'What does the LIMIT clause do?', options: ['Limits the size of a table', 'Restricts the number of rows returned by a query', 'Limits the data types allowed', 'Sets a maximum execution time'], answer: 'Restricts the number of rows returned by a query' },
+      { question: 'If you want to implement pagination, which clause is essential?', options: ['GROUP BY', 'HAVING', 'LIMIT', 'JOIN'], answer: 'LIMIT' },
+      { question: 'What does LIMIT 10, 5 mean?', options: ['Skip 10 rows, return 5 rows', 'Skip 5 rows, return 10 rows', 'Return rows 5 through 10', 'Return 15 rows'], answer: 'Skip 10 rows, return 5 rows' },
+      { question: 'Which clause should almost always accompany LIMIT?', options: ['WHERE', 'ORDER BY', 'GROUP BY', 'HAVING'], answer: 'ORDER BY' },
+      { question: 'Is LIMIT standard across all SQL databases (like SQL Server or Oracle)?', options: ['Yes', 'No, SQL Server uses TOP and Oracle uses ROWNUM/FETCH FIRST', 'Only in open source DBs', 'Only for SELECT queries'], answer: 'No, SQL Server uses TOP and Oracle uses ROWNUM/FETCH FIRST' }
     ],
     interviewQuestions: [
-      'How do you implement pagination in MySQL?',
-      'What is the difference between LIMIT and OFFSET?',
-      'How do you get the third-highest salary using LIMIT?'
+      { q: 'How would you implement pagination in MySQL?', a: 'Using the LIMIT and OFFSET clauses. For example, to get page 2 with 10 items per page, you would calculate offset as (Page - 1) * Items = (2-1)*10 = 10. The query would be `LIMIT 10 OFFSET 10` or `LIMIT 10, 10`.' }
     ],
-    quickQuiz: {
-      question: 'Which clause limits the number of rows returned by a SELECT query?',
-      options: ['TOP', 'MAX ROWS', 'LIMIT', 'COUNT'],
-      answer: 'LIMIT'
-    }
+    summary: ['LIMIT restricts the number of returned rows.', 'Crucial for pagination.', 'Always use with ORDER BY.'],
+    references: commonReferences
   },
 
   'mysql_order_by': {
     isStructured: true,
     title: '23. ORDER BY',
     difficulty: 'Beginner',
-    readingTime: '3 min',
-    definition: 'ORDER BY sorts the result set by one or more columns, in ascending (ASC) or descending (DESC) order.',
-    whyUseIt: 'Without ORDER BY, the order of results is unpredictable. Sorting is essential for leaderboards, reports, and pagination.',
-    syntax: 'SELECT * FROM table ORDER BY column ASC;\\nSELECT * FROM table ORDER BY column DESC;\\nSELECT * FROM table ORDER BY col1 ASC, col2 DESC;',
-    codeExample: '-- Sort alphabetically (A to Z):\\nSELECT * FROM students ORDER BY name ASC;\\n\\n-- Sort by age, newest first:\\nSELECT * FROM students ORDER BY age DESC;\\n\\n-- Sort by multiple columns:\\nSELECT * FROM students\\nORDER BY grade ASC, age DESC;\\n-- (Same grade? Sort by age descending)\\n\\n-- Top 3 highest scorers:\\nSELECT name, score FROM students\\nORDER BY score DESC\\nLIMIT 3;',
-    hasLiveOutput: false, expectedOutput: '+----+---------+-----+\\n| id | name    | age |\\n+----+---------+-----+\\n|  2 | Bob     |  22 |\\n|  3 | Charlie |  21 |\\n|  1 | Alice   |  20 |\\n+----+---------+-----+',
+    readingTime: '4 min',
+    definition: 'The ORDER BY keyword is used to sort the result-set in ascending or descending order.',
+    whyUseIt: 'Data is naturally unordered in a database. You must use ORDER BY if you want results sorted alphabetically, by date, or numerically.',
+    syntax: 'SELECT columns FROM table ORDER BY column1 ASC|DESC, column2 ASC|DESC;',
+    codeExample: '-- Sort alphabetically by name (A-Z):\nSELECT name, age FROM users ORDER BY name ASC;\n\n-- Sort by age, oldest first (Highest to Lowest):\nSELECT name, age FROM users ORDER BY age DESC;\n\n-- Sort by age DESC, then name ASC:\nSELECT name, age FROM users ORDER BY age DESC, name ASC;',
+    hasLiveOutput: false,
+    expectedOutput: '+---------+-----+\n| name    | age |\n+---------+-----+\n| Charlie |  35 |\n| Alice   |  25 |\n| Bob     |  25 |\n+---------+-----+',
     explanation: [
-      { code: 'ASC', desc: 'Ascending order: A→Z, 0→9, oldest→newest. Default.' },
-      { code: 'DESC', desc: 'Descending order: Z→A, 9→0, newest→oldest.' },
-      { code: 'Multiple columns', desc: 'First sorted by col1; ties are broken by col2.' }
+      { code: 'ORDER BY', desc: 'Keyword to initiate sorting.' },
+      { code: 'ASC', desc: 'Ascending (default). 1-10, A-Z.' },
+      { code: 'DESC', desc: 'Descending. 10-1, Z-A.' }
     ],
-    realWorldExample: 'SELECT product_name, sales FROM products ORDER BY sales DESC LIMIT 5; — Amazon uses this to show the top 5 best-selling products.',
+    realWorldExample: 'Sorting an Amazon search by "Price: Low to High" uses ORDER BY price ASC.',
     commonMistakes: [
-      { error: 'Assuming default sort order is reliable.', code: '', suffix: 'Without ORDER BY, MySQL may return rows in any order. Never assume.' }
+      { error: 'Assuming data comes out ordered automatically.', code: '', suffix: 'Relational DB theory states rows have no inherent order. Always use ORDER BY.' }
     ],
-    bestPractices: [
-      'Always specify ASC or DESC explicitly for clarity',
-      'Combine ORDER BY with LIMIT for efficient top-N queries',
-      'Index the sorted column for better performance'
-    ],
-    summary: [
-      'ORDER BY sorts results in ASC (default) or DESC order.',
-      'Multiple columns can be sorted independently.',
-      'Always use ORDER BY with LIMIT for consistent pagination.'
+    bestPractices: ['Indexes on columns used in ORDER BY can massively speed up sorting'],
+    practiceExercise: {
+      task: 'Write a query to get all `movies` sorted from highest `rating` to lowest.',
+      expectedOutput: '+------------+--------+\n| title      | rating |\n+------------+--------+',
+      solution: 'SELECT * FROM movies ORDER BY rating DESC;'
+    },
+    quiz: [
+      { question: 'What is the default sort order for ORDER BY?', options: ['DESC', 'ASC', 'Random', 'By Primary Key'], answer: 'ASC' },
+      { question: 'Which keyword sorts results from highest to lowest?', options: ['ASC', 'HIGH', 'DESC', 'DOWN'], answer: 'DESC' },
+      { question: 'Can you sort by multiple columns?', options: ['No', 'Yes, separated by AND', 'Yes, separated by commas', 'Only if they are numeric'], answer: 'Yes, separated by commas' },
+      { question: 'What happens if you omit ORDER BY?', options: ['Error', 'Results are sorted by Primary Key', 'Results are returned in an unpredictable order', 'Results are sorted by date added'], answer: 'Results are returned in an unpredictable order' },
+      { question: 'Where does the ORDER BY clause go in a standard SELECT query?', options: ['Before WHERE', 'After LIMIT', 'After WHERE, before LIMIT', 'First line'], answer: 'After WHERE, before LIMIT' }
     ],
     interviewQuestions: [
-      'What is the default sort order in ORDER BY?',
-      'How do you sort by multiple columns?',
-      'How do you find the second highest value using ORDER BY?'
+      { q: 'Can you sort by a column that is not included in the SELECT list?', a: 'Yes, you can `ORDER BY` a column even if you do not retrieve it in your `SELECT` statement.' }
     ],
-    quickQuiz: {
-      question: 'What is the default sort order of ORDER BY?',
-      options: ['DESC', 'Random', 'ASC', 'None'],
-      answer: 'ASC'
-    }
+    summary: ['ORDER BY sorts results.', 'ASC is default.', 'Use DESC for reverse order.'],
+    references: commonReferences
   },
 
   'mysql_distinct': {
@@ -299,40 +289,37 @@ export const mysqlContentBatch2 = {
     title: '24. DISTINCT',
     difficulty: 'Beginner',
     readingTime: '3 min',
-    definition: 'SELECT DISTINCT removes duplicate values from the result set, returning only unique values.',
-    whyUseIt: 'When your table has repeated values in a column and you want a list of unique values, DISTINCT is the tool.',
-    syntax: 'SELECT DISTINCT column FROM table;\\nSELECT DISTINCT col1, col2 FROM table;',
-    codeExample: '-- All grades (with duplicates):\\nSELECT grade FROM students;\\n-- Returns: A, A, B, C, A, B, C, A...\\n\\n-- Only unique grades:\\nSELECT DISTINCT grade FROM students;\\n-- Returns: A, B, C\\n\\n-- Distinct combination of columns:\\nSELECT DISTINCT grade, age FROM students;\\n-- Unique pairs of (grade, age)\\n\\n-- Count unique grades:\\nSELECT COUNT(DISTINCT grade) AS unique_grades FROM students;',
-    hasLiveOutput: false, expectedOutput: '+---------+\\n| country |\\n+---------+\\n| USA     |\\n| UK      |\\n| India   |\\n| Canada  |\\n+---------+',
+    definition: 'The SELECT DISTINCT statement is used to return only distinct (different) values.',
+    whyUseIt: 'When a column contains duplicate values, DISTINCT helps you extract a unique list of options.',
+    syntax: 'SELECT DISTINCT column_name FROM table_name;',
+    codeExample: '-- Given a table where multiple users are from the same country:\nSELECT country FROM users;\n-- Output: USA, UK, USA, India, UK\n\n-- Get unique countries only:\nSELECT DISTINCT country FROM users;',
+    hasLiveOutput: false,
+    expectedOutput: '+---------+\n| country |\n+---------+\n| USA     |\n| UK      |\n| India   |\n+---------+',
     explanation: [
-      { code: 'DISTINCT', desc: 'Filters out duplicate rows from the result set.' },
-      { code: 'Multiple columns', desc: 'DISTINCT applies to the COMBINATION of all selected columns.' },
-      { code: 'COUNT(DISTINCT col)', desc: 'Counts the number of unique values in a column.' }
+      { code: 'DISTINCT', desc: 'Filters out duplicate rows from the final result set.' }
     ],
-    realWorldExample: 'SELECT DISTINCT country FROM users; — Used to build a dropdown list of all countries your users are from, without duplicates.',
+    realWorldExample: 'Populating a dropdown filter for "Select Country". You only want each country listed once.',
     commonMistakes: [
-      { error: 'Expecting DISTINCT to work on one column when multiple are selected.', code: '', suffix: 'DISTINCT applies to ALL columns together, not just the first one.' }
+      { error: 'Using DISTINCT unnecessarily.', code: 'SELECT DISTINCT id FROM users', suffix: 'If the column is a Primary Key, it is already unique. DISTINCT adds unnecessary overhead.' }
     ],
-    bestPractices: [
-      'Use DISTINCT when you need a unique list of values',
-      'For large tables, consider GROUP BY which is often more efficient',
-      'Use COUNT(DISTINCT col) to count unique values'
-    ],
-    summary: [
-      'DISTINCT removes duplicate rows from query results.',
-      'It applies to the combination of all selected columns.',
-      'COUNT(DISTINCT col) counts unique values in a column.'
+    bestPractices: ['Use GROUP BY instead if you need to calculate aggregates (like COUNT) alongside the unique values'],
+    practiceExercise: {
+      task: 'Write a query to find the unique list of `department` names from the `employees` table.',
+      expectedOutput: '+------------+\n| department |\n+------------+',
+      solution: 'SELECT DISTINCT department FROM employees;'
+    },
+    quiz: [
+      { question: 'What does SELECT DISTINCT do?', options: ['Selects deleted rows', 'Returns only unique, non-duplicate values', 'Formats text clearly', 'Selects all columns'], answer: 'Returns only unique, non-duplicate values' },
+      { question: 'If two rows have the exact same values for the selected columns, how many rows will DISTINCT return?', options: ['Two', 'One', 'Zero', 'Depends on the database'], answer: 'One' },
+      { question: 'Does DISTINCT apply to a single column or the entire row combination?', options: ['Single column only', 'The combination of all columns specified in the SELECT list', 'The Primary Key only', 'Only string columns'], answer: 'The combination of all columns specified in the SELECT list' },
+      { question: 'Is using DISTINCT on a Primary Key column useful?', options: ['Yes, it improves speed', 'No, primary keys are already unique so it wastes processing time', 'Yes, it removes nulls', 'No, it causes an error'], answer: 'No, primary keys are already unique so it wastes processing time' },
+      { question: 'Can you use COUNT(DISTINCT column_name)?', options: ['Yes, it counts the number of unique values', 'No, syntax error', 'Yes, but only in Oracle', 'No, COUNT only works on rows'], answer: 'Yes, it counts the number of unique values' }
     ],
     interviewQuestions: [
-      'What is the difference between DISTINCT and GROUP BY?',
-      'How does DISTINCT work with multiple columns?',
-      'How do you count unique values in a column?'
+      { q: 'How does DISTINCT handle multiple columns?', a: 'If you write `SELECT DISTINCT col1, col2`, it returns unique combinations of BOTH columns. It evaluates the entire row result, not just the first column.' }
     ],
-    quickQuiz: {
-      question: 'What does SELECT DISTINCT grade FROM students return?',
-      options: ['All grades including duplicates', 'Only the first grade', 'Each grade only once', 'The most common grade'],
-      answer: 'Each grade only once'
-    }
+    summary: ['DISTINCT removes duplicates from the result set.', 'Useful for generating lists of unique categories.'],
+    references: commonReferences
   },
 
   'mysql_aliases': {
@@ -340,67 +327,76 @@ export const mysqlContentBatch2 = {
     title: '25. Aliases (AS)',
     difficulty: 'Beginner',
     readingTime: '3 min',
-    definition: 'An alias gives a temporary, readable name to a column or table in a query. It only exists for the duration of that query.',
-    whyUseIt: 'Aliases make output more readable, shorten long table names in JOINs, and are required when naming calculated columns.',
-    syntax: 'SELECT column AS alias FROM table;\\nSELECT column alias FROM table; -- AS is optional\\nSELECT t.col FROM table_name AS t;',
-    codeExample: '-- Column alias:\\nSELECT name AS "Student Name", age AS "Age (Years)"\\nFROM students;\\n\\n-- Calculated column (alias required):\\nSELECT name, salary * 12 AS "Annual Salary"\\nFROM employees;\\n\\n-- Table alias (shortens long names in JOINs):\\nSELECT s.name, c.course_name\\nFROM students AS s\\nJOIN courses AS c ON s.course_id = c.id;\\n\\n-- Alias in ORDER BY:\\nSELECT name, salary * 12 AS annual\\nFROM employees\\nORDER BY annual DESC;',
-    hasLiveOutput: false, expectedOutput: '+---------------+--------------+\\n| student_name  | email_address|\\n+---------------+--------------+\\n| Alice         | a@mail.com   |\\n| Bob           | b@mail.com   |\\n+---------------+--------------+',
+    definition: 'Aliases are used to give a table, or a column in a table, a temporary name. This is done using the AS keyword.',
+    whyUseIt: 'Aliases make column names more readable, especially when using complex functions or joins.',
+    syntax: 'SELECT column_name AS alias_name FROM table_name;\nSELECT column_name FROM table_name AS table_alias;',
+    codeExample: '-- Column Alias:\nSELECT first_name AS Name, date_of_birth AS DOB FROM users;\n\n-- Alias for a function result (Very Common):\nSELECT COUNT(*) AS total_users FROM users;\n\n-- Table Alias (Useful in Joins):\nSELECT u.name, u.age FROM users AS u;',
+    hasLiveOutput: false,
+    expectedOutput: '+-------------+\n| total_users |\n+-------------+\n|        5200 |\n+-------------+',
     explanation: [
-      { code: 'AS "Name"', desc: 'Renames a column in the output. Quote if name has spaces.' },
-      { code: 'Table alias', desc: 'Shortens table names — critical in complex JOIN queries.' },
-      { code: 'Calculated column', desc: 'Expressions like salary * 12 need an alias to have a name.' }
+      { code: 'AS', desc: 'The keyword to assign an alias (often optional, but good for readability).' },
+      { code: 'total_users', desc: 'The temporary name given to the result of COUNT(*).' }
     ],
-    realWorldExample: 'SELECT AVG(salary) AS "Average Salary", MAX(salary) AS "Highest Salary" FROM employees WHERE department = "Engineering";',
+    realWorldExample: 'When returning data to an API, aliases ensure the JSON keys match what the frontend expects.',
     commonMistakes: [
-      { error: 'Using alias in WHERE clause.', code: '', suffix: 'Aliases cannot be used in WHERE (SQL evaluates WHERE before SELECT). Use HAVING or subqueries instead.' }
+      { error: 'Using spaces without quotes.', code: 'SELECT name AS First Name', suffix: 'If an alias has spaces, wrap it in quotes: AS "First Name".' }
     ],
-    bestPractices: [
-      'Use aliases for all calculated columns',
-      'Use table aliases in JOIN queries to keep code short',
-      'Use quotes around aliases with spaces or special characters'
-    ],
-    summary: [
-      'AS creates temporary column or table aliases.',
-      'Aliases make results more readable and are required for calculated columns.',
-      'Table aliases are essential for JOIN queries.'
+    bestPractices: ['Use AS for calculated columns (e.g., COUNT, SUM) to give them meaningful names'],
+    practiceExercise: {
+      task: 'Select the `price` column from the `items` table, but rename the output column to `Cost`.',
+      expectedOutput: '+------+\n| Cost |\n+------+',
+      solution: 'SELECT price AS Cost FROM items;'
+    },
+    quiz: [
+      { question: 'Which keyword creates an alias?', options: ['FOR', 'ALIAS', 'AS', 'LIKE'], answer: 'AS' },
+      { question: 'How long does an alias last?', options: ['Permanently', 'Only for the duration of that specific query', 'Until the database restarts', 'Until you DROP it'], answer: 'Only for the duration of that specific query' },
+      { question: 'How must you write an alias if it contains spaces (e.g., First Name)?', options: ['With underscores: AS First_Name', 'Inside quotes: AS "First Name"', 'You cannot have spaces in aliases', 'Inside brackets: AS [First Name]'], answer: 'Inside quotes: AS "First Name"' },
+      { question: 'Is the AS keyword mandatory in MySQL?', options: ['Yes, always', 'No, it can often be omitted (e.g., SELECT name First_Name)', 'Only for tables', 'Only for columns'], answer: 'No, it can often be omitted (e.g., SELECT name First_Name)' },
+      { question: 'Why use an alias for a table?', options: ['To save memory', 'To shorten long table names in complex JOIN queries', 'To hide the table name for security', 'To encrypt data'], answer: 'To shorten long table names in complex JOIN queries' }
     ],
     interviewQuestions: [
-      'Can you use a column alias in a WHERE clause?',
-      'What is the difference between a column alias and a table alias?',
-      'Is the AS keyword mandatory?'
+      { q: 'Can you use a column alias in a WHERE clause?', a: 'Standard SQL does not allow column aliases in the WHERE clause because the WHERE clause is evaluated before the SELECT list. However, you can use aliases in the GROUP BY, ORDER BY, and HAVING clauses.' }
     ],
-    quickQuiz: {
-      question: 'Can you use a column alias in the WHERE clause?',
-      options: ['Yes, always', 'No, WHERE is evaluated before SELECT aliases are created', 'Only if it is a number', 'Only with HAVING'],
-      answer: 'No, WHERE is evaluated before SELECT aliases are created'
-    }
+    summary: ['AS creates a temporary name.', 'Highly useful for calculated columns.'],
+    references: commonReferences
   },
-
-  // ─── MODULE 4: Filtering Data ─────────────────────────────────────────────────
 
   'mysql_and': {
     isStructured: true,
     title: '26. AND Operator',
     difficulty: 'Beginner',
     readingTime: '3 min',
-    definition: 'The AND operator filters records where ALL specified conditions are true.',
-    whyUseIt: 'AND lets you narrow down results to rows that match every condition you specify.',
-    syntax: 'SELECT * FROM table WHERE condition1 AND condition2;',
-    codeExample: '-- Students who are grade A AND under 21:\\nSELECT * FROM students\\nWHERE grade = \'A\' AND age < 21;\\n\\n-- Orders that are paid AND shipped AND above $100:\\nSELECT * FROM orders\\nWHERE status = \'paid\'\\n  AND is_shipped = TRUE\\n  AND total > 100;\\n\\n-- Three conditions:\\nSELECT * FROM employees\\nWHERE department = \'IT\'\\n  AND salary > 50000\\n  AND city = \'Hyderabad\';',
-    hasLiveOutput: false, expectedOutput: '+----+---------+-----+-------+\\n| id | name    | age | grade |\\n+----+---------+-----+-------+\\n|  2 | Bob     |  22 | A     |\\n|  5 | Eve     |  21 | A     |\\n+----+---------+-----+-------+',
+    definition: 'The AND operator displays a record if ALL the conditions separated by AND are TRUE.',
+    whyUseIt: 'To narrow down search results requiring multiple specific criteria to be met simultaneously.',
+    syntax: 'SELECT columns FROM table WHERE condition1 AND condition2 AND condition3;',
+    codeExample: '-- Find adults living in the USA:\nSELECT * FROM users \nWHERE age >= 18 \nAND country = \'USA\';\n\n-- Find specific active products:\nSELECT name, price FROM products \nWHERE stock > 0 \nAND category = \'Electronics\' \nAND price < 500;',
+    hasLiveOutput: false,
+    expectedOutput: '+---------+-------+\n| name    | price |\n+---------+-------+\n| Monitor |  300  |\n| Kindle  |  120  |\n+---------+-------+',
     explanation: [
-      { code: 'AND', desc: 'Returns a row only when ALL conditions are true.' },
-      { code: 'Multiple AND', desc: 'Chain as many AND conditions as needed.' },
-      { code: 'Truth table', desc: 'TRUE AND TRUE = TRUE. TRUE AND FALSE = FALSE. FALSE AND FALSE = FALSE.' }
+      { code: 'AND', desc: 'Requires BOTH conditions to be true.' }
     ],
-    realWorldExample: 'SELECT * FROM flights WHERE from_city = "Mumbai" AND to_city = "Delhi" AND date = "2025-08-15" AND seats_available > 0;',
+    realWorldExample: 'Filtering a flight search: "Departing from NY" AND "Arriving in LA" AND "Date = Tomorrow".',
     commonMistakes: [
-      { error: 'Mixing AND/OR without parentheses.', code: '', suffix: 'AND has higher precedence than OR. Use parentheses to control evaluation order.' }
+      { error: 'Combining mutually exclusive conditions.', code: 'WHERE color = \'Red\' AND color = \'Blue\'', suffix: 'A single column cannot hold two different values simultaneously. Use OR instead.' }
     ],
-    bestPractices: ['Use parentheses when combining AND with OR', 'Order conditions from most to least selective for readability'],
-    summary: ['AND requires ALL conditions to be true.', 'Multiple AND conditions can be chained.', 'AND has higher precedence than OR.'],
-    interviewQuestions: ['What is the difference between AND and OR?', 'What happens when you chain multiple AND conditions?'],
-    quickQuiz: { question: 'AND returns a row when...', options: ['At least one condition is true', 'No conditions are true', 'ALL conditions are true', 'Exactly one condition is true'], answer: 'ALL conditions are true' }
+    bestPractices: ['Format complex WHERE clauses with line breaks for readability'],
+    practiceExercise: {
+      task: 'Write a query to find employees where `department` is "Sales" AND `salary` is greater than 50000.',
+      expectedOutput: '+------+--------+------------+\n| name | salary | department |\n+------+--------+------------+',
+      solution: 'SELECT * FROM employees WHERE department = \'Sales\' AND salary > 50000;'
+    },
+    quiz: [
+      { question: 'The AND operator displays a record if...', options: ['Any condition is true', 'All conditions are true', 'No conditions are true', 'The first condition is true'], answer: 'All conditions are true' },
+      { question: 'What happens if you run: WHERE age > 20 AND age < 10?', options: ['Returns people between 10 and 20', 'Returns everyone', 'Returns 0 rows (Impossible condition)', 'Syntax Error'], answer: 'Returns 0 rows (Impossible condition)' },
+      { question: 'Can you use more than two AND conditions?', options: ['No, maximum is two', 'Yes, you can chain as many as needed', 'Only if they check the same column', 'Only with numeric data'], answer: 'Yes, you can chain as many as needed' },
+      { question: 'Which operator is evaluated first: AND or OR?', options: ['OR is evaluated first', 'AND is evaluated first', 'Evaluated left to right', 'Randomly'], answer: 'AND is evaluated first' },
+      { question: 'Is && a valid synonym for AND in MySQL?', options: ['Yes', 'No', 'Only in strict mode', 'Only in stored procedures'], answer: 'Yes' }
+    ],
+    interviewQuestions: [
+      { q: 'What is the precedence of AND and OR in SQL?', a: 'AND has higher precedence than OR. This means `A OR B AND C` is evaluated as `A OR (B AND C)`. Always use parentheses to make your intent explicit.' }
+    ],
+    summary: ['AND requires all conditions to be true.', 'Use parentheses when combining with OR.'],
+    references: commonReferences
   },
 
   'mysql_or': {
@@ -408,21 +404,37 @@ export const mysqlContentBatch2 = {
     title: '27. OR Operator',
     difficulty: 'Beginner',
     readingTime: '3 min',
-    definition: 'The OR operator filters records where AT LEAST ONE of the specified conditions is true.',
-    whyUseIt: 'OR lets you retrieve rows that match any one of multiple criteria.',
-    syntax: 'SELECT * FROM table WHERE condition1 OR condition2;',
-    codeExample: '-- Students with grade A OR grade B:\\nSELECT * FROM students\\nWHERE grade = \'A\' OR grade = \'B\';\\n\\n-- From multiple cities:\\nSELECT * FROM employees\\nWHERE city = \'Hyderabad\' OR city = \'Chennai\' OR city = \'Pune\';\\n\\n-- Mix of AND and OR (use parentheses!):\\nSELECT * FROM products\\nWHERE (category = \'laptop\' OR category = \'phone\')\\n  AND price < 50000;',
-    hasLiveOutput: false, expectedOutput: '+----+---------+-----+-------+\\n| id | name    | age | grade |\\n+----+---------+-----+-------+\\n|  1 | Alice   |  19 | B     |\\n|  2 | Bob     |  22 | A     |\\n|  4 | David   |  18 | C     |\\n+----+---------+-----+-------+',
+    definition: 'The OR operator displays a record if ANY of the conditions separated by OR is TRUE.',
+    whyUseIt: 'To broaden search results when multiple different criteria are acceptable.',
+    syntax: 'SELECT columns FROM table WHERE condition1 OR condition2;',
+    codeExample: '-- Find users living in the USA or Canada:\nSELECT name, country FROM users \nWHERE country = \'USA\' \nOR country = \'Canada\';\n\n-- Find users who are admins OR have a high score:\nSELECT name FROM users \nWHERE role = \'Admin\' \nOR score > 9000;',
+    hasLiveOutput: false,
+    expectedOutput: '+--------+---------+\n| name   | country |\n+--------+---------+\n| Alice  | USA     |\n| Bob    | Canada  |\n+--------+---------+',
     explanation: [
-      { code: 'OR', desc: 'Returns a row if ANY of the conditions is true.' },
-      { code: 'Parentheses', desc: 'Always group OR conditions in parentheses when mixed with AND.' }
+      { code: 'OR', desc: 'Requires AT LEAST ONE condition to be true.' }
     ],
-    realWorldExample: 'SELECT * FROM customers WHERE country = "India" OR country = "Nepal" OR country = "Sri Lanka"; — Gets all South Asian customers.',
-    commonMistakes: [{ error: 'Not using parentheses with AND+OR.', code: '', suffix: 'WHERE a = 1 OR b = 2 AND c = 3 is NOT the same as WHERE (a=1 OR b=2) AND c=3.' }],
-    bestPractices: ['Use IN() instead of multiple OR on the same column — much cleaner', 'Always wrap OR groups in parentheses when mixing with AND'],
-    summary: ['OR returns rows where any condition is true.', 'Use parentheses to control evaluation order with AND.', 'Consider IN() as a cleaner alternative to multiple ORs.'],
-    interviewQuestions: ['What is the difference between AND and OR?', 'How do you use OR efficiently?'],
-    quickQuiz: { question: 'OR returns a row when...', options: ['All conditions are true', 'No conditions are true', 'At least one condition is true', 'Exactly two conditions are true'], answer: 'At least one condition is true' }
+    realWorldExample: 'An online store showing products that are either "On Sale" OR "In Clearance".',
+    commonMistakes: [
+      { error: 'Forgetting column names in subsequent conditions.', code: 'WHERE country = \'USA\' OR \'Canada\'', suffix: 'Must be: WHERE country = \'USA\' OR country = \'Canada\'.' }
+    ],
+    bestPractices: ['Use the IN operator instead of multiple ORs for the same column (e.g. IN ("USA", "Canada"))'],
+    practiceExercise: {
+      task: 'Write a query to find books where the `genre` is "Fantasy" OR the `genre` is "Sci-Fi".',
+      expectedOutput: '+---------+---------+\n| title   | genre   |\n+---------+---------+',
+      solution: 'SELECT * FROM books WHERE genre = \'Fantasy\' OR genre = \'Sci-Fi\';'
+    },
+    quiz: [
+      { question: 'The OR operator displays a record if...', options: ['All conditions are true', 'At least one condition is true', 'No conditions are true', 'The last condition is true'], answer: 'At least one condition is true' },
+      { question: 'Which is correctly written?', options: ["WHERE color = 'Red' OR 'Blue'", "WHERE color = 'Red' OR color = 'Blue'", "WHERE color == 'Red' OR 'Blue'", "WHERE color = 'Red', 'Blue'"], answer: "WHERE color = 'Red' OR color = 'Blue'" },
+      { question: 'What is a shorter alternative to multiple OR statements on the same column?', options: ['AND', 'LIKE', 'IN', 'BETWEEN'], answer: 'IN' },
+      { question: 'Is || a valid synonym for OR in MySQL?', options: ['Yes', 'No', 'Only for strings', 'Only for numbers'], answer: 'Yes' },
+      { question: 'If you combine AND and OR, which should you use to control execution order?', options: ['Brackets []', 'Parentheses ()', 'Quotes ""', 'Commas ,'], answer: 'Parentheses ()' }
+    ],
+    interviewQuestions: [
+      { q: 'Why might `IN` be better than multiple `OR` statements?', a: '`IN` is more readable, concise, and in some database engines, it can be optimized better than a long chain of `OR` statements.' }
+    ],
+    summary: ['OR requires at least one condition to be true.', 'Always explicitly state the column for each OR.'],
+    references: commonReferences
   },
 
   'mysql_not': {
@@ -430,23 +442,37 @@ export const mysqlContentBatch2 = {
     title: '28. NOT Operator',
     difficulty: 'Beginner',
     readingTime: '3 min',
-    definition: 'NOT reverses the result of a condition. If a condition is true, NOT makes it false, and vice versa.',
-    whyUseIt: 'NOT lets you filter out records that match a condition, rather than finding ones that do.',
-    syntax: 'SELECT * FROM table WHERE NOT condition;\\nSELECT * FROM table WHERE col NOT IN (val1, val2);\\nSELECT * FROM table WHERE col NOT LIKE \'pattern\';',
-    codeExample: '-- Students NOT in grade F:\\nSELECT * FROM students WHERE NOT grade = \'F\';\\n-- Equivalent to:\\nSELECT * FROM students WHERE grade != \'F\';\\n\\n-- NOT IN:\\nSELECT * FROM employees\\nWHERE department NOT IN (\'HR\', \'Marketing\');\\n\\n-- NOT LIKE:\\nSELECT * FROM products\\nWHERE name NOT LIKE \'%Samsung%\';\\n\\n-- NOT NULL:\\nSELECT * FROM students WHERE email IS NOT NULL;',
-    hasLiveOutput: false, expectedOutput: '+----+---------+---------+\\n| id | name    | country |\\n+----+---------+---------+\\n|  2 | Bob     | UK      |\\n|  3 | Charlie | Canada  |\\n+----+---------+---------+',
+    definition: 'The NOT operator displays a record if the condition(s) is NOT TRUE.',
+    whyUseIt: 'To exclude specific values or ranges from your results.',
+    syntax: 'SELECT columns FROM table WHERE NOT condition;',
+    codeExample: '-- Exclude users from a specific country:\nSELECT name, country FROM users \nWHERE NOT country = \'USA\';\n-- Alternatively: WHERE country != \'USA\';\n\n-- Exclude multiple conditions:\nSELECT name FROM users \nWHERE NOT (role = \'Admin\' OR role = \'SuperUser\');',
+    hasLiveOutput: false,
+    expectedOutput: '+-------+---------+\n| name  | country |\n+-------+---------+\n| Ravi  | India   |\n| Luis  | Spain   |\n+-------+---------+',
     explanation: [
-      { code: 'NOT', desc: 'Negates the condition that follows it.' },
-      { code: 'NOT IN', desc: 'Excludes rows matching the listed values.' },
-      { code: 'NOT LIKE', desc: 'Excludes rows that match the pattern.' },
-      { code: 'IS NOT NULL', desc: 'Returns rows where the column has a value.' }
+      { code: 'NOT', desc: 'Inverts the truth value of the condition.' }
     ],
-    realWorldExample: 'SELECT * FROM orders WHERE status NOT IN ("delivered", "cancelled"); — Gets all active/pending orders.',
-    commonMistakes: [{ error: 'Using NOT NULL instead of IS NOT NULL.', code: 'WHERE email IS NOT NULL', suffix: 'NULL comparisons require IS NOT NULL, not != NULL.' }],
-    bestPractices: ['Use != for simple negation', 'Use NOT IN for excluding multiple values', 'Use IS NOT NULL for null checks'],
-    summary: ['NOT reverses a condition.', 'NOT IN excludes multiple values efficiently.', 'IS NOT NULL checks for non-empty columns.'],
-    interviewQuestions: ['What is the difference between != and NOT?', 'How do you check for non-null values?'],
-    quickQuiz: { question: 'Which is the correct way to check for non-null values?', options: ['WHERE col != NULL', 'WHERE col NOT NULL', 'WHERE col IS NOT NULL', 'WHERE col <> NULL'], answer: 'WHERE col IS NOT NULL' }
+    realWorldExample: 'Showing all active tasks: SELECT * FROM tasks WHERE NOT status = "Completed";',
+    commonMistakes: [
+      { error: 'Placing NOT in the wrong place.', code: 'WHERE country NOT = \'USA\'', suffix: 'Correct syntax is NOT condition, or use != / <>.' }
+    ],
+    bestPractices: ['For simple equality, != or <> is often more readable than NOT'],
+    practiceExercise: {
+      task: 'Write a query to find all users where the `status` is NOT "Banned".',
+      expectedOutput: '+------+--------+\n| name | status |\n+------+--------+',
+      solution: 'SELECT * FROM users WHERE NOT status = \'Banned\'; -- or status != \'Banned\''
+    },
+    quiz: [
+      { question: 'What does the NOT operator do?', options: ['Returns only NULL values', 'Inverts a condition', 'Deletes data', 'Throws an error'], answer: 'Inverts a condition' },
+      { question: 'Which of the following is equivalent to: NOT country = "USA"?', options: ['country != "USA"', 'country <> "USA"', 'Both A and B', 'None of the above'], answer: 'Both A and B' },
+      { question: 'Where is NOT usually placed?', options: ['At the end of the query', 'Before the condition it is negating', 'After the table name', 'Before the SELECT keyword'], answer: 'Before the condition it is negating' },
+      { question: 'Can NOT be combined with IN (e.g., NOT IN)?', options: ['Yes', 'No', 'Only with numbers', 'Only with strings'], answer: 'Yes' },
+      { question: 'Is ! a valid synonym for NOT in MySQL?', options: ['Yes', 'No', 'Only inside IF statements', 'Only for booleans'], answer: 'Yes' }
+    ],
+    interviewQuestions: [
+      { q: 'What is the difference between `!=` and `<>`?', a: 'In standard SQL, both `<>` and `!=` mean "not equal to". `<>` is the ISO standard, while `!=` is a widely supported extension.' }
+    ],
+    summary: ['NOT inverts a condition.', 'Commonly used with IN, BETWEEN, and LIKE (e.g., NOT IN).'],
+    references: commonReferences
   },
 
   'mysql_between': {
@@ -454,22 +480,37 @@ export const mysqlContentBatch2 = {
     title: '29. BETWEEN',
     difficulty: 'Beginner',
     readingTime: '3 min',
-    definition: 'BETWEEN selects rows where a value is within a specified range. It is inclusive on both ends.',
-    whyUseIt: 'BETWEEN makes range queries much more readable than using AND with >= and <=.',
-    syntax: 'SELECT * FROM table WHERE col BETWEEN val1 AND val2;\\nSELECT * FROM table WHERE col NOT BETWEEN val1 AND val2;',
-    codeExample: '-- Students aged 18 to 21:\\nSELECT * FROM students WHERE age BETWEEN 18 AND 21;\\n-- Same as: WHERE age >= 18 AND age <= 21\\n\\n-- Products priced 1000 to 5000:\\nSELECT * FROM products WHERE price BETWEEN 1000 AND 5000;\\n\\n-- Date range:\\nSELECT * FROM orders\\nWHERE order_date BETWEEN \'2025-01-01\' AND \'2025-12-31\';\\n\\n-- NOT BETWEEN:\\nSELECT * FROM students WHERE age NOT BETWEEN 18 AND 21;',
-    hasLiveOutput: false, expectedOutput: '+----+-------+-------+\\n| id | name  | price |\\n+----+-------+-------+\\n|  1 | Book  |  15   |\\n|  3 | Pen   |  10   |\\n|  5 | Bag   |  25   |\\n+----+-------+-------+',
+    definition: 'The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.',
+    whyUseIt: 'It is a cleaner, more readable alternative to using >= AND <=.',
+    syntax: 'SELECT columns FROM table WHERE column BETWEEN value1 AND value2;',
+    codeExample: '-- Find products priced between 10 and 50:\nSELECT name, price FROM products \nWHERE price BETWEEN 10 AND 50;\n\n-- Find users who joined in a specific date range:\nSELECT name, join_date FROM users\nWHERE join_date BETWEEN \'2023-01-01\' AND \'2023-12-31\';\n\n-- NOT BETWEEN:\nSELECT name, price FROM products\nWHERE price NOT BETWEEN 10 AND 50;',
+    hasLiveOutput: false,
+    expectedOutput: '+-------+-------+\n| name  | price |\n+-------+-------+\n| Mug   |  12   |\n| Book  |  25   |\n+-------+-------+',
     explanation: [
-      { code: 'BETWEEN a AND b', desc: 'Returns rows where value is >= a AND <= b (inclusive both ends).' },
-      { code: 'Date BETWEEN', desc: 'Works with DATE, DATETIME, and TIMESTAMP columns.' },
-      { code: 'NOT BETWEEN', desc: 'Returns rows outside the specified range.' }
+      { code: 'BETWEEN x AND y', desc: 'Is inclusive! It includes both x and y in the results.' }
     ],
-    realWorldExample: 'SELECT * FROM flights WHERE price BETWEEN 5000 AND 15000 AND travel_date BETWEEN "2025-12-20" AND "2025-12-31"; — Holiday flight search.',
-    commonMistakes: [{ error: 'Putting larger value first.', code: 'BETWEEN 21 AND 18', suffix: 'BETWEEN requires the smaller value first. 21 AND 18 returns 0 rows.' }],
-    bestPractices: ['Use BETWEEN for date ranges — much cleaner than >= AND <=', 'Remember BETWEEN is inclusive on both ends'],
-    summary: ['BETWEEN selects values within an inclusive range.', 'Works with numbers, strings, and dates.', 'NOT BETWEEN excludes the range.'],
-    interviewQuestions: ['Is BETWEEN inclusive or exclusive?', 'How does BETWEEN work with dates?'],
-    quickQuiz: { question: 'Is BETWEEN inclusive or exclusive of the boundary values?', options: ['Exclusive on both ends', 'Inclusive on left only', 'Inclusive on both ends', 'Exclusive on right only'], answer: 'Inclusive on both ends' }
+    realWorldExample: 'Filtering a store by a price range, or generating a report for a specific week.',
+    commonMistakes: [
+      { error: 'Assuming BETWEEN is exclusive.', code: '', suffix: 'BETWEEN 1 AND 5 includes both 1 and 5.' }
+    ],
+    bestPractices: ['Ensure the smaller value comes first (BETWEEN small AND large)'],
+    practiceExercise: {
+      task: 'Write a query to find employees where `salary` is between 40000 and 60000.',
+      expectedOutput: '+--------+\n| salary |\n+--------+',
+      solution: 'SELECT * FROM employees WHERE salary BETWEEN 40000 AND 60000;'
+    },
+    quiz: [
+      { question: 'Is the BETWEEN operator inclusive or exclusive?', options: ['Exclusive', 'Inclusive', 'Includes start, excludes end', 'Excludes start, includes end'], answer: 'Inclusive' },
+      { question: 'Which is equivalent to: price BETWEEN 10 AND 20?', options: ['price > 10 AND price < 20', 'price >= 10 AND price <= 20', 'price = 10 OR price = 20', 'price = 10 AND price = 20'], answer: 'price >= 10 AND price <= 20' },
+      { question: 'Can BETWEEN be used with Dates?', options: ['Yes', 'No, only numbers', 'Only timestamps', 'Only strings'], answer: 'Yes' },
+      { question: 'What happens if the first value is larger than the second (BETWEEN 20 AND 10)?', options: ['Works normally', 'Reverses the sort order', 'Returns an error or zero rows', 'Deletes data'], answer: 'Returns an error or zero rows' },
+      { question: 'How do you find values OUTSIDE a range?', options: ['OUTSIDE BETWEEN', 'NOT BETWEEN', 'EXCEPT BETWEEN', 'BEYOND'], answer: 'NOT BETWEEN' }
+    ],
+    interviewQuestions: [
+      { q: 'Is BETWEEN inclusive?', a: 'Yes, `BETWEEN A AND B` includes both A and B. It is exactly equivalent to `>= A AND <= B`.' }
+    ],
+    summary: ['BETWEEN finds values in a range.', 'It is inclusive.', 'Works with numbers, dates, and text.'],
+    references: commonReferences
   },
 
   'mysql_in': {
@@ -477,22 +518,37 @@ export const mysqlContentBatch2 = {
     title: '30. IN Operator',
     difficulty: 'Beginner',
     readingTime: '3 min',
-    definition: 'IN allows you to match a column against a list of values. It is a cleaner alternative to multiple OR conditions on the same column.',
-    whyUseIt: 'IN is more readable and sometimes faster than writing multiple OR conditions.',
-    syntax: 'SELECT * FROM table WHERE col IN (val1, val2, val3);\\nSELECT * FROM table WHERE col NOT IN (val1, val2);',
-    codeExample: '-- Instead of:\\nSELECT * FROM students WHERE grade = \'A\' OR grade = \'B\' OR grade = \'C\';\\n\\n-- Use IN:\\nSELECT * FROM students WHERE grade IN (\'A\', \'B\', \'C\');\\n\\n-- NOT IN:\\nSELECT * FROM employees WHERE department NOT IN (\'HR\', \'Admin\');\\n\\n-- IN with subquery (advanced):\\nSELECT * FROM students\\nWHERE id IN (SELECT student_id FROM enrollments WHERE course = \'MySQL\');',
-    hasLiveOutput: false, expectedOutput: '+----+---------+-------+\\n| id | name    | dept  |\\n+----+---------+-------+\\n|  1 | Alice   | IT    |\\n|  3 | Charlie | HR    |\\n|  6 | Frank   | Sales |\\n+----+---------+-------+',
+    definition: 'The IN operator allows you to specify multiple values in a WHERE clause.',
+    whyUseIt: 'It is a shorthand for multiple OR conditions, making queries much cleaner and easier to read.',
+    syntax: 'SELECT columns FROM table WHERE column IN (value1, value2, ...);',
+    codeExample: '-- Instead of:\n-- WHERE country = \'USA\' OR country = \'UK\' OR country = \'India\'\n\n-- Use IN:\nSELECT name, country FROM users \nWHERE country IN (\'USA\', \'UK\', \'India\');\n\n-- Combine with NOT:\nSELECT name, country FROM users\nWHERE country NOT IN (\'USA\', \'UK\');',
+    hasLiveOutput: false,
+    expectedOutput: '+--------+---------+\n| name   | country |\n+--------+---------+\n| Alice  | USA     |\n| Ravi   | India   |\n| George | UK      |\n+--------+---------+',
     explanation: [
-      { code: 'IN (v1, v2)', desc: 'Matches if the column value equals any of the listed values.' },
-      { code: 'NOT IN', desc: 'Matches if the column value does NOT equal any of the listed values.' },
-      { code: 'IN with subquery', desc: 'Use a SELECT inside IN to dynamically generate the list.' }
+      { code: 'IN (...)', desc: 'Checks if the column value matches any value in the list.' }
     ],
-    realWorldExample: 'SELECT * FROM products WHERE brand IN ("Apple", "Samsung", "OnePlus"); — Filter by multiple brands.',
-    commonMistakes: [{ error: 'Using NOT IN with NULL values in the list.', code: '', suffix: 'NOT IN returns no rows if the list contains NULL. Use IS NOT NULL separately.' }],
-    bestPractices: ['Use IN instead of multiple OR conditions', 'Combine with subqueries for dynamic filtering', 'Avoid NOT IN with nullable columns'],
-    summary: ['IN matches a column against a list of values.', 'Cleaner and often more readable than multiple OR conditions.', 'NOT IN excludes listed values.'],
-    interviewQuestions: ['What is the difference between IN and OR?', 'What problem can NOT IN cause with NULL values?'],
-    quickQuiz: { question: 'Which is cleaner: multiple OR conditions or IN?', options: ['Multiple OR', 'IN operator', 'They are identical', 'BETWEEN'], answer: 'IN operator' }
+    realWorldExample: 'Selecting users based on a multi-select dropdown (e.g., Status: Active, Pending, Review).',
+    commonMistakes: [
+      { error: 'Using IN with wildcards.', code: 'WHERE name IN (\'A%\', \'B%\')', suffix: 'IN does not support wildcards. Use LIKE with OR instead.' }
+    ],
+    bestPractices: ['Use IN for lists of exact matches', 'IN is often used with Subqueries (e.g., WHERE id IN (SELECT...))'],
+    practiceExercise: {
+      task: 'Write a query to find all orders where the `status` is either "Shipped", "Delivered", or "Processing".',
+      expectedOutput: '+--------+\n| status |\n+--------+',
+      solution: 'SELECT * FROM orders WHERE status IN (\'Shipped\', \'Delivered\', \'Processing\');'
+    },
+    quiz: [
+      { question: 'The IN operator is a shorthand for multiple what?', options: ['AND statements', 'OR statements', 'LIKE statements', 'JOINs'], answer: 'OR statements' },
+      { question: 'How is the list of values formatted for the IN operator?', options: ['In square brackets [a, b]', 'In parentheses (a, b)', 'Separated by spaces', 'In quotes "a, b"'], answer: 'In parentheses (a, b)' },
+      { question: 'Which is correctly written?', options: ['WHERE status IN \'Active\', \'Pending\'', 'WHERE status IN ("Active", "Pending")', 'WHERE status = IN ("Active")', 'WHERE status IN [Active, Pending]'], answer: 'WHERE status IN ("Active", "Pending")' },
+      { question: 'Can you use the IN operator with numeric values?', options: ['Yes', 'No, only strings', 'No, only dates', 'Only with floats'], answer: 'Yes' },
+      { question: 'Can you put a SELECT query inside the IN parentheses?', options: ['Yes, this is called a Subquery', 'No, that is a syntax error', 'Only in Oracle SQL', 'Yes, but it ignores the result'], answer: 'Yes, this is called a Subquery' }
+    ],
+    interviewQuestions: [
+      { q: 'Can you use wildcards (like %) inside an IN clause?', a: 'No, the IN clause only performs exact string matching. To use wildcards, you must use the LIKE operator combined with OR.' }
+    ],
+    summary: ['IN is shorthand for multiple ORs.', 'Great for arrays of specific values.'],
+    references: commonReferences
   },
 
   'mysql_like': {
@@ -500,45 +556,77 @@ export const mysqlContentBatch2 = {
     title: '31. LIKE Operator',
     difficulty: 'Beginner',
     readingTime: '4 min',
-    definition: 'LIKE is used in a WHERE clause to search for a specified pattern in a column using wildcard characters.',
-    whyUseIt: 'LIKE enables flexible text searching when you don\'t know the exact value — like searching for all emails from Gmail.',
-    syntax: 'SELECT * FROM table WHERE col LIKE \'pattern\';\\n-- % matches any sequence of characters\\n-- _ matches exactly one character',
-    codeExample: '-- Names starting with "Ra":\\nSELECT * FROM students WHERE name LIKE \'Ra%\';\\n\\n-- Names ending with "ar":\\nSELECT * FROM students WHERE name LIKE \'%ar\';\\n\\n-- Names containing "avi":\\nSELECT * FROM students WHERE name LIKE \'%avi%\';\\n\\n-- Exactly 4-character names:\\nSELECT * FROM students WHERE name LIKE \'____\'; -- four underscores\\n\\n-- Gmail users:\\nSELECT * FROM users WHERE email LIKE \'%@gmail.com\';\\n\\n-- NOT LIKE (exclude pattern):\\nSELECT * FROM products WHERE name NOT LIKE \'%refurbished%\';',
-    hasLiveOutput: false, expectedOutput: '+----+----------+\\n| id | name     |\\n+----+----------+\\n|  1 | Alice    |\\n|  4 | Alex     |\\n|  7 | Alistair |\\n+----+----------+',
+    definition: 'The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.',
+    whyUseIt: 'Essential for text searches (e.g., "Find all users whose email ends in @gmail.com").',
+    syntax: 'SELECT columns FROM table WHERE column LIKE pattern;',
+    codeExample: '-- Starts with "a":\nSELECT name FROM users WHERE name LIKE \'a%\';\n\n-- Ends with "gmail.com":\nSELECT email FROM users WHERE email LIKE \'%@gmail.com\';\n\n-- Contains "john":\nSELECT name FROM users WHERE name LIKE \'%john%\';',
+    hasLiveOutput: false,
+    expectedOutput: '+----------------+\n| email          |\n+----------------+\n| a@gmail.com    |\n| bob@gmail.com  |\n+----------------+',
     explanation: [
-      { code: '%', desc: 'Wildcard: matches zero or more characters.' },
-      { code: '_', desc: 'Wildcard: matches exactly one character.' },
-      { code: 'NOT LIKE', desc: 'Returns rows that do NOT match the pattern.' }
+      { code: 'LIKE', desc: 'Initiates a pattern match.' },
+      { code: '%', desc: 'Wildcard: Represents zero, one, or multiple characters.' }
     ],
-    realWorldExample: 'SELECT * FROM customers WHERE phone LIKE \'+91%\'; — Find all customers with Indian phone numbers.',
-    commonMistakes: [{ error: 'LIKE is case-insensitive by default in MySQL.', code: '', suffix: 'Use BINARY LIKE for case-sensitive matching.' }],
-    bestPractices: ['Avoid leading % (e.g., LIKE \'%word\') — it prevents index usage', 'Use FULLTEXT indexes for heavy text searching', 'Use LIKE \'word%\' (no leading %) whenever possible for performance'],
-    summary: ['LIKE searches for patterns using % (any chars) and _ (one char).', 'NOT LIKE excludes matching patterns.', 'Leading % disables index usage — use sparingly.'],
-    interviewQuestions: ['What is the difference between % and _ in LIKE?', 'Why is LIKE \'%word\' slower than LIKE \'word%\'?'],
-    quickQuiz: { question: 'Which LIKE pattern matches names that START with "Ra"?', options: ['LIKE \'%Ra\'', 'LIKE \'Ra%\'', 'LIKE \'_Ra_\'', 'LIKE \'Ra_\''], answer: 'LIKE \'Ra%\'' }
+    realWorldExample: 'Implementing a simple search bar on a website.',
+    commonMistakes: [
+      { error: 'Using LIKE for exact matches.', code: 'WHERE name LIKE \'Alice\'', suffix: 'This works, but = is faster for exact matches.' }
+    ],
+    bestPractices: ['Avoid leading wildcards (e.g., \'%john\') if possible, as they prevent MySQL from using indexes, making searches slow on large tables.'],
+    practiceExercise: {
+      task: 'Write a query to find all users whose `phone` number starts with "555".',
+      expectedOutput: '+----------+\n| phone    |\n+----------+',
+      solution: 'SELECT * FROM users WHERE phone LIKE \'555%\';'
+    },
+    quiz: [
+      { question: 'What does the LIKE operator do?', options: ['Finds exact numeric matches', 'Searches for a specified pattern in a column', 'Likes a database post', 'Finds similar sounding words'], answer: 'Searches for a specified pattern in a column' },
+      { question: 'Which character represents "zero or more characters"?', options: ['*', '?', '_', '%'], answer: '%' },
+      { question: 'How do you find values ending with "son"?', options: ['LIKE "son%"', 'LIKE "%son%"', 'LIKE "%son"', 'LIKE "son"'], answer: 'LIKE "%son"' },
+      { question: 'Is LIKE case-sensitive in MySQL by default?', options: ['Yes', 'No', 'Only for passwords', 'Only on Linux'], answer: 'No' },
+      { question: 'Why is `LIKE "%text"` slow on large tables?', options: ['It requires internet access', 'It prevents the database from using an index', 'It uses too much memory', 'It converts data to numbers first'], answer: 'It prevents the database from using an index' }
+    ],
+    interviewQuestions: [
+      { q: 'Why might a query using `LIKE "%search%"` be very slow?', a: 'Because of the leading wildcard `%`, the database engine cannot use standard B-Tree indexes. It must perform a "Full Table Scan", checking every single row in the database, which is extremely slow on large tables.' }
+    ],
+    summary: ['LIKE searches for patterns.', '% means any sequence of characters.'],
+    references: commonReferences
   },
 
   'mysql_wildcards': {
     isStructured: true,
     title: '32. Wildcards',
-    difficulty: 'Beginner',
-    readingTime: '3 min',
-    definition: 'Wildcards are special characters used with LIKE to perform pattern matching. MySQL uses % (any chars) and _ (one char).',
-    whyUseIt: 'Wildcards give you flexibility to search for partial matches, patterns, and sequences of unknown characters.',
-    syntax: '% → matches zero or more characters\\n_ → matches exactly one character',
-    codeExample: '-- % Examples:\\nLIKE \'A%\'      -- starts with A\\nLIKE \'%a\'      -- ends with a\\nLIKE \'%SQL%\'   -- contains SQL anywhere\\nLIKE \'%\'       -- matches everything\\n\\n-- _ Examples:\\nLIKE \'_av%\'    -- second+third char are "av" (e.g., Ravi, Dav)\\nLIKE \'___\'     -- exactly 3 characters\\nLIKE \'R___i\'   -- R, then 3 any chars, then i\\n\\n-- Real use:\\nSELECT * FROM files WHERE filename LIKE \'%.pdf\';\\nSELECT * FROM codes WHERE pin LIKE \'50___\'; -- 5-digit codes starting with 50',
-    hasLiveOutput: false, expectedOutput: '+----+----------+\\n| id | name     |\\n+----+----------+\\n|  2 | Bob      |\\n|  5 | Rob      |\\n+----+----------+\\n\\n+----+----------+\\n| id | name     |\\n+----+----------+\\n|  3 | Charlie  |\\n|  8 | Chloe    |\\n+----+----------+',
+    difficulty: 'Intermediate',
+    readingTime: '4 min',
+    definition: 'Wildcards are special characters used with the LIKE operator to define complex search patterns.',
+    whyUseIt: 'Allows for highly specific fuzzy searching.',
+    syntax: '-- % represents zero or more characters\n-- _ represents a SINGLE character',
+    codeExample: '-- Find any name starting with A and at least 3 chars long:\nSELECT name FROM users WHERE name LIKE \'A_%_%\';\n\n-- Find a 5-letter name starting with "S" and ending with "h":\nSELECT name FROM users WHERE name LIKE \'S___h\';\n\n-- Find names where the second letter is "a":\nSELECT name FROM users WHERE name LIKE \'_a%\';',
+    hasLiveOutput: false,
+    expectedOutput: '+-------+\n| name  |\n+-------+\n| Sarah |\n| Smith |\n+-------+',
     explanation: [
-      { code: '%', desc: 'Matches any sequence of characters (including empty).' },
-      { code: '_', desc: 'Matches exactly one character — any character.' },
-      { code: 'Escape wildcard', desc: 'To match literal % or _, use ESCAPE: LIKE \'50\\%\' ESCAPE \'\\\\\'' }
+      { code: '_ (underscore)', desc: 'Matches exactly ONE character.' },
+      { code: '% (percent)', desc: 'Matches ANY number of characters.' }
     ],
-    realWorldExample: 'SELECT * FROM documents WHERE filename LIKE \'%.csv\'; — Find all CSV files uploaded to the system.',
-    commonMistakes: [{ error: 'Forgetting _ matches exactly one character.', code: '', suffix: 'LIKE \'R_vi\' matches "Ravi" but NOT "Raavi" or "Rvi".' }],
-    bestPractices: ['Use specific patterns to avoid unnecessary matches', 'Document your LIKE patterns with comments', 'Consider REGEXP for complex pattern matching'],
-    summary: ['% matches any number of characters.', '_ matches exactly one character.', 'Combine them for precise pattern searches.'],
-    interviewQuestions: ['What are SQL wildcards?', 'How do you search for a literal % character in LIKE?'],
-    quickQuiz: { question: 'Which wildcard in MySQL matches exactly ONE character?', options: ['%', '*', '_', '?'], answer: '_' }
+    realWorldExample: 'Finding postal codes formatted like "A1A 1A1": LIKE "_%_ %_%"',
+    commonMistakes: [
+      { error: 'Confusing % and _', code: '', suffix: '_ is exactly one character. % is 0 to infinity characters.' }
+    ],
+    bestPractices: ['Combine _ and % for highly specific pattern requirements'],
+    practiceExercise: {
+      task: 'Write a query to find words that are exactly 3 letters long and end in "at" (e.g., cat, bat, hat).',
+      expectedOutput: '+------+\n| word |\n+------+',
+      solution: 'SELECT * FROM words WHERE word LIKE \'_at\';'
+    },
+    quiz: [
+      { question: 'What does the underscore (_) wildcard represent?', options: ['Zero characters', 'Exactly one character', 'Multiple characters', 'A space'], answer: 'Exactly one character' },
+      { question: 'Which pattern matches names where the third letter is "t"?', options: ['LIKE "t%"', 'LIKE "_t%"', 'LIKE "__t%"', 'LIKE "%t_"'], answer: 'LIKE "__t%"' },
+      { question: 'What does the pattern LIKE "a_%_%" mandate?', options: ['Starts with a', 'Starts with a, and is at least 3 characters long', 'Ends with a', 'Has 3 letters'], answer: 'Starts with a, and is at least 3 characters long' },
+      { question: 'Are wildcards used with the = operator?', options: ['Yes', 'No, they are used with LIKE', 'Only on strings', 'Yes, but only %'], answer: 'No, they are used with LIKE' },
+      { question: 'How do you match a literal percent sign (%) if it is a wildcard?', options: ['You cannot', 'Escape it: LIKE "100\\%"', 'Use ==', 'Quote it: "%"'], answer: 'Escape it: LIKE "100\\%"' }
+    ],
+    interviewQuestions: [
+      { q: 'How would you search for a literal `%` or `_` character in a string?', a: 'You must escape the wildcard character using a backslash `\\`, for example: `WHERE discount LIKE "50\\%"`' }
+    ],
+    summary: ['% matches any number of chars.', '_ matches exactly one char.'],
+    references: commonReferences
   },
 
   'mysql_is_null': {
@@ -546,23 +634,38 @@ export const mysqlContentBatch2 = {
     title: '33. IS NULL',
     difficulty: 'Beginner',
     readingTime: '3 min',
-    definition: 'IS NULL checks whether a column value is NULL (empty/missing). You cannot use = NULL because NULL is not equal to anything, including itself.',
-    whyUseIt: 'NULL represents missing data. IS NULL lets you find incomplete records and IS NOT NULL finds complete ones.',
-    syntax: 'SELECT * FROM table WHERE col IS NULL;\\nSELECT * FROM table WHERE col IS NOT NULL;\\nSELECT IFNULL(col, \'default\') FROM table;',
-    codeExample: '-- Find students with no email (NULL):\\nSELECT * FROM students WHERE email IS NULL;\\n\\n-- Find students who DO have an email:\\nSELECT * FROM students WHERE email IS NOT NULL;\\n\\n-- Replace NULL with a default in output:\\nSELECT name, IFNULL(phone, \'No Phone\') AS contact\\nFROM students;\\n\\n-- Count NULLs in a column:\\nSELECT COUNT(*) - COUNT(email) AS missing_emails\\nFROM students;\\n\\n-- Update NULL values:\\nUPDATE students SET grade = \'N/A\' WHERE grade IS NULL;',
-    hasLiveOutput: false, expectedOutput: '+----+----------+-------+\\n| id | name     | phone |\\n+----+----------+-------+\\n|  2 | Bob      | NULL  |\\n|  5 | Eve      | NULL  |\\n+----+----------+-------+',
+    definition: 'IS NULL is used to test for empty (NULL) values in a column.',
+    whyUseIt: 'You cannot use = NULL to check for null values. You MUST use IS NULL.',
+    syntax: 'SELECT columns FROM table WHERE column IS NULL;',
+    codeExample: '-- Find users who have NOT provided an email address:\nSELECT name FROM users WHERE email IS NULL;\n\n-- Find orders that have no shipping date yet:\nSELECT order_id FROM orders WHERE shipped_date IS NULL;',
+    hasLiveOutput: false,
+    expectedOutput: '+--------+\n| name   |\n+--------+\n| Bob    |\n| George |\n+--------+',
     explanation: [
-      { code: 'IS NULL', desc: 'Returns rows where the column has no value (NULL).' },
-      { code: 'IS NOT NULL', desc: 'Returns rows where the column has a value.' },
-      { code: 'IFNULL(col, default)', desc: 'Returns the column value, or a default if it is NULL.' },
-      { code: '= NULL (wrong!)', desc: 'Never use = NULL. NULL = NULL is FALSE in SQL. Always use IS NULL.' }
+      { code: 'NULL', desc: 'Represents missing or unknown data. It is NOT the same as zero or an empty string.' },
+      { code: 'IS NULL', desc: 'The only valid way to check if a value is NULL.' }
     ],
-    realWorldExample: 'SELECT * FROM orders WHERE shipped_date IS NULL; — Find all orders that have not been shipped yet.',
-    commonMistakes: [{ error: 'Using = NULL instead of IS NULL.', code: 'WHERE email IS NULL', suffix: 'WHERE email = NULL will always return 0 rows!' }],
-    bestPractices: ['Always use IS NULL / IS NOT NULL for null checks', 'Use IFNULL() or COALESCE() to handle NULLs in output', 'Design tables to avoid unnecessary NULLs with NOT NULL constraints'],
-    summary: ['IS NULL finds rows with missing/empty values.', 'IS NOT NULL finds rows with actual values.', 'Never use = NULL — it always returns no results.'],
-    interviewQuestions: ['Why can\'t you use = NULL in SQL?', 'What is the difference between IS NULL and IFNULL?', 'How do you count NULL values in a column?'],
-    quickQuiz: { question: 'Which is the correct way to check for NULL in MySQL?', options: ['WHERE col = NULL', 'WHERE col == NULL', 'WHERE col IS NULL', 'WHERE col EQUALS NULL'], answer: 'WHERE col IS NULL' }
+    realWorldExample: 'Finding incomplete profiles to send a "Complete your profile" email.',
+    commonMistakes: [
+      { error: 'Using = NULL', code: 'WHERE email = NULL', suffix: 'This will ALWAYS return false. NULL cannot equal NULL.' }
+    ],
+    bestPractices: ['Understand that NULL means "Unknown", not "Empty String"'],
+    practiceExercise: {
+      task: 'Write a query to find all tasks in the `todos` table where the `completed_at` date is missing.',
+      expectedOutput: '+------+\n| task |\n+------+',
+      solution: 'SELECT * FROM todos WHERE completed_at IS NULL;'
+    },
+    quiz: [
+      { question: 'What does NULL represent in a database?', options: ['The number zero', 'An empty string ""', 'Missing, unknown, or undefined data', 'A syntax error'], answer: 'Missing, unknown, or undefined data' },
+      { question: 'How do you correctly check if a column is NULL?', options: ['WHERE column = NULL', 'WHERE column == NULL', 'WHERE column IS NULL', 'WHERE column CONTAINS NULL'], answer: 'WHERE column IS NULL' },
+      { question: 'Why does WHERE column = NULL fail?', options: ['MySQL bug', 'NULL means unknown, and unknown cannot equal unknown', 'You need quotes: "NULL"', 'It deletes data'], answer: 'NULL means unknown, and unknown cannot equal unknown' },
+      { question: 'Is NULL the same as an empty string ("")?', options: ['Yes', 'No', 'Only in VARCHAR columns', 'Only on Windows'], answer: 'No' },
+      { question: 'Can primary keys be NULL?', options: ['Yes', 'No', 'Only on the first row', 'Yes, but only once'], answer: 'No' }
+    ],
+    interviewQuestions: [
+      { q: 'Why doesn\'t `WHERE column = NULL` work?', a: 'Because NULL represents an unknown value. In SQL logic, evaluating `Unknown = Unknown` results in `Unknown` (not True). Therefore, you must use the special `IS NULL` operator.' }
+    ],
+    summary: ['NULL means missing data.', 'Always use IS NULL, never = NULL.'],
+    references: commonReferences
   },
 
   'mysql_is_not_null': {
@@ -570,21 +673,36 @@ export const mysqlContentBatch2 = {
     title: '34. IS NOT NULL',
     difficulty: 'Beginner',
     readingTime: '3 min',
-    definition: 'IS NOT NULL returns rows where a column contains an actual value (not NULL/empty).',
-    whyUseIt: 'Use IS NOT NULL to filter your results to only complete, valid records.',
-    syntax: 'SELECT * FROM table WHERE col IS NOT NULL;\\nSELECT COALESCE(col, \'default\') FROM table;',
-    codeExample: '-- Find students who have submitted their email:\\nSELECT * FROM students WHERE email IS NOT NULL;\\n\\n-- Find delivered orders:\\nSELECT * FROM orders WHERE delivered_at IS NOT NULL;\\n\\n-- COALESCE: use first non-null value:\\nSELECT name,\\n  COALESCE(mobile, phone, email, \'No Contact\') AS contact\\nFROM students;\\n\\n-- Count non-null values:\\nSELECT COUNT(email) AS students_with_email FROM students;\\n-- COUNT() automatically ignores NULLs!',
-    hasLiveOutput: false, expectedOutput: '+----+----------+------------+\\n| id | name     | phone      |\\n+----+----------+------------+\\n|  1 | Alice    | 555-1234   |\\n|  3 | Charlie  | 555-5678   |\\n+----+----------+------------+',
+    definition: 'IS NOT NULL is used to filter out empty (NULL) values, ensuring the column has some data.',
+    whyUseIt: 'To ensure you only process rows that have valid data in a specific column.',
+    syntax: 'SELECT columns FROM table WHERE column IS NOT NULL;',
+    codeExample: '-- Find users who HAVE provided an email address:\nSELECT name, email FROM users WHERE email IS NOT NULL;\n\n-- Find orders that have already shipped:\nSELECT order_id FROM orders WHERE shipped_date IS NOT NULL;',
+    hasLiveOutput: false,
+    expectedOutput: '+-------+---------------+\n| name  | email         |\n+-------+---------------+\n| Alice | a@mail.com    |\n| David | d@mail.com    |\n+-------+---------------+',
     explanation: [
-      { code: 'IS NOT NULL', desc: 'Returns only rows where the column has an actual value.' },
-      { code: 'COALESCE(a,b,c)', desc: 'Returns the first non-NULL value from a list of columns.' },
-      { code: 'COUNT(col)', desc: 'Counts non-NULL values only. COUNT(*) counts all rows.' }
+      { code: 'IS NOT NULL', desc: 'Checks that the field contains actual data.' }
     ],
-    realWorldExample: 'SELECT * FROM employees WHERE manager_id IS NOT NULL; — Find all employees who have a manager assigned (not top-level).',
-    commonMistakes: [{ error: 'Using COUNT(*) vs COUNT(col).', code: '', suffix: 'COUNT(*) counts all rows. COUNT(email) skips NULLs.' }],
-    bestPractices: ['Use COALESCE for multiple fallback values', 'Understand that COUNT(col) ignores NULLs by design'],
-    summary: ['IS NOT NULL returns rows with actual values.', 'COALESCE returns the first non-NULL from a list.', 'COUNT(col) automatically skips NULL values.'],
-    interviewQuestions: ['What is the difference between COUNT(*) and COUNT(column)?', 'What does COALESCE do?'],
-    quickQuiz: { question: 'What does COUNT(email) return compared to COUNT(*)?', options: ['They are identical', 'COUNT(email) skips NULL values; COUNT(*) counts all rows', 'COUNT(*) is slower', 'COUNT(email) is always larger'], answer: 'COUNT(email) skips NULL values; COUNT(*) counts all rows' }
+    realWorldExample: 'Sending out an email newsletter. You only want to query users whose email IS NOT NULL.',
+    commonMistakes: [
+      { error: 'Using != NULL', code: 'WHERE email != NULL', suffix: 'Just like = NULL, this will not work. Always use IS NOT NULL.' }
+    ],
+    bestPractices: ['Define columns as NOT NULL during table creation if the data is strictly required'],
+    practiceExercise: {
+      task: 'Write a query to find all users who have an avatar uploaded (i.e., `avatar_url` is not missing).',
+      expectedOutput: '+------------+\n| avatar_url |\n+------------+',
+      solution: 'SELECT * FROM users WHERE avatar_url IS NOT NULL;'
+    },
+    quiz: [
+      { question: 'What does IS NOT NULL do?', options: ['Checks if a value is 0', 'Checks if a string is empty', 'Ensures a column contains actual data (not missing)', 'Deletes NULL values'], answer: 'Ensures a column contains actual data (not missing)' },
+      { question: 'Which is the correct syntax?', options: ['!= NULL', '<> NULL', 'NOT = NULL', 'IS NOT NULL'], answer: 'IS NOT NULL' },
+      { question: 'If a column contains an empty string (""), will IS NOT NULL return that row?', options: ['Yes, an empty string is not NULL', 'No, empty strings are treated as NULL', 'Error', 'Randomly'], answer: 'Yes, an empty string is not NULL' },
+      { question: 'How can you prevent NULL values from ever entering a column?', options: ['Use IS NOT NULL on every query', 'Define the column with the NOT NULL constraint in CREATE TABLE', 'You cannot prevent it', 'Use triggers'], answer: 'Define the column with the NOT NULL constraint in CREATE TABLE' },
+      { question: 'What happens if you use COUNT(column_name)?', options: ['It counts all rows', 'It only counts rows where column_name IS NOT NULL', 'It causes an error', 'It only counts NULLs'], answer: 'It only counts rows where column_name IS NOT NULL' }
+    ],
+    interviewQuestions: [
+      { q: 'Does `COUNT(column_name)` include NULL values?', a: 'No. `COUNT(column_name)` ignores NULL values in that specific column. However, `COUNT(*)` counts all rows regardless of NULL values.' }
+    ],
+    summary: ['IS NOT NULL filters out missing data.', 'Empty strings ("") are NOT Null.'],
+    references: commonReferences
   }
 };
