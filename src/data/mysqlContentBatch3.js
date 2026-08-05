@@ -12,7 +12,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'COUNT() is used in almost every report — counting users, orders, products, or any metric.',
     syntax: 'SELECT COUNT(*) FROM table;\\nSELECT COUNT(column) FROM table; -- ignores NULLs\\nSELECT COUNT(DISTINCT column) FROM table;',
     codeExample: '-- Count ALL rows:\\nSELECT COUNT(*) AS total_students FROM students;\\n\\n-- Count non-NULL emails only:\\nSELECT COUNT(email) AS students_with_email FROM students;\\n\\n-- Count per group:\\nSELECT grade, COUNT(*) AS students_per_grade\\nFROM students\\nGROUP BY grade;\\n\\n-- Count unique values:\\nSELECT COUNT(DISTINCT grade) AS unique_grades FROM students;\\n\\n-- Count with condition:\\nSELECT COUNT(*) AS top_students\\nFROM students WHERE grade = \'A\';',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----------+\\n| COUNT(*) |\\n+----------+\\n|      150 |\\n+----------+\\n\\n+------------------+\\n| COUNT(department)|\\n+------------------+\\n|                5 |\\n+------------------+',
     explanation: [
       { code: 'COUNT(*)', desc: 'Counts ALL rows including those with NULLs.' },
       { code: 'COUNT(col)', desc: 'Counts only rows where the column is NOT NULL.' },
@@ -37,7 +37,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'SUM() is essential for financial reporting — total sales, total salary cost, total inventory value.',
     syntax: 'SELECT SUM(column) FROM table;\\nSELECT SUM(column) FROM table WHERE condition;',
     codeExample: '-- Total salary of all employees:\\nSELECT SUM(salary) AS total_payroll FROM employees;\\n\\n-- Total revenue from paid orders:\\nSELECT SUM(total_amount) AS revenue\\nFROM orders WHERE status = \'paid\';\\n\\n-- Sum per department:\\nSELECT department, SUM(salary) AS dept_payroll\\nFROM employees\\nGROUP BY department\\nORDER BY dept_payroll DESC;\\n\\n-- Sum with calculation:\\nSELECT SUM(quantity * unit_price) AS total_value\\nFROM order_items;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+-------------+\\n| SUM(salary) |\\n+-------------+\\n|   250000.00 |\\n+-------------+',
     explanation: [
       { code: 'SUM(col)', desc: 'Adds up all non-NULL values in the specified column.' },
       { code: 'SUM with GROUP BY', desc: 'Calculates the total for each group.' },
@@ -60,7 +60,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'AVG() is used for performance analysis, pricing, and statistical summaries.',
     syntax: 'SELECT AVG(column) FROM table;\\nSELECT ROUND(AVG(column), 2) FROM table;',
     codeExample: '-- Average student age:\\nSELECT AVG(age) AS average_age FROM students;\\n\\n-- Average salary per department:\\nSELECT department, ROUND(AVG(salary), 2) AS avg_salary\\nFROM employees\\nGROUP BY department;\\n\\n-- Find students above average score:\\nSELECT name, score FROM students\\nWHERE score > (SELECT AVG(score) FROM students);\\n\\n-- Monthly average order value:\\nSELECT MONTH(order_date) AS month,\\n       ROUND(AVG(total), 2) AS avg_order_value\\nFROM orders\\nGROUP BY MONTH(order_date);',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+-------------+\\n| AVG(salary) |\\n+-------------+\\n|    55000.00 |\\n+-------------+',
     explanation: [
       { code: 'AVG(col)', desc: 'Calculates the average of all non-NULL values.' },
       { code: 'ROUND(AVG(), 2)', desc: 'Rounds the average to 2 decimal places.' },
@@ -83,7 +83,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'MIN() finds the lowest value — cheapest product, earliest date, lowest score.',
     syntax: 'SELECT MIN(column) FROM table;\\nSELECT MIN(column) FROM table WHERE condition;',
     codeExample: '-- Lowest price in the store:\\nSELECT MIN(price) AS cheapest_product FROM products;\\n\\n-- Earliest order date:\\nSELECT MIN(order_date) AS first_order FROM orders;\\n\\n-- Minimum salary per department:\\nSELECT department, MIN(salary) AS lowest_salary\\nFROM employees\\nGROUP BY department;\\n\\n-- Find the product with the minimum price:\\nSELECT * FROM products\\nWHERE price = (SELECT MIN(price) FROM products);',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+-------------+\\n| MIN(salary) |\\n+-------------+\\n|    35000.00 |\\n+-------------+',
     explanation: [
       { code: 'MIN(col)', desc: 'Returns the smallest value. For strings, returns alphabetically first.' },
       { code: 'MIN with dates', desc: 'Returns the earliest date.' },
@@ -106,7 +106,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'MAX() finds the highest value — most expensive product, latest date, top score.',
     syntax: 'SELECT MAX(column) FROM table;',
     codeExample: '-- Highest salary:\\nSELECT MAX(salary) AS top_salary FROM employees;\\n\\n-- Most recent order:\\nSELECT MAX(order_date) AS latest_order FROM orders;\\n\\n-- Max score per grade:\\nSELECT grade, MAX(score) AS top_score\\nFROM students\\nGROUP BY grade;\\n\\n-- Get the employee with the highest salary:\\nSELECT * FROM employees\\nWHERE salary = (SELECT MAX(salary) FROM employees);',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+-------------+\\n| MAX(salary) |\\n+-------------+\\n|    95000.00 |\\n+-------------+',
     explanation: [
       { code: 'MAX(col)', desc: 'Returns the largest value. For strings, returns alphabetically last.' },
       { code: 'MAX with dates', desc: 'Returns the most recent (latest) date.' },
@@ -129,7 +129,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'Raw calculations often produce long decimals. ROUND() formats them cleanly for display.',
     syntax: 'ROUND(number, decimal_places)\\nROUND(number) -- rounds to nearest integer',
     codeExample: '-- Round to 2 decimal places:\\nSELECT ROUND(3.14159, 2);  -- Returns: 3.14\\n\\n-- Round to nearest integer:\\nSELECT ROUND(4.6);  -- Returns: 5\\nSELECT ROUND(4.4);  -- Returns: 4\\n\\n-- Round negative places (round to tens):\\nSELECT ROUND(1234.56, -2);  -- Returns: 1200\\n\\n-- Use with AVG:\\nSELECT ROUND(AVG(salary), 2) AS avg_salary FROM employees;\\n\\n-- Use with SUM:\\nSELECT ROUND(SUM(total), 2) AS total_revenue FROM orders;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----------------+\\n| ROUND(price, 2)|\\n+----------------+\\n|          19.99 |\\n+----------------+',
     explanation: [
       { code: 'ROUND(n, 2)', desc: 'Rounds to 2 decimal places.' },
       { code: 'ROUND(n, 0)', desc: 'Rounds to the nearest whole number.' },
@@ -152,7 +152,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'CONCAT lets you build full names, addresses, URLs, or any formatted string from separate columns.',
     syntax: 'CONCAT(str1, str2, str3, ...)\\nCONCAT_WS(separator, str1, str2, ...)',
     codeExample: '-- Combine first and last name:\\nSELECT CONCAT(first_name, \' \', last_name) AS full_name\\nFROM employees;\\n\\n-- CONCAT_WS (With Separator - skips NULLs):\\nSELECT CONCAT_WS(\', \', city, state, country) AS address\\nFROM users;\\n\\n-- Build a URL:\\nSELECT CONCAT(\'https://example.com/user/\', id) AS profile_url\\nFROM users;\\n\\n-- NULL handling:\\nSELECT CONCAT(\'Hello \', NULL, \'World\');  -- Returns NULL!\\nSELECT CONCAT_WS(\' \', \'Hello\', NULL, \'World\');  -- Returns: Hello World',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+-------------------+\\n| full_name         |\\n+-------------------+\\n| John Doe          |\\n| Jane Smith        |\\n+-------------------+',
     explanation: [
       { code: 'CONCAT(a,b)', desc: 'Joins strings. Returns NULL if ANY argument is NULL.' },
       { code: 'CONCAT_WS(sep,a,b)', desc: 'Joins with separator and SKIPS NULL values. Safer.' },
@@ -175,7 +175,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'Length functions help with data validation — checking if passwords are too short, usernames are too long, etc.',
     syntax: 'LENGTH(string)\\nCHAR_LENGTH(string)  -- recommended for Unicode',
     codeExample: '-- Length of a name:\\nSELECT name, CHAR_LENGTH(name) AS name_length\\nFROM students;\\n\\n-- Find users with short passwords (validation):\\nSELECT username FROM users\\nWHERE CHAR_LENGTH(password) < 8;\\n\\n-- Find long product descriptions:\\nSELECT product_name FROM products\\nWHERE LENGTH(description) > 1000;\\n\\n-- LENGTH vs CHAR_LENGTH:\\nSELECT LENGTH(\'café\');       -- Returns 5 (bytes)\\nSELECT CHAR_LENGTH(\'café\'); -- Returns 4 (characters)',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+-------+--------------+\\n| name  | LENGTH(name) |\\n+-------+--------------+\\n| John  |            4 |\\n| Alice |            5 |\\n+-------+--------------+',
     explanation: [
       { code: 'LENGTH(s)', desc: 'Returns the length in bytes. Multi-byte chars count as more.' },
       { code: 'CHAR_LENGTH(s)', desc: 'Returns the length in characters. Use for Unicode text.' },
@@ -198,7 +198,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'Used for case-insensitive comparisons, standardizing data during import, and formatting output.',
     syntax: 'UPPER(string)\\nLOWER(string)',
     codeExample: '-- Convert to uppercase:\\nSELECT UPPER(\'hello world\');  -- HELLO WORLD\\n\\n-- Convert to lowercase:\\nSELECT LOWER(\'RAVI KUMAR\');  -- ravi kumar\\n\\n-- Case-insensitive search:\\nSELECT * FROM students\\nWHERE LOWER(name) = LOWER(\'ravi kumar\');\\n\\n-- Standardize email on insert:\\nINSERT INTO users (email)\\nVALUES (LOWER(\'RAVI@GMAIL.COM\'));\\n\\n-- Format display:\\nSELECT UPPER(first_name), LOWER(last_name) FROM employees;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+------------+------------+\\n| UPPER(name)| LOWER(name)|\\n+------------+------------+\\n| JOHN DOE   | john doe   |\\n| ALICE      | alice      |\\n+------------+------------+',
     explanation: [
       { code: 'UPPER(s)', desc: 'Converts all characters to uppercase: "hello" → "HELLO".' },
       { code: 'LOWER(s)', desc: 'Converts all characters to lowercase: "HELLO" → "hello".' },
@@ -223,7 +223,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'GROUP BY is essential for reporting and analytics — counting users per country, total sales per month, average salary per department.',
     syntax: 'SELECT col, AGG_FUNC(col2)\\nFROM table\\nGROUP BY col;',
     codeExample: '-- Count students per grade:\\nSELECT grade, COUNT(*) AS total\\nFROM students\\nGROUP BY grade;\\n\\n-- Total sales per product:\\nSELECT product_id, SUM(amount) AS total_sales\\nFROM orders\\nGROUP BY product_id\\nORDER BY total_sales DESC;\\n\\n-- Average salary per department:\\nSELECT department,\\n       ROUND(AVG(salary), 2) AS avg_salary,\\n       COUNT(*) AS headcount\\nFROM employees\\nGROUP BY department;\\n\\n-- Group by multiple columns:\\nSELECT department, job_title, COUNT(*) AS count\\nFROM employees\\nGROUP BY department, job_title;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+------------+-------------+\\n| department | employee_count|\\n+------------+-------------+\\n| IT         |          45 |\\n| HR         |          12 |\\n| Sales      |          28 |\\n+------------+-------------+',
     explanation: [
       { code: 'GROUP BY col', desc: 'Groups all rows with the same value in col into one output row.' },
       { code: 'With aggregate', desc: 'Applies the aggregate function (COUNT, SUM, etc.) to each group.' },
@@ -248,7 +248,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'You cannot use WHERE to filter aggregate results like COUNT() > 5. HAVING is the solution.',
     syntax: 'SELECT col, AGG_FUNC(col2)\\nFROM table\\nGROUP BY col\\nHAVING AGG_FUNC(col2) condition;',
     codeExample: '-- Grades with more than 5 students:\\nSELECT grade, COUNT(*) AS total\\nFROM students\\nGROUP BY grade\\nHAVING total > 5;\\n\\n-- Departments with avg salary > 60000:\\nSELECT department, ROUND(AVG(salary), 2) AS avg_sal\\nFROM employees\\nGROUP BY department\\nHAVING avg_sal > 60000;\\n\\n-- Products sold more than 100 times:\\nSELECT product_id, SUM(quantity) AS total_sold\\nFROM order_items\\nGROUP BY product_id\\nHAVING total_sold > 100\\nORDER BY total_sold DESC;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+------------+-------------+\\n| department | employee_count|\\n+------------+-------------+\\n| IT         |          45 |\\n| Sales      |          28 |\\n+------------+-------------+',
     explanation: [
       { code: 'HAVING', desc: 'Filters groups after GROUP BY has been applied.' },
       { code: 'WHERE vs HAVING', desc: 'WHERE filters rows. HAVING filters groups. Use WHERE before GROUP BY, HAVING after.' },
@@ -273,7 +273,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'Aggregate functions are the backbone of all reporting and dashboards — sales totals, user counts, average ratings, etc.',
     syntax: 'COUNT(), SUM(), AVG(), MIN(), MAX()\\n-- All ignore NULL values (except COUNT(*))',
     codeExample: '-- Comprehensive summary report:\\nSELECT\\n  department,\\n  COUNT(*)            AS headcount,\\n  ROUND(AVG(salary),2) AS avg_salary,\\n  SUM(salary)         AS total_payroll,\\n  MIN(salary)         AS lowest_salary,\\n  MAX(salary)         AS highest_salary\\nFROM employees\\nGROUP BY department\\nORDER BY total_payroll DESC;\\n\\n-- Sales dashboard:\\nSELECT\\n  MONTH(order_date) AS month,\\n  COUNT(*)           AS order_count,\\n  SUM(total)         AS revenue,\\n  ROUND(AVG(total),2) AS avg_order\\nFROM orders\\nWHERE YEAR(order_date) = 2025\\nGROUP BY MONTH(order_date);',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+-------------+-------------+-------------+-------------+\\n| total_emps  | avg_salary  | min_salary  | max_salary  |\\n+-------------+-------------+-------------+-------------+\\n|          85 |    65000.00 |    35000.00 |   125000.00 |\\n+-------------+-------------+-------------+-------------+',
     explanation: [
       { code: 'COUNT(*)', desc: 'Total rows in group.' },
       { code: 'SUM(col)', desc: 'Total of numeric column values.' },
@@ -297,7 +297,7 @@ export const mysqlContentBatch3 = {
     whyUseIt: 'CASE lets you create conditional columns, categorize data, and apply logic directly in your SQL queries.',
     syntax: 'CASE\\n  WHEN condition1 THEN result1\\n  WHEN condition2 THEN result2\\n  ELSE default_result\\nEND',
     codeExample: '-- Categorize by grade:\\nSELECT name, score,\\n  CASE\\n    WHEN score >= 90 THEN \'Distinction\'\\n    WHEN score >= 75 THEN \'First Class\'\\n    WHEN score >= 60 THEN \'Second Class\'\\n    WHEN score >= 50 THEN \'Pass\'\\n    ELSE                  \'Fail\'\\n  END AS result\\nFROM students;\\n\\n-- Salary band categorization:\\nSELECT name, salary,\\n  CASE\\n    WHEN salary > 100000 THEN \'Senior\'\\n    WHEN salary > 60000  THEN \'Mid-Level\'\\n    ELSE                      \'Junior\'\\n  END AS band\\nFROM employees;\\n\\n-- Use CASE with aggregate:\\nSELECT\\n  SUM(CASE WHEN gender = \'M\' THEN 1 ELSE 0 END) AS male_count,\\n  SUM(CASE WHEN gender = \'F\' THEN 1 ELSE 0 END) AS female_count\\nFROM employees;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+---------+-------+-------------+\\n| name    | score | grade       |\\n+---------+-------+-------------+\\n| Alice   |    95 | Excellent   |\\n| Bob     |    82 | Good        |\\n| Charlie |    65 | Needs Work  |\\n+---------+-------+-------------+',
     explanation: [
       { code: 'WHEN condition', desc: 'Evaluated in order — first match wins.' },
       { code: 'THEN result', desc: 'The value returned when the WHEN condition is true.' },

@@ -12,7 +12,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'INSERT is the "C" in CRUD. Without it, you cannot add any data to your database.',
     syntax: 'INSERT INTO table_name (col1, col2) VALUES (val1, val2);\\nINSERT INTO table_name VALUES (val1, val2, ...); -- all columns\\nINSERT INTO table_name (col1) VALUES (v1),(v2),(v3); -- multiple rows',
     codeExample: '-- Insert one row:\\nINSERT INTO students (name, email, age, grade)\\nVALUES (\'Ravi Kumar\', \'ravi@example.com\', 20, \'A\');\\n\\n-- Insert multiple rows at once:\\nINSERT INTO students (name, email, age, grade) VALUES\\n  (\'Priya Sharma\', \'priya@example.com\', 21, \'B\'),\\n  (\'Arjun Patel\',  \'arjun@example.com\', 19, \'A\'),\\n  (\'Sneha Reddy\',  \'sneha@example.com\', 22, \'C\');\\n\\n-- Verify:\\nSELECT * FROM students;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: 'Query OK, 1 row affected (0.01 sec)\\nQuery OK, 3 rows affected (0.01 sec)\\nRecords: 3  Duplicates: 0  Warnings: 0',
     explanation: [
       { code: 'INSERT INTO', desc: 'Specifies which table to insert into.' },
       { code: '(col1, col2)', desc: 'Lists the columns you are providing values for.' },
@@ -54,7 +54,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'SELECT is the "R" in CRUD. Every report, dashboard, and data display on any application runs on SELECT.',
     syntax: 'SELECT * FROM table_name;\\nSELECT col1, col2 FROM table_name;\\nSELECT DISTINCT col FROM table_name;\\nSELECT col FROM table_name WHERE condition;',
     codeExample: '-- Select ALL columns:\\nSELECT * FROM students;\\n\\n-- Select specific columns:\\nSELECT name, email, grade FROM students;\\n\\n-- Rename columns in output:\\nSELECT name AS "Student Name", grade AS "Score" FROM students;\\n\\n-- Select with calculation:\\nSELECT name, age, (age + 5) AS "Age in 5 Years" FROM students;\\n\\n-- Select from multiple conditions:\\nSELECT * FROM students WHERE grade = \'A\' AND age < 21;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+-------+-----+\\n| id | name  | age |\\n+----+-------+-----+\\n|  1 | Alice |  20 |\\n|  2 | Bob   |  22 |\\n|  3 | Charlie| 21 |\\n+----+-------+-----+',
     explanation: [
       { code: 'SELECT *', desc: 'Retrieves ALL columns. Avoid in production — specify columns.' },
       { code: 'SELECT col1, col2', desc: 'Retrieves only specific columns. More efficient.' },
@@ -96,7 +96,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'Without WHERE, every SELECT returns all rows and every UPDATE/DELETE affects every row. WHERE makes queries precise and safe.',
     syntax: 'SELECT col FROM table WHERE condition;\\nUPDATE table SET col = val WHERE condition;\\nDELETE FROM table WHERE condition;',
     codeExample: '-- Filter by exact value:\\nSELECT * FROM students WHERE grade = \'A\';\\n\\n-- Filter by number range:\\nSELECT * FROM students WHERE age >= 18 AND age <= 25;\\n\\n-- Filter with multiple conditions:\\nSELECT * FROM students\\nWHERE grade = \'A\' OR grade = \'B\';\\n\\n-- Combine AND + OR (use parentheses!):\\nSELECT * FROM students\\nWHERE (grade = \'A\' OR grade = \'B\') AND age > 18;\\n\\n-- Use in UPDATE (very important!):\\nUPDATE students SET grade = \'A+\' WHERE name = \'Ravi Kumar\';\\n\\n-- Use in DELETE (very important!):\\nDELETE FROM students WHERE id = 5;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+-------+-----+\\n| id | name  | age |\\n+----+-------+-----+\\n|  2 | Bob   |  22 |\\n|  3 | Charlie| 21 |\\n+----+-------+-----+',
     explanation: [
       { code: '= != < > <= >=', desc: 'Comparison operators used in WHERE conditions.' },
       { code: 'AND', desc: 'Both conditions must be true.' },
@@ -139,7 +139,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'Data changes over time. UPDATE lets you change specific records without deleting and reinserting them.',
     syntax: 'UPDATE table_name\\nSET column1 = value1, column2 = value2\\nWHERE condition;',
     codeExample: '-- Update a single column:\\nUPDATE students SET grade = \'A+\' WHERE id = 1;\\n\\n-- Update multiple columns at once:\\nUPDATE students\\nSET email = \'ravi.new@example.com\', age = 21\\nWHERE id = 1;\\n\\n-- Update based on calculation:\\nUPDATE products SET price = price * 1.10\\nWHERE category = \'electronics\';  -- 10% price increase\\n\\n-- Safe UPDATE: First SELECT to verify:\\nSELECT * FROM students WHERE id = 1;\\n-- Then update:\\nUPDATE students SET grade = \'B\' WHERE id = 1;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: 'Query OK, 1 row affected (0.01 sec)\\nRows matched: 1  Changed: 1  Warnings: 0\\n\\nQuery OK, 3 rows affected (0.01 sec)\\nRows matched: 3  Changed: 3  Warnings: 0',
     explanation: [
       { code: 'SET', desc: 'Specifies which columns to change and their new values.' },
       { code: 'WHERE', desc: 'Restricts the update to specific rows. Without it, ALL rows are updated.' },
@@ -180,7 +180,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'DELETE removes individual records that are no longer needed, unlike TRUNCATE which removes all data.',
     syntax: 'DELETE FROM table_name WHERE condition;\\nDELETE FROM table_name; -- deletes ALL rows!',
     codeExample: '-- Delete a specific row by ID (safest):\\nDELETE FROM students WHERE id = 5;\\n\\n-- Delete based on condition:\\nDELETE FROM students WHERE grade = \'F\';\\n\\n-- Delete with multiple conditions:\\nDELETE FROM orders\\nWHERE status = \'cancelled\' AND created_at < \'2024-01-01\';\\n\\n-- SAFE method: check first:\\nSELECT COUNT(*) FROM students WHERE grade = \'F\';\\n-- If count looks right, then delete:\\nDELETE FROM students WHERE grade = \'F\';',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: 'Query OK, 1 row affected (0.01 sec)\\n\\nQuery OK, 5 rows affected (0.01 sec)',
     explanation: [
       { code: 'DELETE FROM', desc: 'Specifies the table to delete from.' },
       { code: 'WHERE', desc: 'Specifies which rows to delete. CRITICAL — without this, all rows are deleted.' },
@@ -221,7 +221,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'Without LIMIT, a SELECT on a large table returns millions of rows, crashing your app. LIMIT is essential for pagination.',
     syntax: 'SELECT * FROM table LIMIT count;\\nSELECT * FROM table LIMIT offset, count;\\nSELECT * FROM table LIMIT count OFFSET offset;',
     codeExample: '-- Get first 5 students:\\nSELECT * FROM students LIMIT 5;\\n\\n-- Get next 5 students (pagination page 2):\\nSELECT * FROM students LIMIT 5 OFFSET 5;\\n-- or equivalently:\\nSELECT * FROM students LIMIT 5, 5; -- offset=5, count=5\\n\\n-- Get the top scorer:\\nSELECT * FROM students ORDER BY score DESC LIMIT 1;\\n\\n-- Pagination formula:\\n-- Page N, page_size P:\\n-- LIMIT P OFFSET (N-1)*P\\n-- Page 3, size 10: LIMIT 10 OFFSET 20',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+-------+-----+\\n| id | name  | age |\\n+----+-------+-----+\\n|  1 | Alice |  20 |\\n|  2 | Bob   |  22 |\\n|  3 | Charlie| 21 |\\n+----+-------+-----+',
     explanation: [
       { code: 'LIMIT n', desc: 'Returns at most n rows.' },
       { code: 'OFFSET n', desc: 'Skips the first n rows before returning results.' },
@@ -262,7 +262,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'Without ORDER BY, the order of results is unpredictable. Sorting is essential for leaderboards, reports, and pagination.',
     syntax: 'SELECT * FROM table ORDER BY column ASC;\\nSELECT * FROM table ORDER BY column DESC;\\nSELECT * FROM table ORDER BY col1 ASC, col2 DESC;',
     codeExample: '-- Sort alphabetically (A to Z):\\nSELECT * FROM students ORDER BY name ASC;\\n\\n-- Sort by age, newest first:\\nSELECT * FROM students ORDER BY age DESC;\\n\\n-- Sort by multiple columns:\\nSELECT * FROM students\\nORDER BY grade ASC, age DESC;\\n-- (Same grade? Sort by age descending)\\n\\n-- Top 3 highest scorers:\\nSELECT name, score FROM students\\nORDER BY score DESC\\nLIMIT 3;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+---------+-----+\\n| id | name    | age |\\n+----+---------+-----+\\n|  2 | Bob     |  22 |\\n|  3 | Charlie |  21 |\\n|  1 | Alice   |  20 |\\n+----+---------+-----+',
     explanation: [
       { code: 'ASC', desc: 'Ascending order: A→Z, 0→9, oldest→newest. Default.' },
       { code: 'DESC', desc: 'Descending order: Z→A, 9→0, newest→oldest.' },
@@ -303,7 +303,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'When your table has repeated values in a column and you want a list of unique values, DISTINCT is the tool.',
     syntax: 'SELECT DISTINCT column FROM table;\\nSELECT DISTINCT col1, col2 FROM table;',
     codeExample: '-- All grades (with duplicates):\\nSELECT grade FROM students;\\n-- Returns: A, A, B, C, A, B, C, A...\\n\\n-- Only unique grades:\\nSELECT DISTINCT grade FROM students;\\n-- Returns: A, B, C\\n\\n-- Distinct combination of columns:\\nSELECT DISTINCT grade, age FROM students;\\n-- Unique pairs of (grade, age)\\n\\n-- Count unique grades:\\nSELECT COUNT(DISTINCT grade) AS unique_grades FROM students;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+---------+\\n| country |\\n+---------+\\n| USA     |\\n| UK      |\\n| India   |\\n| Canada  |\\n+---------+',
     explanation: [
       { code: 'DISTINCT', desc: 'Filters out duplicate rows from the result set.' },
       { code: 'Multiple columns', desc: 'DISTINCT applies to the COMBINATION of all selected columns.' },
@@ -344,7 +344,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'Aliases make output more readable, shorten long table names in JOINs, and are required when naming calculated columns.',
     syntax: 'SELECT column AS alias FROM table;\\nSELECT column alias FROM table; -- AS is optional\\nSELECT t.col FROM table_name AS t;',
     codeExample: '-- Column alias:\\nSELECT name AS "Student Name", age AS "Age (Years)"\\nFROM students;\\n\\n-- Calculated column (alias required):\\nSELECT name, salary * 12 AS "Annual Salary"\\nFROM employees;\\n\\n-- Table alias (shortens long names in JOINs):\\nSELECT s.name, c.course_name\\nFROM students AS s\\nJOIN courses AS c ON s.course_id = c.id;\\n\\n-- Alias in ORDER BY:\\nSELECT name, salary * 12 AS annual\\nFROM employees\\nORDER BY annual DESC;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+---------------+--------------+\\n| student_name  | email_address|\\n+---------------+--------------+\\n| Alice         | a@mail.com   |\\n| Bob           | b@mail.com   |\\n+---------------+--------------+',
     explanation: [
       { code: 'AS "Name"', desc: 'Renames a column in the output. Quote if name has spaces.' },
       { code: 'Table alias', desc: 'Shortens table names — critical in complex JOIN queries.' },
@@ -387,7 +387,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'AND lets you narrow down results to rows that match every condition you specify.',
     syntax: 'SELECT * FROM table WHERE condition1 AND condition2;',
     codeExample: '-- Students who are grade A AND under 21:\\nSELECT * FROM students\\nWHERE grade = \'A\' AND age < 21;\\n\\n-- Orders that are paid AND shipped AND above $100:\\nSELECT * FROM orders\\nWHERE status = \'paid\'\\n  AND is_shipped = TRUE\\n  AND total > 100;\\n\\n-- Three conditions:\\nSELECT * FROM employees\\nWHERE department = \'IT\'\\n  AND salary > 50000\\n  AND city = \'Hyderabad\';',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+---------+-----+-------+\\n| id | name    | age | grade |\\n+----+---------+-----+-------+\\n|  2 | Bob     |  22 | A     |\\n|  5 | Eve     |  21 | A     |\\n+----+---------+-----+-------+',
     explanation: [
       { code: 'AND', desc: 'Returns a row only when ALL conditions are true.' },
       { code: 'Multiple AND', desc: 'Chain as many AND conditions as needed.' },
@@ -412,7 +412,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'OR lets you retrieve rows that match any one of multiple criteria.',
     syntax: 'SELECT * FROM table WHERE condition1 OR condition2;',
     codeExample: '-- Students with grade A OR grade B:\\nSELECT * FROM students\\nWHERE grade = \'A\' OR grade = \'B\';\\n\\n-- From multiple cities:\\nSELECT * FROM employees\\nWHERE city = \'Hyderabad\' OR city = \'Chennai\' OR city = \'Pune\';\\n\\n-- Mix of AND and OR (use parentheses!):\\nSELECT * FROM products\\nWHERE (category = \'laptop\' OR category = \'phone\')\\n  AND price < 50000;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+---------+-----+-------+\\n| id | name    | age | grade |\\n+----+---------+-----+-------+\\n|  1 | Alice   |  19 | B     |\\n|  2 | Bob     |  22 | A     |\\n|  4 | David   |  18 | C     |\\n+----+---------+-----+-------+',
     explanation: [
       { code: 'OR', desc: 'Returns a row if ANY of the conditions is true.' },
       { code: 'Parentheses', desc: 'Always group OR conditions in parentheses when mixed with AND.' }
@@ -434,7 +434,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'NOT lets you filter out records that match a condition, rather than finding ones that do.',
     syntax: 'SELECT * FROM table WHERE NOT condition;\\nSELECT * FROM table WHERE col NOT IN (val1, val2);\\nSELECT * FROM table WHERE col NOT LIKE \'pattern\';',
     codeExample: '-- Students NOT in grade F:\\nSELECT * FROM students WHERE NOT grade = \'F\';\\n-- Equivalent to:\\nSELECT * FROM students WHERE grade != \'F\';\\n\\n-- NOT IN:\\nSELECT * FROM employees\\nWHERE department NOT IN (\'HR\', \'Marketing\');\\n\\n-- NOT LIKE:\\nSELECT * FROM products\\nWHERE name NOT LIKE \'%Samsung%\';\\n\\n-- NOT NULL:\\nSELECT * FROM students WHERE email IS NOT NULL;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+---------+---------+\\n| id | name    | country |\\n+----+---------+---------+\\n|  2 | Bob     | UK      |\\n|  3 | Charlie | Canada  |\\n+----+---------+---------+',
     explanation: [
       { code: 'NOT', desc: 'Negates the condition that follows it.' },
       { code: 'NOT IN', desc: 'Excludes rows matching the listed values.' },
@@ -458,7 +458,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'BETWEEN makes range queries much more readable than using AND with >= and <=.',
     syntax: 'SELECT * FROM table WHERE col BETWEEN val1 AND val2;\\nSELECT * FROM table WHERE col NOT BETWEEN val1 AND val2;',
     codeExample: '-- Students aged 18 to 21:\\nSELECT * FROM students WHERE age BETWEEN 18 AND 21;\\n-- Same as: WHERE age >= 18 AND age <= 21\\n\\n-- Products priced 1000 to 5000:\\nSELECT * FROM products WHERE price BETWEEN 1000 AND 5000;\\n\\n-- Date range:\\nSELECT * FROM orders\\nWHERE order_date BETWEEN \'2025-01-01\' AND \'2025-12-31\';\\n\\n-- NOT BETWEEN:\\nSELECT * FROM students WHERE age NOT BETWEEN 18 AND 21;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+-------+-------+\\n| id | name  | price |\\n+----+-------+-------+\\n|  1 | Book  |  15   |\\n|  3 | Pen   |  10   |\\n|  5 | Bag   |  25   |\\n+----+-------+-------+',
     explanation: [
       { code: 'BETWEEN a AND b', desc: 'Returns rows where value is >= a AND <= b (inclusive both ends).' },
       { code: 'Date BETWEEN', desc: 'Works with DATE, DATETIME, and TIMESTAMP columns.' },
@@ -481,7 +481,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'IN is more readable and sometimes faster than writing multiple OR conditions.',
     syntax: 'SELECT * FROM table WHERE col IN (val1, val2, val3);\\nSELECT * FROM table WHERE col NOT IN (val1, val2);',
     codeExample: '-- Instead of:\\nSELECT * FROM students WHERE grade = \'A\' OR grade = \'B\' OR grade = \'C\';\\n\\n-- Use IN:\\nSELECT * FROM students WHERE grade IN (\'A\', \'B\', \'C\');\\n\\n-- NOT IN:\\nSELECT * FROM employees WHERE department NOT IN (\'HR\', \'Admin\');\\n\\n-- IN with subquery (advanced):\\nSELECT * FROM students\\nWHERE id IN (SELECT student_id FROM enrollments WHERE course = \'MySQL\');',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+---------+-------+\\n| id | name    | dept  |\\n+----+---------+-------+\\n|  1 | Alice   | IT    |\\n|  3 | Charlie | HR    |\\n|  6 | Frank   | Sales |\\n+----+---------+-------+',
     explanation: [
       { code: 'IN (v1, v2)', desc: 'Matches if the column value equals any of the listed values.' },
       { code: 'NOT IN', desc: 'Matches if the column value does NOT equal any of the listed values.' },
@@ -504,7 +504,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'LIKE enables flexible text searching when you don\'t know the exact value — like searching for all emails from Gmail.',
     syntax: 'SELECT * FROM table WHERE col LIKE \'pattern\';\\n-- % matches any sequence of characters\\n-- _ matches exactly one character',
     codeExample: '-- Names starting with "Ra":\\nSELECT * FROM students WHERE name LIKE \'Ra%\';\\n\\n-- Names ending with "ar":\\nSELECT * FROM students WHERE name LIKE \'%ar\';\\n\\n-- Names containing "avi":\\nSELECT * FROM students WHERE name LIKE \'%avi%\';\\n\\n-- Exactly 4-character names:\\nSELECT * FROM students WHERE name LIKE \'____\'; -- four underscores\\n\\n-- Gmail users:\\nSELECT * FROM users WHERE email LIKE \'%@gmail.com\';\\n\\n-- NOT LIKE (exclude pattern):\\nSELECT * FROM products WHERE name NOT LIKE \'%refurbished%\';',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+----------+\\n| id | name     |\\n+----+----------+\\n|  1 | Alice    |\\n|  4 | Alex     |\\n|  7 | Alistair |\\n+----+----------+',
     explanation: [
       { code: '%', desc: 'Wildcard: matches zero or more characters.' },
       { code: '_', desc: 'Wildcard: matches exactly one character.' },
@@ -527,7 +527,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'Wildcards give you flexibility to search for partial matches, patterns, and sequences of unknown characters.',
     syntax: '% → matches zero or more characters\\n_ → matches exactly one character',
     codeExample: '-- % Examples:\\nLIKE \'A%\'      -- starts with A\\nLIKE \'%a\'      -- ends with a\\nLIKE \'%SQL%\'   -- contains SQL anywhere\\nLIKE \'%\'       -- matches everything\\n\\n-- _ Examples:\\nLIKE \'_av%\'    -- second+third char are "av" (e.g., Ravi, Dav)\\nLIKE \'___\'     -- exactly 3 characters\\nLIKE \'R___i\'   -- R, then 3 any chars, then i\\n\\n-- Real use:\\nSELECT * FROM files WHERE filename LIKE \'%.pdf\';\\nSELECT * FROM codes WHERE pin LIKE \'50___\'; -- 5-digit codes starting with 50',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+----------+\\n| id | name     |\\n+----+----------+\\n|  2 | Bob      |\\n|  5 | Rob      |\\n+----+----------+\\n\\n+----+----------+\\n| id | name     |\\n+----+----------+\\n|  3 | Charlie  |\\n|  8 | Chloe    |\\n+----+----------+',
     explanation: [
       { code: '%', desc: 'Matches any sequence of characters (including empty).' },
       { code: '_', desc: 'Matches exactly one character — any character.' },
@@ -550,7 +550,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'NULL represents missing data. IS NULL lets you find incomplete records and IS NOT NULL finds complete ones.',
     syntax: 'SELECT * FROM table WHERE col IS NULL;\\nSELECT * FROM table WHERE col IS NOT NULL;\\nSELECT IFNULL(col, \'default\') FROM table;',
     codeExample: '-- Find students with no email (NULL):\\nSELECT * FROM students WHERE email IS NULL;\\n\\n-- Find students who DO have an email:\\nSELECT * FROM students WHERE email IS NOT NULL;\\n\\n-- Replace NULL with a default in output:\\nSELECT name, IFNULL(phone, \'No Phone\') AS contact\\nFROM students;\\n\\n-- Count NULLs in a column:\\nSELECT COUNT(*) - COUNT(email) AS missing_emails\\nFROM students;\\n\\n-- Update NULL values:\\nUPDATE students SET grade = \'N/A\' WHERE grade IS NULL;',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+----------+-------+\\n| id | name     | phone |\\n+----+----------+-------+\\n|  2 | Bob      | NULL  |\\n|  5 | Eve      | NULL  |\\n+----+----------+-------+',
     explanation: [
       { code: 'IS NULL', desc: 'Returns rows where the column has no value (NULL).' },
       { code: 'IS NOT NULL', desc: 'Returns rows where the column has a value.' },
@@ -574,7 +574,7 @@ export const mysqlContentBatch2 = {
     whyUseIt: 'Use IS NOT NULL to filter your results to only complete, valid records.',
     syntax: 'SELECT * FROM table WHERE col IS NOT NULL;\\nSELECT COALESCE(col, \'default\') FROM table;',
     codeExample: '-- Find students who have submitted their email:\\nSELECT * FROM students WHERE email IS NOT NULL;\\n\\n-- Find delivered orders:\\nSELECT * FROM orders WHERE delivered_at IS NOT NULL;\\n\\n-- COALESCE: use first non-null value:\\nSELECT name,\\n  COALESCE(mobile, phone, email, \'No Contact\') AS contact\\nFROM students;\\n\\n-- Count non-null values:\\nSELECT COUNT(email) AS students_with_email FROM students;\\n-- COUNT() automatically ignores NULLs!',
-    hasLiveOutput: false,
+    hasLiveOutput: false, expectedOutput: '+----+----------+------------+\\n| id | name     | phone      |\\n+----+----------+------------+\\n|  1 | Alice    | 555-1234   |\\n|  3 | Charlie  | 555-5678   |\\n+----+----------+------------+',
     explanation: [
       { code: 'IS NOT NULL', desc: 'Returns only rows where the column has an actual value.' },
       { code: 'COALESCE(a,b,c)', desc: 'Returns the first non-NULL value from a list of columns.' },
