@@ -1,47 +1,72 @@
 import { Link } from 'react-router-dom';
-import { GitBranch, Briefcase, Mail } from 'lucide-react';
+import { BookOpen, GitBranch, Mail, Heart } from 'lucide-react';
 
 export function Footer() {
   return (
     <footer className="w-full border-t border-borderGlass bg-card mt-auto">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-2">
-            <h3 className="text-xl font-bold text-primary mb-4">Swarnandhra Academy</h3>
-            <p className="text-textSecondary mb-4 max-w-sm">
-              Learn technology the smart way. Complete notes, projects, interview questions, and career roadmap in one place.
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Brand */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Link to="/" className="flex items-center space-x-2 text-primary mb-3">
+              <BookOpen className="w-6 h-6" />
+              <span className="font-bold text-lg text-foreground">Swarnandhra Academy</span>
+            </Link>
+            <p className="text-textSecondary text-sm leading-relaxed">
+              Complete notes, projects, interview questions, and career roadmap for engineering students.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-textSecondary hover:text-primary transition-colors"><GitBranch className="w-5 h-5" /></a>
-              <a href="#" className="text-textSecondary hover:text-primary transition-colors"><Briefcase className="w-5 h-5" /></a>
-              <a href="#" className="text-textSecondary hover:text-primary transition-colors"><Mail className="w-5 h-5" /></a>
-            </div>
           </div>
+
+          {/* Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">Resources</h4>
-            <ul className="space-y-2">
-              <li><Link to="/subjects" className="text-textSecondary hover:text-primary text-sm transition-colors">All Subjects</Link></li>
-              <li><Link to="/projects" className="text-textSecondary hover:text-primary text-sm transition-colors">Projects</Link></li>
-              <li><Link to="/placement" className="text-textSecondary hover:text-primary text-sm transition-colors">Placement Prep</Link></li>
-              <li><a href="#" className="text-textSecondary hover:text-primary text-sm transition-colors">Cheat Sheets</a></li>
+            <h3 className="font-semibold text-foreground text-sm uppercase tracking-wider mb-3">Learn</h3>
+            <ul className="space-y-2 text-sm">
+              {['HTML', 'CSS', 'Java', 'MySQL', 'Linux', 'Git & GitHub', 'AI'].map(subject => (
+                <li key={subject}>
+                  <Link to="/subjects" className="text-textSecondary hover:text-primary transition-colors">
+                    {subject}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
+
+          {/* Resources */}
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">Legal</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-textSecondary hover:text-primary text-sm transition-colors">About Us</a></li>
-              <li><a href="#" className="text-textSecondary hover:text-primary text-sm transition-colors">Contact</a></li>
-              <li><a href="#" className="text-textSecondary hover:text-primary text-sm transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-textSecondary hover:text-primary text-sm transition-colors">Terms of Service</a></li>
+            <h3 className="font-semibold text-foreground text-sm uppercase tracking-wider mb-3">Resources</h3>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/subjects" className="text-textSecondary hover:text-primary transition-colors">Technologies</Link></li>
+              <li><Link to="/projects" className="text-textSecondary hover:text-primary transition-colors">Projects</Link></li>
+              <li><span className="text-textSecondary">Interview Questions</span></li>
+              <li><span className="text-textSecondary">Practice Quizzes</span></li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="font-semibold text-foreground text-sm uppercase tracking-wider mb-3">Connect</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a href="mailto:venkatamallacs@gmail.com" className="text-textSecondary hover:text-primary transition-colors flex items-center gap-2">
+                  <Mail className="w-4 h-4" /> Contact Admin
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-textSecondary hover:text-primary transition-colors flex items-center gap-2">
+                  <GitBranch className="w-4 h-4" /> GitHub
+                </a>
+              </li>
             </ul>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-borderGlass text-center flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-textSecondary">
+
+        {/* Bottom Bar */}
+        <div className="mt-8 pt-6 border-t border-borderGlass flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-textSecondary">
             © {new Date().getFullYear()} Swarnandhra Academy. All rights reserved.
           </p>
-          <p className="text-sm text-textSecondary mt-2 md:mt-0 flex items-center">
-            Made with <span className="text-danger mx-1">❤️</span> for Students
+          <p className="text-xs text-textSecondary flex items-center gap-1">
+            Made with <Heart className="w-3 h-3 text-danger fill-danger" /> for Students
           </p>
         </div>
       </div>

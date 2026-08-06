@@ -42,6 +42,9 @@
   * {
     @apply border-[color:var(--border)];
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-[color:var(--background)] text-[color:var(--foreground)] font-sans antialiased;
   }
@@ -54,6 +57,40 @@
   .glass-card {
     @apply bg-[color:var(--card)] backdrop-blur-md bg-opacity-80 border border-[color:var(--border)] shadow-soft rounded-xl transition-all duration-300;
   }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, 
+    var(--border) 25%, 
+    transparent 50%, 
+    var(--border) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }
 
 /* Custom Scrollbar */
@@ -92,5 +129,12 @@
     page-break-inside: avoid;
     border: 1px solid #e2e8f0 !important;
     background: white !important;
+  }
+}
+
+/* Mobile touch improvements */
+@media (hover: none) {
+  button, a, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
   }
 }

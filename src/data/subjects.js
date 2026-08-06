@@ -4,8 +4,401 @@ import { mysqlContent } from './mysqlContent';
 import { linuxContent } from './linuxContent';
 import { gitContent } from './gitContent';
 import { aiContent } from './aiContent';
+import { cssContent } from './cssContent';
 
 export const subjectsData = {
+
+    css: {
+    id: 'css',
+    name: 'CSS (Cascading Style Sheets)',
+    chapters: [
+    {
+        "id": "css_introduction_to_css",
+        "title": "1. Introduction to CSS"
+    },
+    {
+        "id": "css_history_of_css",
+        "title": "2. History of CSS"
+    },
+    {
+        "id": "css_why_css",
+        "title": "3. Why CSS?"
+    },
+    {
+        "id": "css_types_of_css_inline_internal_external",
+        "title": "4. Types of CSS (Inline, Internal, External)"
+    },
+    {
+        "id": "css_css_syntax",
+        "title": "5. CSS Syntax"
+    },
+    {
+        "id": "css_comments",
+        "title": "6. Comments"
+    },
+    {
+        "id": "css_css_selectors",
+        "title": "7. CSS Selectors"
+    },
+    {
+        "id": "css_colors",
+        "title": "8. Colors"
+    },
+    {
+        "id": "css_backgrounds",
+        "title": "9. Backgrounds"
+    },
+    {
+        "id": "css_borders",
+        "title": "10. Borders"
+    },
+    {
+        "id": "css_margins",
+        "title": "11. Margins"
+    },
+    {
+        "id": "css_padding",
+        "title": "12. Padding"
+    },
+    {
+        "id": "css_height_width",
+        "title": "13. Height & Width"
+    },
+    {
+        "id": "css_box_model",
+        "title": "14. Box Model"
+    },
+    {
+        "id": "css_fonts",
+        "title": "15. Fonts"
+    },
+    {
+        "id": "css_font_properties",
+        "title": "16. Font Properties"
+    },
+    {
+        "id": "css_text_color",
+        "title": "17. Text Color"
+    },
+    {
+        "id": "css_text_alignment",
+        "title": "18. Text Alignment"
+    },
+    {
+        "id": "css_text_decoration",
+        "title": "19. Text Decoration"
+    },
+    {
+        "id": "css_text_transform",
+        "title": "20. Text Transform"
+    },
+    {
+        "id": "css_letter_spacing",
+        "title": "21. Letter Spacing"
+    },
+    {
+        "id": "css_word_spacing",
+        "title": "22. Word Spacing"
+    },
+    {
+        "id": "css_line_height",
+        "title": "23. Line Height"
+    },
+    {
+        "id": "css_text_shadow",
+        "title": "24. Text Shadow"
+    },
+    {
+        "id": "css_display_property",
+        "title": "25. Display Property"
+    },
+    {
+        "id": "css_position_property",
+        "title": "26. Position Property"
+    },
+    {
+        "id": "css_float",
+        "title": "27. Float"
+    },
+    {
+        "id": "css_clear",
+        "title": "28. Clear"
+    },
+    {
+        "id": "css_overflow",
+        "title": "29. Overflow"
+    },
+    {
+        "id": "css_z_index",
+        "title": "30. Z-index"
+    },
+    {
+        "id": "css_visibility",
+        "title": "31. Visibility"
+    },
+    {
+        "id": "css_opacity",
+        "title": "32. Opacity"
+    },
+    {
+        "id": "css_introduction_to_flexbox",
+        "title": "33. Introduction to Flexbox"
+    },
+    {
+        "id": "css_display_flex",
+        "title": "34. display:flex"
+    },
+    {
+        "id": "css_flex_direction",
+        "title": "35. flex-direction"
+    },
+    {
+        "id": "css_justify_content",
+        "title": "36. justify-content"
+    },
+    {
+        "id": "css_align_items",
+        "title": "37. align-items"
+    },
+    {
+        "id": "css_flex_wrap",
+        "title": "38. flex-wrap"
+    },
+    {
+        "id": "css_align_content",
+        "title": "39. align-content"
+    },
+    {
+        "id": "css_flex_grow",
+        "title": "40. flex-grow"
+    },
+    {
+        "id": "css_flex_shrink",
+        "title": "41. flex-shrink"
+    },
+    {
+        "id": "css_gap",
+        "title": "42. gap"
+    },
+    {
+        "id": "css_introduction_to_grid",
+        "title": "43. Introduction to Grid"
+    },
+    {
+        "id": "css_grid_container",
+        "title": "44. Grid Container"
+    },
+    {
+        "id": "css_grid_items",
+        "title": "45. Grid Items"
+    },
+    {
+        "id": "css_grid_template_columns",
+        "title": "46. Grid Template Columns"
+    },
+    {
+        "id": "css_grid_template_rows",
+        "title": "47. Grid Template Rows"
+    },
+    {
+        "id": "css_grid_gap",
+        "title": "48. Grid Gap"
+    },
+    {
+        "id": "css_grid_area",
+        "title": "49. Grid Area"
+    },
+    {
+        "id": "css_grid_alignment",
+        "title": "50. Grid Alignment"
+    },
+    {
+        "id": "css_media_queries",
+        "title": "51. Media Queries"
+    },
+    {
+        "id": "css_mobile_first_design",
+        "title": "52. Mobile First Design"
+    },
+    {
+        "id": "css_responsive_images",
+        "title": "53. Responsive Images"
+    },
+    {
+        "id": "css_responsive_layout",
+        "title": "54. Responsive Layout"
+    },
+    {
+        "id": "css_viewport",
+        "title": "55. Viewport"
+    },
+    {
+        "id": "css_css_units_px_em_rem_vh_vw",
+        "title": "56. CSS Units (px, %, em, rem, vh, vw)"
+    },
+    {
+        "id": "css_pseudo_classes",
+        "title": "57. Pseudo Classes"
+    },
+    {
+        "id": "css_pseudo_elements",
+        "title": "58. Pseudo Elements"
+    },
+    {
+        "id": "css_css_variables",
+        "title": "59. CSS Variables"
+    },
+    {
+        "id": "css_gradients",
+        "title": "60. Gradients"
+    },
+    {
+        "id": "css_shadows",
+        "title": "61. Shadows"
+    },
+    {
+        "id": "css_filters",
+        "title": "62. Filters"
+    },
+    {
+        "id": "css_clip_path",
+        "title": "63. Clip Path"
+    },
+    {
+        "id": "css_object_fit",
+        "title": "64. Object Fit"
+    },
+    {
+        "id": "css_backdrop_filter",
+        "title": "65. Backdrop Filter"
+    },
+    {
+        "id": "css_transform",
+        "title": "66. Transform"
+    },
+    {
+        "id": "css_transition",
+        "title": "67. Transition"
+    },
+    {
+        "id": "css_keyframes",
+        "title": "68. Keyframes"
+    },
+    {
+        "id": "css_animation_properties",
+        "title": "69. Animation Properties"
+    },
+    {
+        "id": "css_hover_effects",
+        "title": "70. Hover Effects"
+    },
+    {
+        "id": "css_loading_spinner",
+        "title": "71. Loading Spinner"
+    },
+    {
+        "id": "css_card_animations",
+        "title": "72. Card Animations"
+    },
+    {
+        "id": "css_glassmorphism",
+        "title": "73. Glassmorphism"
+    },
+    {
+        "id": "css_neumorphism",
+        "title": "74. Neumorphism"
+    },
+    {
+        "id": "css_dark_mode",
+        "title": "75. Dark Mode"
+    },
+    {
+        "id": "css_css_icons",
+        "title": "76. CSS Icons"
+    },
+    {
+        "id": "css_css_cards",
+        "title": "77. CSS Cards"
+    },
+    {
+        "id": "css_buttons",
+        "title": "78. Buttons"
+    },
+    {
+        "id": "css_navigation_bar",
+        "title": "79. Navigation Bar"
+    },
+    {
+        "id": "css_sidebar",
+        "title": "80. Sidebar"
+    },
+    {
+        "id": "css_personal_portfolio",
+        "title": "81. Personal Portfolio"
+    },
+    {
+        "id": "css_login_page",
+        "title": "82. Login Page"
+    },
+    {
+        "id": "css_registration_form",
+        "title": "83. Registration Form"
+    },
+    {
+        "id": "css_landing_page",
+        "title": "84. Landing Page"
+    },
+    {
+        "id": "css_pricing_cards",
+        "title": "85. Pricing Cards"
+    },
+    {
+        "id": "css_product_card",
+        "title": "86. Product Card"
+    },
+    {
+        "id": "css_dashboard_ui",
+        "title": "87. Dashboard UI"
+    },
+    {
+        "id": "css_responsive_website",
+        "title": "88. Responsive Website"
+    },
+    {
+        "id": "css_top_50_css_interview_questions",
+        "title": "89. Top 50 CSS Interview Questions"
+    },
+    {
+        "id": "css_flexbox_interview_questions",
+        "title": "90. Flexbox Interview Questions"
+    },
+    {
+        "id": "css_grid_interview_questions",
+        "title": "91. Grid Interview Questions"
+    },
+    {
+        "id": "css_css_cheat_sheet",
+        "title": "92. CSS Cheat Sheet"
+    },
+    {
+        "id": "css_css_best_practices",
+        "title": "93. CSS Best Practices"
+    },
+    {
+        "id": "css_common_css_mistakes",
+        "title": "94. Common CSS Mistakes"
+    },
+    {
+        "id": "css_mini_quiz",
+        "title": "95. Mini Quiz"
+    },
+    {
+        "id": "css_css_roadmap",
+        "title": "96. CSS Roadmap"
+    }
+]
+    },
+
     java: {
     id: 'java',
     name: 'Java',

@@ -5,8 +5,11 @@ import { CodeBlock } from '../components/ui/CodeBlock';
 import { subjectsData } from '../data/subjects';
 import { ChevronRight, Menu, X, CheckCircle2 } from 'lucide-react';
 import { StructuredLesson } from '../components/course/StructuredLesson';
+import { useAuth } from '../contexts/AuthContext';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
-export function SubjectView() {
+export default function SubjectView() {
   const { subjectId } = useParams();
   const subject = subjectsData[subjectId];
   
@@ -14,17 +17,38 @@ export function SubjectView() {
     subject?.chapters[0]?.id || ''
   );
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [completedCount, setCompletedCount] = useState(0);
+  const [completedChapters, setCompletedChapters] = useState({});
+  const { currentUser } = useAuth();
 
-  const updateProgress = () => {
+  const updateProgress = async () => {
     if (!subject) return;
-    let count = 0;
-    subject.chapters.forEach(c => {
-      if (localStorage.getItem(`completed_${subjectId}_${c.id}`) === 'true') {
-        count++;
-      }
-    });
-    setCompletedCount(count);
+    
+    if (!currentUser) {
+      let localProgress = {};
+      subject.chapters.forEach(c => {
+        if (localStorage.getItem(`completed_${subjectId}_${c.id}`) === 'true') {
+          localProgress[c.id] = true;
+        }
+      });
+      setCompletedChapters(localProgress);
+      return;
+    }
+
+    try {
+      const q = query(
+        collection(db, 'users', currentUser.uid, 'progress'), 
+        where('subjectId', '==', subjectId), 
+        where('isCompleted', '==', true)
+      );
+      const querySnapshot = await getDocs(q);
+      const progress = {};
+      querySnapshot.forEach((doc) => {
+        progress[doc.data().chapterId] = true;
+      });
+      setCompletedChapters(progress);
+    } catch (e) {
+      console.error("Failed to fetch progress", e);
+    }
   };
 
   useEffect(() => {
@@ -35,7 +59,7 @@ export function SubjectView() {
     
     window.addEventListener('progressUpdate', updateProgress);
     return () => window.removeEventListener('progressUpdate', updateProgress);
-  }, [subjectId, subject]);
+  }, [subjectId, subject, currentUser]);
 
   if (!subject) {
     return <div className="p-8 text-center">Subject not found.</div>;
@@ -64,6 +88,7 @@ export function SubjectView() {
     }
   };
 
+  const completedCount = Object.keys(completedChapters).length;
   const progressPercentage = Math.round((completedCount / subject.chapters.length) * 100) || 0;
 
   return (
@@ -102,7 +127,7 @@ export function SubjectView() {
           
           <nav className="space-y-1">
             {subject.chapters.map((chapter) => {
-              const isCompleted = localStorage.getItem(`completed_${subjectId}_${chapter.id}`) === 'true';
+              const isCompleted = completedChapters[chapter.id];
               return (
                 <button
                   key={chapter.id}

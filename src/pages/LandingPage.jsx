@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Code2, BookOpen, FileText, CheckCircle2 } from 'lucide-react';
 
-export function LandingPage() {
+export default function LandingPage() {
   const features = [
     "Beginner Friendly",
     "Practical Examples",

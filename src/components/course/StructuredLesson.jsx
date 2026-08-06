@@ -1,29 +1,99 @@
 import { useState, useEffect } from 'react';
 import { Bookmark, BookmarkCheck, CheckCircle2, Download, Play, Copy, Clock, Target, ChevronRight, Check, XCircle, AlertCircle, ExternalLink } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { db } from '../../lib/firebase';
 
 export function StructuredLesson({ content, chapterId, subjectId }) {
+  const { currentUser } = useAuth();
+  
   // Local storage keys
   const notesKey = `notes_${subjectId}_${chapterId}`;
   const completedKey = `completed_${subjectId}_${chapterId}`;
   const bookmarkKey = `bookmark_${subjectId}_${chapterId}`;
 
-  const [notes, setNotes] = useState(() => localStorage.getItem(notesKey) || '');
-  const [isCompleted, setIsCompleted] = useState(() => localStorage.getItem(completedKey) === 'true');
-  const [isBookmarked, setIsBookmarked] = useState(() => localStorage.getItem(bookmarkKey) === 'true');
+  const [notes, setNotes] = useState('');
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [dbLoading, setDbLoading] = useState(true);
+
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showQuizResults, setShowQuizResults] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
   const [expandedInterviewQ, setExpandedInterviewQ] = useState(null);
 
-  // Sync to local storage
-  useEffect(() => { localStorage.setItem(notesKey, notes); }, [notes, notesKey]);
+  // Load from DB
+  useEffect(() => {
+    let isMounted = true;
+    
+    const loadProgress = async () => {
+      if (currentUser) {
+        try {
+          const docRef = doc(db, 'users', currentUser.uid, 'progress', completedKey);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists() && isMounted) {
+            const data = docSnap.data();
+            setNotes(data.notes || '');
+            setIsCompleted(data.isCompleted || false);
+            setIsBookmarked(data.isBookmarked || false);
+          } else if (isMounted) {
+            setNotes(localStorage.getItem(notesKey) || '');
+            setIsCompleted(localStorage.getItem(completedKey) === 'true');
+            setIsBookmarked(localStorage.getItem(bookmarkKey) === 'true');
+          }
+        } catch (e) {
+          console.error("Error loading progress", e);
+        }
+      } else {
+        if (isMounted) {
+          setNotes(localStorage.getItem(notesKey) || '');
+          setIsCompleted(localStorage.getItem(completedKey) === 'true');
+          setIsBookmarked(localStorage.getItem(bookmarkKey) === 'true');
+        }
+      }
+      if (isMounted) setDbLoading(false);
+    };
+
+    setDbLoading(true);
+    loadProgress();
+
+    return () => { isMounted = false; };
+  }, [currentUser, completedKey, notesKey, bookmarkKey]);
+
+  // Sync notes with Debounce
   useEffect(() => { 
-    localStorage.setItem(completedKey, isCompleted);
-    // Dispatch custom event to notify parent (SubjectView) of progress change
+    if (dbLoading) return;
+    const timeoutId = setTimeout(() => {
+      if (currentUser) {
+        setDoc(doc(db, 'users', currentUser.uid, 'progress', completedKey), { notes, subjectId, chapterId }, { merge: true }).catch(console.error);
+      } else {
+        localStorage.setItem(notesKey, notes); 
+      }
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  }, [notes, notesKey, currentUser, dbLoading, completedKey, subjectId, chapterId]);
+
+  // Sync completion
+  useEffect(() => { 
+    if (dbLoading) return;
+    if (currentUser) {
+      setDoc(doc(db, 'users', currentUser.uid, 'progress', completedKey), { isCompleted, subjectId, chapterId }, { merge: true }).catch(console.error);
+    } else {
+      localStorage.setItem(completedKey, isCompleted);
+    }
     window.dispatchEvent(new Event('progressUpdate'));
-  }, [isCompleted, completedKey]);
-  useEffect(() => { localStorage.setItem(bookmarkKey, isBookmarked); }, [isBookmarked, bookmarkKey]);
+  }, [isCompleted, completedKey, currentUser, dbLoading, subjectId, chapterId]);
+
+  // Sync bookmark
+  useEffect(() => { 
+    if (dbLoading) return;
+    if (currentUser) {
+      setDoc(doc(db, 'users', currentUser.uid, 'progress', completedKey), { isBookmarked, subjectId, chapterId }, { merge: true }).catch(console.error);
+    } else {
+      localStorage.setItem(bookmarkKey, isBookmarked); 
+    }
+  }, [isBookmarked, bookmarkKey, currentUser, dbLoading, subjectId, chapterId]);
 
   // Reset states when content changes
   useEffect(() => {
