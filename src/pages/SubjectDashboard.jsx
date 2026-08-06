@@ -7,13 +7,13 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 
 const subjects = [
-  { id: 'html', name: 'HTML', chapters: 12, difficulty: 'Beginner', time: '10h', icon: Layout, color: 'text-orange-500', bg: 'bg-orange-500/10', image: 'https://images.unsplash.com/photo-1618477388954-7852f32655ec?auto=format&fit=crop&q=80&w=800' },
-  { id: 'css', name: 'CSS', chapters: 15, difficulty: 'Beginner', time: '20h', icon: Layers, color: 'text-blue-400', bg: 'bg-blue-400/10', image: 'https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?auto=format&fit=crop&q=80&w=800' },
-  { id: 'java', name: 'Java', chapters: 28, difficulty: 'Intermediate', time: '45h', icon: Code2, color: 'text-red-500', bg: 'bg-red-500/10', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800' },
-  { id: 'mysql', name: 'MySQL', chapters: 16, difficulty: 'Intermediate', time: '25h', icon: Database, color: 'text-blue-600', bg: 'bg-blue-600/10', image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&q=80&w=800' },
-  { id: 'linux', name: 'Linux', chapters: 10, difficulty: 'Beginner', time: '15h', icon: Terminal, color: 'text-yellow-500', bg: 'bg-yellow-500/10', image: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&q=80&w=800' },
-  { id: 'github', name: 'Git & GitHub', chapters: 89, difficulty: 'Beginner', time: '25h', icon: GitBranch, color: 'text-slate-800 dark:text-slate-200', bg: 'bg-slate-500/10', image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=800' },
-  { id: 'ai', name: 'Artificial Intelligence', chapters: 8, difficulty: 'Advanced', time: '30h', icon: BrainCircuit, color: 'text-purple-500', bg: 'bg-purple-500/10', image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800' },
+  { id: 'html', name: 'HTML', chapters: 12, difficulty: 'Beginner', time: '10h', icon: Layout, color: 'text-orange-500', bg: 'bg-orange-500/10', image: 'https://images.unsplash.com/photo-1621839673705-6617adf9e890?auto=format&fit=crop&q=80&w=800' }, // HTML Code
+  { id: 'css', name: 'CSS', chapters: 15, difficulty: 'Beginner', time: '20h', icon: Layers, color: 'text-blue-400', bg: 'bg-blue-400/10', image: 'https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?auto=format&fit=crop&q=80&w=800' }, // CSS / Design
+  { id: 'java', name: 'Java', chapters: 28, difficulty: 'Intermediate', time: '45h', icon: Code2, color: 'text-red-500', bg: 'bg-red-500/10', image: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&q=80&w=800' }, // Java / Code Screen
+  { id: 'mysql', name: 'MySQL', chapters: 16, difficulty: 'Intermediate', time: '25h', icon: Database, color: 'text-blue-600', bg: 'bg-blue-600/10', image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80&w=800' }, // Data / Charts / DB
+  { id: 'linux', name: 'Linux', chapters: 10, difficulty: 'Beginner', time: '15h', icon: Terminal, color: 'text-yellow-500', bg: 'bg-yellow-500/10', image: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&q=80&w=800' }, // Linux Terminal
+  { id: 'github', name: 'Git & GitHub', chapters: 89, difficulty: 'Beginner', time: '25h', icon: GitBranch, color: 'text-slate-800 dark:text-slate-200', bg: 'bg-slate-500/10', image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=800' }, // Git / Code
+  { id: 'ai', name: 'Artificial Intelligence', chapters: 8, difficulty: 'Advanced', time: '30h', icon: BrainCircuit, color: 'text-purple-500', bg: 'bg-purple-500/10', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800' }, // AI Brain / Network
 ];
 
 export default function SubjectDashboard() {

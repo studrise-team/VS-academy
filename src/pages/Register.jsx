@@ -209,7 +209,7 @@ export default function Register() {
             <BookOpen className="w-10 h-10" />
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[color:var(--foreground)] text-center">
-            Join Swarnandhra Academy
+            Join VS-Academy
           </h2>
           <p className="text-textSecondary text-sm mt-2">Create your student account</p>
         </motion.div>
@@ -360,7 +360,7 @@ export default function Register() {
                         type="text"
                         required
                         className="w-full rounded-xl px-3 py-3 pl-10 border border-borderGlass bg-[color:var(--background)] text-[color:var(--foreground)] placeholder-textSecondary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm"
-                        placeholder="e.g., Swarnandhra Engineering College"
+                        placeholder="e.g., VS-Academy Engineering College"
                         value={formData.collegeName}
                         onChange={handleChange}
                       />

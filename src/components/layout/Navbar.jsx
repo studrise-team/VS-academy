@@ -39,8 +39,8 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 text-primary shrink-0">
             <BookOpen className="w-7 h-7 sm:w-8 sm:h-8" />
-            <span className="font-bold text-lg sm:text-xl text-foreground hidden min-[400px]:inline">Swarnandhra Academy</span>
-            <span className="font-bold text-lg text-foreground min-[400px]:hidden">SA</span>
+            <span className="font-bold text-lg sm:text-xl text-foreground hidden min-[400px]:inline">VS-Academy</span>
+            <span className="font-bold text-lg text-foreground min-[400px]:hidden">VS</span>
           </Link>  
           
           {/* Desktop Search */}
