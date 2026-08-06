@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { Layout } from './components/layout/Layout';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { PublicRoute } from './components/auth/PublicRoute';
 import { AdminRoute } from './components/auth/AdminRoute';
 import { LoadingSpinner } from './components/ui/LoadingSpinner';
 
@@ -20,6 +21,7 @@ const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 const AdminLayout = lazy(() => import('./components/layout/AdminLayout').then(m => ({ default: m.AdminLayout })));
 const PendingRequests = lazy(() => import('./pages/admin/PendingRequests'));
 const StudentList = lazy(() => import('./pages/admin/StudentList'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
   return (
@@ -31,8 +33,12 @@ function App() {
               <Route index element={<LandingPage />} />
               <Route path="projects" element={<Projects />} />
               <Route path="projects/:id" element={<ProjectDetails />} />
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
+              <Route path="login" element={
+                <PublicRoute><Login /></PublicRoute>
+              } />
+              <Route path="register" element={
+                <PublicRoute><Register /></PublicRoute>
+              } />
               <Route path="pending" element={<PendingApproval />} />
               
               {/* Protected routes — require approved login */}
@@ -45,6 +51,9 @@ function App() {
               <Route path="subjects/:subjectId" element={
                 <ProtectedRoute><SubjectView /></ProtectedRoute>
               } />
+              
+              {/* 404 Catch-all route */}
+              <Route path="*" element={<NotFound />} />
             </Route>
 
             {/* Admin routes with dedicated layout */}
