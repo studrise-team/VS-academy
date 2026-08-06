@@ -11,6 +11,7 @@ export const subjectsData = {
     css: {
     id: 'css',
     name: 'CSS (Cascading Style Sheets)',
+    content: cssContent,
     chapters: [
     {
         "id": "css_introduction_to_css",
@@ -402,6 +403,7 @@ export const subjectsData = {
     java: {
     id: 'java',
     name: 'Java',
+    content: javaContent,
     chapters: [
           {
                 "id": "java_introduction_to_java",
@@ -929,6 +931,7 @@ export const subjectsData = {
   html: {
     id: 'html',
     name: 'HTML',
+    content: htmlContent,
     chapters: [
       { id: 'html_intro', title: '1. Introduction' },
       { id: 'html_editors', title: '2. HTML Editors' },
@@ -972,6 +975,7 @@ export const subjectsData = {
   mysql: {
     id: 'mysql',
     name: 'MySQL',
+    content: mysqlContent,
     chapters: [
       { id: 'mysql_what_is_db',       title: '1. What is a Database?' },
       { id: 'mysql_types_of_db',      title: '2. Types of Databases' },
@@ -1079,6 +1083,7 @@ export const subjectsData = {
   linux: {
     id: 'linux',
     name: 'Linux',
+    content: linuxContent,
     description: 'Master Linux fundamentals, commands, bash scripting, and DevOps essentials.',
     chapters: [
       { id: 'linux_what_is', title: '1. What is Linux?' },
@@ -1220,6 +1225,7 @@ export const subjectsData = {
   github: {
     id: 'github',
     name: 'Git & GitHub',
+    content: gitContent,
     description: 'Master version control with Git and collaboration with GitHub.',
     chapters: [
       // Module 1: Introduction to GitHub
