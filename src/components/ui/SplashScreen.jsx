@@ -7,7 +7,7 @@ export function SplashScreen({ onComplete }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Animate progress bar from 0 to 100 over 2 seconds
+    // Animate progress bar smoothly over ~4.5 seconds
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -15,10 +15,10 @@ export function SplashScreen({ onComplete }) {
           setTimeout(() => {
             setIsVisible(false);
             if (onComplete) onComplete();
-          }, 300);
+          }, 500);
           return 100;
         }
-        return prev + 5;
+        return prev + 2;
       });
     }, 80);
 
