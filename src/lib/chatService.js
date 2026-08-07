@@ -10,6 +10,7 @@ import {
   onSnapshot, 
   serverTimestamp 
 } from 'firebase/firestore';
+import { triggerNativePushNotification } from './notificationService';
 
 /**
  * Send a message in a student's chat channel
@@ -44,7 +45,26 @@ export async function sendMessage({ studentUid, studentInfo, senderUser, text, i
       : { unreadByAdmin: true, unreadByStudent: false }
     )
   }, { merge: true });
+
+  // 3. Trigger immediate OS level Push Notification
+  if (isSenderAdmin) {
+    // Notify Student
+    triggerNativePushNotification(
+      '💬 Message from Admin',
+      trimmedText,
+      '/'
+    );
+  } else {
+    // Notify Admin
+    triggerNativePushNotification(
+      `💬 New message from ${studentInfo?.name || 'Student'}`,
+      trimmedText,
+      '/admin/chat'
+    );
+  }
 }
+
+let prevStudentMsgCount = 0;
 
 /**
  * Real-time listener for messages in a specific student chat
@@ -62,11 +82,27 @@ export function subscribeToStudentMessages(studentUid, callback) {
       id: doc.id,
       ...doc.data()
     }));
+
+    // Trigger push notification if new message from Admin arrives while listening
+    if (prevStudentMsgCount > 0 && messages.length > prevStudentMsgCount) {
+      const lastMsg = messages[messages.length - 1];
+      if (lastMsg && lastMsg.senderRole === 'admin') {
+        triggerNativePushNotification(
+          '💬 Message from Admin',
+          lastMsg.text,
+          '/'
+        );
+      }
+    }
+    prevStudentMsgCount = messages.length;
+
     callback(messages);
   }, (error) => {
     console.error("Error subscribing to student messages:", error);
   });
 }
+
+let prevAdminUnreadCount = 0;
 
 /**
  * Real-time listener for all student chats (used by Admin)
@@ -82,6 +118,21 @@ export function subscribeToAdminChats(callback) {
       id: doc.id,
       ...doc.data()
     }));
+
+    const currentUnread = chats.filter(c => c.unreadByAdmin).length;
+    // Trigger push notification for Admin when a student sends a new message
+    if (currentUnread > prevAdminUnreadCount) {
+      const newestUnread = chats.find(c => c.unreadByAdmin);
+      if (newestUnread) {
+        triggerNativePushNotification(
+          `💬 New message from ${newestUnread.studentName || 'Student'}`,
+          newestUnread.lastMessage || 'New message received.',
+          '/admin/chat'
+        );
+      }
+    }
+    prevAdminUnreadCount = currentUnread;
+
     callback(chats);
   }, (error) => {
     console.error("Error subscribing to admin chats:", error);

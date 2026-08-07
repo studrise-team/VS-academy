@@ -20,6 +20,7 @@ import {
   Megaphone
 } from 'lucide-react';
 import { subscribeToAdminChats } from '../../lib/chatService';
+import { NotificationDrawer } from '../notifications/NotificationDrawer';
 
 export function AdminLayout() {
   const { currentUser, logout } = useAuth();
@@ -184,10 +185,8 @@ export function AdminLayout() {
               {theme === 'dark' ? <Sun className="w-5 h-5 text-warning" /> : <Moon className="w-5 h-5 text-secondary" />}
             </button>
             
-            <button className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative">
-              <Bell className="w-5 h-5 text-textSecondary" />
-              <span className="absolute top-1.5 right-2 w-2 h-2 bg-danger rounded-full ring-2 ring-card"></span>
-            </button>
+            {/* Notifications Bell Drawer */}
+            <NotificationDrawer />
 
             <div className="w-px h-6 bg-borderGlass mx-1"></div>
 
