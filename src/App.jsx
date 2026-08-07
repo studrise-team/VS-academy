@@ -25,9 +25,12 @@ const AdminChat = lazy(() => import('./pages/admin/AdminChat'));
 const AdminAnnouncements = lazy(() => import('./pages/admin/AdminAnnouncements'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
+import { SplashScreen } from './components/ui/SplashScreen';
+
 function App() {
   return (
     <AuthProvider>
+      <SplashScreen />
       <Router>
         <Suspense fallback={<LoadingSpinner message="Loading page..." />}>
           <Routes>

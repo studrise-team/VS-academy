@@ -38,10 +38,12 @@ export function Navbar() {
       <nav className="sticky top-0 z-50 w-full glass border-b">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 text-primary shrink-0">
-            <BookOpen className="w-7 h-7 sm:w-8 sm:h-8" />
-            <span className="font-bold text-lg sm:text-xl text-foreground hidden min-[400px]:inline">VS-Academy</span>
-            <span className="font-bold text-lg text-foreground min-[400px]:hidden">VS</span>
+          <Link to="/" className="flex items-center space-x-2.5 text-primary shrink-0 group">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl overflow-hidden shadow-md group-hover:scale-105 transition-transform duration-300 ring-2 ring-primary/20 bg-slate-900 flex items-center justify-center p-0.5">
+              <img src="/logo.png" alt="VS Academy Logo" className="w-full h-full object-contain filter drop-shadow" />
+            </div>
+            <span className="font-extrabold text-lg sm:text-xl text-foreground tracking-tight hidden min-[400px]:inline">VS-Academy</span>
+            <span className="font-extrabold text-lg text-foreground min-[400px]:hidden">VS</span>
           </Link>  
           
           {/* Desktop Search */}
