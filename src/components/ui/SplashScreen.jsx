@@ -10,17 +10,18 @@ export function SplashScreen({ onComplete }) {
     // Animate progress bar smoothly over ~3.5 seconds total
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
+        const next = Math.min(prev + 2, 100);
+        if (next >= 100) {
           clearInterval(interval);
           setTimeout(() => {
             setIsVisible(false);
             if (onComplete) onComplete();
-          }, 400);
+          }, 600);
           return 100;
         }
-        return prev + 3;
+        return next;
       });
-    }, 80);
+    }, 70);
 
     return () => clearInterval(interval);
   }, [onComplete]);
@@ -166,13 +167,14 @@ export function SplashScreen({ onComplete }) {
             >
               <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden p-0.5 border border-white/10 shadow-inner">
                 <motion.div
+                  initial={{ width: '0%' }}
+                  animate={{ width: `${Math.min(progress, 100)}%` }}
+                  transition={{ ease: 'easeOut', duration: 0.15 }}
                   className="h-full bg-gradient-to-r from-purple-500 via-teal-400 to-indigo-500 rounded-full shadow-lg"
-                  style={{ width: `${progress}%` }}
-                  transition={{ ease: 'linear' }}
                 />
               </div>
               <p className="text-[11px] text-slate-400 font-medium tracking-wide">
-                Initializing platform... {progress}%
+                {progress >= 100 ? 'Ready! Launching VS-Academy...' : `Initializing platform... ${progress}%`}
               </p>
             </motion.div>
           </div>
