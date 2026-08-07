@@ -186,9 +186,10 @@ export default function ProjectDetails() {
                 href={`https://www.youtube.com/results?search_query=${encodeURIComponent(project.title + ' tutorial')}`} 
                 target="_blank" 
                 rel="noreferrer"
-                className="block w-full py-2 bg-foreground text-background font-bold rounded-xl hover:opacity-90 transition-opacity text-sm"
+                className="flex items-center justify-center gap-2 w-full py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg shadow-red-600/30 hover:scale-[1.02] transition-all text-sm"
               >
-                Search on YouTube
+                <PlayCircle className="w-4 h-4 fill-white text-red-600" />
+                <span>Search on YouTube</span>
               </a>
             </motion.div>
 
