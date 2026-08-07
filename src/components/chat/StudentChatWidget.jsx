@@ -9,7 +9,7 @@ import {
 import { db } from '../../lib/firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Shield, User, Loader2, LogIn } from 'lucide-react';
+import { MessageSquare, X, Send, Shield, User, Loader2, LogIn, ExternalLink } from 'lucide-react';
 
 export function StudentChatWidget() {
   const { currentUser, isAdmin } = useAuth();
@@ -20,19 +20,16 @@ export function StudentChatWidget() {
   const [hasUnread, setHasUnread] = useState(false);
   const messagesEndRef = useRef(null);
 
-  // Listen to custom window toggle event from Navbar or elsewhere
+  // Listen to custom window toggle event from Navbar or anywhere else
   useEffect(() => {
     const handleToggle = () => setIsOpen(prev => !prev);
     window.addEventListener('toggle-student-chat', handleToggle);
     return () => window.removeEventListener('toggle-student-chat', handleToggle);
   }, []);
 
-  // Hide widget for Admin
-  if (isAdmin) return null;
-
-  // Listen to unread status from parent chat document
+  // Listen to unread status from parent chat document for students
   useEffect(() => {
-    if (!currentUser?.uid) return;
+    if (!currentUser?.uid || isAdmin) return;
 
     const chatDocRef = doc(db, 'chats', currentUser.uid);
     const unsubscribe = onSnapshot(chatDocRef, (docSnap) => {
@@ -45,33 +42,32 @@ export function StudentChatWidget() {
     });
 
     return unsubscribe;
-  }, [currentUser?.uid]);
+  }, [currentUser?.uid, isAdmin]);
 
-  // Subscribe to real-time messages when widget is open or logged in
+  // Subscribe to real-time messages when student is logged in
   useEffect(() => {
-    if (!currentUser?.uid) return;
+    if (!currentUser?.uid || isAdmin) return;
 
     const unsubscribe = subscribeToStudentMessages(currentUser.uid, (msgs) => {
       setMessages(msgs);
     });
 
     return unsubscribe;
-  }, [currentUser?.uid]);
+  }, [currentUser?.uid, isAdmin]);
 
   // Auto-scroll to bottom when messages update or widget opens
   useEffect(() => {
-    if (isOpen && currentUser) {
+    if (isOpen && currentUser && !isAdmin) {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-      // Mark messages as read when widget is opened
       if (hasUnread) {
         markAsReadByStudent(currentUser.uid);
       }
     }
-  }, [messages, isOpen, hasUnread, currentUser?.uid]);
+  }, [messages, isOpen, hasUnread, currentUser, isAdmin]);
 
   const handleSend = async (e) => {
     e.preventDefault();
-    if (!inputText.trim() || sending || !currentUser) return;
+    if (!inputText.trim() || sending || !currentUser || isAdmin) return;
 
     const textToSend = inputText;
     setInputText('');
@@ -100,7 +96,7 @@ export function StudentChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none">
+    <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end pointer-events-none">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -118,9 +114,12 @@ export function StudentChatWidget() {
                   <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-primary rounded-full"></span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm leading-tight">Admin Support</h3>
+                  <h3 className="font-semibold text-sm leading-tight">
+                    {isAdmin ? 'Admin Support Center' : 'Admin Support'}
+                  </h3>
                   <p className="text-xs text-white/80 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse"></span> Direct message with Admin
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse"></span>
+                    {isAdmin ? 'Manage Student Messages' : 'Direct message with Admin'}
                   </p>
                 </div>
               </div>
@@ -159,6 +158,27 @@ export function StudentChatWidget() {
                     className="w-full py-2.5 bg-slate-100 dark:bg-slate-800 text-foreground text-xs font-semibold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-borderGlass"
                   >
                     Create Account
+                  </Link>
+                </div>
+              </div>
+            ) : isAdmin ? (
+              /* Admin User Screen */
+              <div className="flex-1 p-6 flex flex-col items-center justify-center text-center bg-slate-50/50 dark:bg-slate-900/40">
+                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-4 ring-8 ring-primary/5">
+                  <Shield className="w-7 h-7 text-primary" />
+                </div>
+                <h4 className="font-bold text-foreground text-base">Admin Message Portal</h4>
+                <p className="text-xs text-textSecondary mt-2 leading-relaxed max-w-xs">
+                  You are logged in as Admin. Manage and reply to all individual student chat channels in the Admin Portal.
+                </p>
+                <div className="mt-6 w-full">
+                  <Link
+                    to="/admin/chat"
+                    onClick={() => setIsOpen(false)}
+                    className="w-full py-2.5 bg-primary text-white text-xs font-semibold rounded-xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-sm"
+                  >
+                    <span>Open Student Messages</span>
+                    <ExternalLink className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
@@ -240,11 +260,12 @@ export function StudentChatWidget() {
         )}
       </AnimatePresence>
 
-      {/* Floating Toggle Button */}
+      {/* Unconditional Floating Toggle Button (Always visible at bottom-right) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="pointer-events-auto relative p-3.5 bg-primary text-white rounded-full shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center group"
+        className="pointer-events-auto relative p-4 bg-primary text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-200 flex items-center justify-center group ring-4 ring-primary/20"
         title="Chat with Admin"
+        aria-label="Chat with Admin"
       >
         {isOpen ? (
           <X className="w-6 h-6" />
