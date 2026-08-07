@@ -67,7 +67,16 @@ export function Navbar() {
               </Link>
             ))}
 
-            {!isAdmin && (
+            {isAdmin ? (
+              <Link
+                to="/admin/chat"
+                className="text-sm font-medium hover:text-primary transition-all flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 shadow-sm active:scale-95"
+                title="Student Messages Center"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Messages</span>
+              </Link>
+            ) : (
               <button
                 onClick={() => window.dispatchEvent(new CustomEvent('toggle-student-chat'))}
                 className="text-sm font-medium hover:text-primary transition-all flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 shadow-sm active:scale-95"
@@ -215,7 +224,19 @@ export function Navbar() {
                   </Link>
                 ))}
 
-                {!isAdmin && (
+                {isAdmin ? (
+                  <Link
+                    to="/admin/chat"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-primary bg-primary/10 hover:bg-primary/20 transition-all border border-primary/20 mt-2"
+                  >
+                    <div className="flex items-center gap-2">
+                      <MessageSquare className="w-4 h-4 text-primary" />
+                      <span>Student Messages</span>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-primary" />
+                  </Link>
+                ) : (
                   <button
                     onClick={() => {
                       setDrawerOpen(false);
