@@ -21,6 +21,7 @@ const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 const AdminLayout = lazy(() => import('./components/layout/AdminLayout').then(m => ({ default: m.AdminLayout })));
 const PendingRequests = lazy(() => import('./pages/admin/PendingRequests'));
 const StudentList = lazy(() => import('./pages/admin/StudentList'));
+const AdminChat = lazy(() => import('./pages/admin/AdminChat'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
               <AdminRoute><AdminLayout /></AdminRoute>
             }>
               <Route index element={<AdminDashboard />} />
+              <Route path="chat" element={<AdminChat />} />
               <Route path="pending" element={<PendingRequests />} />
               <Route path="students" element={<StudentList statusFilter="all" />} />
             </Route>

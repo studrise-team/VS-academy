@@ -138,33 +138,41 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (isRegistering.current) return;
+    const unsubscribe = onAuthStateChanged(
+      auth, 
+      async (user) => {
+        if (isRegistering.current) return;
 
-      if (user) {
-        try {
-          const userDoc = await getDoc(doc(db, 'users', user.uid));
-          if (userDoc.exists()) {
-            const userData = userDoc.data();
-            // Only set as logged in if approved or admin
-            if (userData.status === 'approved' || userData.isAdmin) {
-              setCurrentUser({ ...user, ...userData });
+        if (user) {
+          try {
+            const userDoc = await getDoc(doc(db, 'users', user.uid));
+            if (userDoc.exists()) {
+              const userData = userDoc.data();
+              // Only set as logged in if approved or admin
+              if (userData.status === 'approved' || userData.isAdmin) {
+                setCurrentUser({ ...user, ...userData });
+              } else {
+                // Pending or rejected — sign out silently
+                setCurrentUser(null);
+              }
             } else {
-              // Pending or rejected — sign out silently
-              setCurrentUser(null);
+              setCurrentUser(user);
             }
-          } else {
+          } catch (err) {
+            console.error('Error fetching user data:', err);
             setCurrentUser(user);
           }
-        } catch (err) {
-          console.error('Error fetching user data:', err);
-          setCurrentUser(user);
+        } else {
+          setCurrentUser(null);
         }
-      } else {
+        setLoading(false);
+      },
+      (error) => {
+        console.warn('Firebase Auth listener error:', error);
         setCurrentUser(null);
+        setLoading(false);
       }
-      setLoading(false);
-    });
+    );
 
     return unsubscribe;
   }, []);

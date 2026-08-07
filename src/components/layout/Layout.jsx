@@ -1,6 +1,7 @@
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { Outlet } from 'react-router-dom';
+import { StudentChatWidget } from '../chat/StudentChatWidget';
 
 export function Layout() {
   return (
@@ -9,7 +10,9 @@ export function Layout() {
       <main className="flex-1 w-full relative">
         <Outlet />
       </main>
+      <StudentChatWidget />
       <Footer />
     </div>
   );
 }
+

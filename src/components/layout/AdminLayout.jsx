@@ -15,8 +15,10 @@ import {
   Moon, 
   BookOpen,
   Bell,
-  Search
+  Search,
+  MessageSquare
 } from 'lucide-react';
+import { subscribeToAdminChats } from '../../lib/chatService';
 
 export function AdminLayout() {
   const { currentUser, logout } = useAuth();
@@ -25,11 +27,21 @@ export function AdminLayout() {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [unreadChatCount, setUnreadChatCount] = useState(0);
 
   // Close sidebar on route change on mobile
   useEffect(() => {
     setSidebarOpen(false);
   }, [location.pathname]);
+
+  // Subscribe to unread messages count
+  useEffect(() => {
+    const unsubscribe = subscribeToAdminChats((chats) => {
+      const unreadCount = chats.filter(c => c.unreadByAdmin).length;
+      setUnreadChatCount(unreadCount);
+    });
+    return unsubscribe;
+  }, []);
 
   const handleLogout = async () => {
     setShowLogoutModal(true);
@@ -52,6 +64,7 @@ export function AdminLayout() {
 
   const navItems = [
     { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
+    { name: 'Student Messages', path: '/admin/chat', icon: MessageSquare, badge: unreadChatCount },
     { name: 'Pending Requests', path: '/admin/pending', icon: Clock },
     { name: 'All Students', path: '/admin/students', icon: Users },
   ];
@@ -74,14 +87,21 @@ export function AdminLayout() {
             <NavLink
               key={item.name}
               to={item.path}
-              className={`flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all duration-200 ${
+              className={`flex items-center justify-between px-3 py-2.5 rounded-xl transition-all duration-200 ${
                 isActive 
                   ? 'bg-primary/10 text-primary font-semibold' 
                   : 'text-textSecondary hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-foreground'
               }`}
             >
-              <item.icon className={`w-5 h-5 ${isActive ? 'text-primary' : 'text-textSecondary'}`} />
-              <span>{item.name}</span>
+              <div className="flex items-center space-x-3">
+                <item.icon className={`w-5 h-5 ${isActive ? 'text-primary' : 'text-textSecondary'}`} />
+                <span>{item.name}</span>
+              </div>
+              {item.badge > 0 && (
+                <span className="px-2 py-0.5 text-[10px] font-bold bg-danger text-white rounded-full animate-pulse">
+                  {item.badge}
+                </span>
+              )}
             </NavLink>
           );
         })}
