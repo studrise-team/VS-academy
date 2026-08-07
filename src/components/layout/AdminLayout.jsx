@@ -178,13 +178,6 @@ export function AdminLayout() {
           </div>
 
           <div className="flex items-center space-x-3 sm:space-x-5">
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            >
-              {theme === 'dark' ? <Sun className="w-5 h-5 text-warning" /> : <Moon className="w-5 h-5 text-secondary" />}
-            </button>
-            
             {/* Notifications Bell Drawer */}
             <NotificationDrawer />
 

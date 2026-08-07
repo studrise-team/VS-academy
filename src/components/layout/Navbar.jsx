@@ -128,15 +128,9 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Mobile: Notification + Theme + Hamburger */}
+          {/* Mobile: Notification + Hamburger */}
           <div className="flex items-center gap-2 md:hidden">
             <NotificationDrawer />
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            >
-              {theme === "dark" ? <Sun className="w-5 h-5 text-warning" /> : <Moon className="w-5 h-5 text-secondary" />}
-            </button>
             <button
               onClick={() => setDrawerOpen(true)}
               className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
