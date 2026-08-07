@@ -27,16 +27,16 @@ export default function LandingPage() {
             transition={{ duration: 0.5 }}
             className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6"
           >
-            Learn Technology the <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Smart Way</span>
+            Master Tech & Coding with <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary">Confidence</span>
           </motion.h1>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-xl text-textSecondary max-w-2xl mx-auto mb-10"
+            className="text-xl text-textSecondary max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            Complete notes, projects, interview questions, coding practice and career roadmap in one beautiful place.
+            Comprehensive study notes, real-world projects, interview prep, and structured career roadmaps — all in one place.
           </motion.p>
           
           <motion.div 
