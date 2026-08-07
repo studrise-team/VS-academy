@@ -16,7 +16,8 @@ import {
   BookOpen,
   Bell,
   Search,
-  MessageSquare
+  MessageSquare,
+  Megaphone
 } from 'lucide-react';
 import { subscribeToAdminChats } from '../../lib/chatService';
 
@@ -64,6 +65,7 @@ export function AdminLayout() {
 
   const navItems = [
     { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
+    { name: 'Announcements', path: '/admin/announcements', icon: Megaphone },
     { name: 'Student Messages', path: '/admin/chat', icon: MessageSquare, badge: unreadChatCount },
     { name: 'Pending Requests', path: '/admin/pending', icon: Clock },
     { name: 'All Students', path: '/admin/students', icon: Users },

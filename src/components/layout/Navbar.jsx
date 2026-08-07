@@ -5,6 +5,8 @@ import { useAuth } from '../../contexts/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Moon, Sun, Search, BookOpen, LogOut, User, Menu, X, Shield, ChevronRight, MessageSquare } from 'lucide-react';
 
+import { NotificationDrawer } from '../notifications/NotificationDrawer';
+
 export function Navbar() {
   const { theme, setTheme } = useTheme();
   const { currentUser, isAdmin, logout } = useAuth();
@@ -87,6 +89,9 @@ export function Navbar() {
               </button>
             )}
             
+            {/* Notification Bell Icon */}
+            <NotificationDrawer />
+            
             <div className="h-6 w-px bg-borderGlass ml-4"></div>
 
             {currentUser ? (
@@ -121,8 +126,9 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Mobile: Theme + Hamburger */}
+          {/* Mobile: Notification + Theme + Hamburger */}
           <div className="flex items-center gap-2 md:hidden">
+            <NotificationDrawer />
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
