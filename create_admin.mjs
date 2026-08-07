@@ -52,7 +52,7 @@ async function setupAdmin() {
       branch: 'N/A',
       year: 'N/A',
       pin: 'ADMIN',
-      collegeName: 'Swarnandhra Academy',
+      collegeName: 'VS Academy',
       profilePhoto: '',
       createdAt: new Date().toISOString()
     }, { merge: true });

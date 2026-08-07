@@ -21,8 +21,8 @@ self.addEventListener('push', (event) => {
 
   const options = {
     body: data.body || data.message || 'Check VS-Academy for new updates.',
-    icon: '/favicon.svg',
-    badge: '/favicon.svg',
+    icon: '/logo.png',
+    badge: '/logo.png',
     vibrate: [200, 100, 200],
     data: {
       url: data.url || '/'

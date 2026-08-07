@@ -112,8 +112,8 @@ export function triggerNativePushNotification(title, body, url = '/') {
   if (Notification.permission === 'granted') {
     const options = {
       body: body,
-      icon: '/favicon.svg',
-      badge: '/favicon.svg',
+      icon: '/logo.png',
+      badge: '/logo.png',
       tag: 'vs-academy-announcement-' + Date.now(),
       renotify: true,
       data: { url: url || '/' },
