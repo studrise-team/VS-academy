@@ -10,8 +10,22 @@ import {
   serverTimestamp 
 } from 'firebase/firestore';
 
+// Register Service Worker for System / Mobile OS Push Notifications
+let swRegistration = null;
+
+if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/firebase-messaging-sw.js')
+    .then((reg) => {
+      swRegistration = reg;
+      console.log('Push Service Worker registered successfully:', reg.scope);
+    })
+    .catch((err) => {
+      console.warn('Push Service Worker registration failed:', err);
+    });
+}
+
 /**
- * Publish a new Announcement to Firestore and trigger native browser notifications
+ * Publish a new Announcement to Firestore and trigger native OS push notifications
  */
 export async function createAnnouncement({ title, message, type = 'info', link = '', adminUser }) {
   if (!title || !message) return;
@@ -29,8 +43,8 @@ export async function createAnnouncement({ title, message, type = 'info', link =
     createdAt: serverTimestamp()
   });
 
-  // 2. Trigger native browser push notification if permitted
-  triggerNativePushNotification(title.trim(), message.trim());
+  // 2. Trigger native OS system push notification
+  triggerNativePushNotification(`📢 ${title.trim()}`, message.trim(), link.trim());
 
   return docRef.id;
 }
@@ -69,11 +83,11 @@ export function subscribeToAnnouncements(callback) {
 }
 
 /**
- * Request Browser Push Notification Permission
+ * Request Browser / Mobile OS Push Notification Permission
  */
 export async function requestNotificationPermission() {
   if (!('Notification' in window)) {
-    console.log("This browser does not support desktop notifications.");
+    console.log("This device/browser does not support notifications.");
     return false;
   }
 
@@ -90,20 +104,50 @@ export async function requestNotificationPermission() {
 }
 
 /**
- * Trigger native browser push notification pop-up on student device
+ * Trigger native System OS push notification pop-up (Windows, Android, macOS)
  */
-export function triggerNativePushNotification(title, body) {
-  if (!('Notification' in window)) return;
+export function triggerNativePushNotification(title, body, url = '/') {
+  if (typeof window === 'undefined' || !('Notification' in window)) return;
 
   if (Notification.permission === 'granted') {
-    try {
-      new Notification(title, {
-        body: body,
-        icon: '/favicon.ico',
-        tag: 'vs-academy-announcement'
+    const options = {
+      body: body,
+      icon: '/favicon.svg',
+      badge: '/favicon.svg',
+      tag: 'vs-academy-announcement-' + Date.now(),
+      renotify: true,
+      data: { url: url || '/' },
+      vibrate: [200, 100, 200]
+    };
+
+    // Priority 1: Service Worker System OS Banner (Windows Action Center & Mobile Bar)
+    if (swRegistration && 'showNotification' in swRegistration) {
+      swRegistration.showNotification(title, options).catch((e) => {
+        console.warn("SW showNotification failed, using fallback:", e);
+        fallbackNotification(title, options);
       });
-    } catch (e) {
-      console.warn("Could not fire native notification:", e);
+    } else if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.ready.then((reg) => {
+        reg.showNotification(title, options);
+      }).catch(() => {
+        fallbackNotification(title, options);
+      });
+    } else {
+      fallbackNotification(title, options);
     }
+  }
+}
+
+function fallbackNotification(title, options) {
+  try {
+    const n = new Notification(title, options);
+    n.onclick = () => {
+      window.focus();
+      if (options.data?.url) {
+        window.location.href = options.data.url;
+      }
+    };
+  } catch (e) {
+    console.warn("Desktop notification fallback error:", e);
   }
 }
