@@ -165,15 +165,13 @@ export function SplashScreen({ onComplete }) {
               transition={{ delay: 0.5, duration: 0.4 }}
               className="mt-6 w-full max-w-[240px] space-y-2"
             >
-              <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden p-0.5 border border-white/10 shadow-inner">
-                <motion.div
-                  initial={{ width: '0%' }}
-                  animate={{ width: `${Math.min(progress, 100)}%` }}
-                  transition={{ ease: 'easeOut', duration: 0.15 }}
-                  className="h-full bg-gradient-to-r from-purple-500 via-teal-400 to-indigo-500 rounded-full shadow-lg"
+              <div className="h-2.5 w-full bg-slate-800/80 rounded-full overflow-hidden p-0.5 border border-white/20 shadow-inner relative">
+                <div
+                  style={{ width: `${Math.min(Math.max(progress, 2), 100)}%` }}
+                  className="h-full bg-gradient-to-r from-purple-500 via-teal-400 to-indigo-400 rounded-full shadow-[0_0_12px_rgba(45,212,191,0.7)] transition-all duration-150 ease-out"
                 />
               </div>
-              <p className="text-[11px] text-slate-400 font-medium tracking-wide">
+              <p className="text-[11px] text-slate-300 font-medium tracking-wide">
                 {progress >= 100 ? 'Ready! Launching VS-Academy...' : `Initializing platform... ${progress}%`}
               </p>
             </motion.div>
