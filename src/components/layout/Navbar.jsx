@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTheme } from '../theme-provider';
 import { useAuth } from '../../contexts/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Moon, Sun, Search, BookOpen, LogOut, User, Menu, X, Shield, ChevronRight } from 'lucide-react';
+import { Moon, Sun, Search, BookOpen, LogOut, User, Menu, X, Shield, ChevronRight, MessageSquare } from 'lucide-react';
 
 export function Navbar() {
   const { theme, setTheme } = useTheme();
@@ -29,7 +29,6 @@ export function Navbar() {
   const navLinks = [
     { to: '/subjects', label: 'Technologies' },
     { to: '/projects', label: 'Projects' },
-    // Admin panel link removed as requested (now uses dedicated AdminLayout)
   ];
 
   return (
@@ -67,6 +66,17 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+
+            {!isAdmin && (
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent('toggle-student-chat'))}
+                className="text-sm font-medium hover:text-primary transition-all flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 shadow-sm active:scale-95"
+                title="Chat with Admin"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Chat</span>
+              </button>
+            )}
             
             <div className="h-6 w-px bg-borderGlass ml-4"></div>
 
@@ -204,6 +214,22 @@ export function Navbar() {
                     <ChevronRight className="w-4 h-4 text-textSecondary" />
                   </Link>
                 ))}
+
+                {!isAdmin && (
+                  <button
+                    onClick={() => {
+                      setDrawerOpen(false);
+                      window.dispatchEvent(new CustomEvent('toggle-student-chat'));
+                    }}
+                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-primary bg-primary/10 hover:bg-primary/20 transition-all border border-primary/20 mt-2"
+                  >
+                    <div className="flex items-center gap-2">
+                      <MessageSquare className="w-4 h-4 text-primary" />
+                      <span>Chat with Admin</span>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-primary" />
+                  </button>
+                )}
               </div>
 
               {/* Bottom Actions */}
