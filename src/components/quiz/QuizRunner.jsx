@@ -4,16 +4,27 @@ import { CheckCircle2, XCircle, RotateCcw } from 'lucide-react';
 export function QuizRunner({ questions, onComplete }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [userAnswers, setUserAnswers] = useState({});
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
 
-  const question = questions[currentIdx];
+  const question = questions?.[currentIdx];
 
-  const handleSelect = (idx) => {
+  const checkIsCorrect = (q, opt, idx) => {
+    if (opt === undefined || opt === null) return false;
+    if (q.answer !== undefined && String(opt).trim() === String(q.answer).trim()) return true;
+    if (q.correctAnswer !== undefined && String(opt).trim() === String(q.correctAnswer).trim()) return true;
+    if (typeof q.correct === 'number' && q.correct === idx) return true;
+    if (typeof q.correctAnswer === 'number' && q.correctAnswer === idx) return true;
+    return false;
+  };
+
+  const handleSelect = (idx, option) => {
     if (selectedOption !== null) return;
-    setSelectedOption(idx);
+    setSelectedOption(option);
+    setUserAnswers(prev => ({ ...prev, [currentIdx]: option }));
     
-    if (idx === question.correct) {
+    if (checkIsCorrect(question, option, idx)) {
       setScore(s => s + 1);
     }
   };
@@ -31,9 +42,12 @@ export function QuizRunner({ questions, onComplete }) {
   const handleRetry = () => {
     setCurrentIdx(0);
     setSelectedOption(null);
+    setUserAnswers({});
     setScore(0);
     setShowResult(false);
   };
+
+  if (!questions || questions.length === 0) return null;
 
   if (showResult) {
     return (
@@ -69,11 +83,12 @@ export function QuizRunner({ questions, onComplete }) {
           let icon = null;
           
           if (selectedOption !== null) {
-            if (idx === question.correct) {
-              bgColor = "bg-success/10 border-success text-success-foreground dark:text-success";
+            const isCorrectOption = checkIsCorrect(question, option, idx);
+            if (isCorrectOption) {
+              bgColor = "bg-success/10 border-success text-success-foreground dark:text-success font-bold";
               icon = <CheckCircle2 className="w-5 h-5 text-success" />;
-            } else if (idx === selectedOption) {
-              bgColor = "bg-danger/10 border-danger text-danger-foreground dark:text-danger";
+            } else if (selectedOption === option) {
+              bgColor = "bg-danger/10 border-danger text-danger-foreground dark:text-danger font-bold";
               icon = <XCircle className="w-5 h-5 text-danger" />;
             } else {
               bgColor = "bg-white dark:bg-slate-900 border-borderGlass opacity-50";
@@ -83,7 +98,7 @@ export function QuizRunner({ questions, onComplete }) {
           return (
             <button
               key={idx}
-              onClick={() => handleSelect(idx)}
+              onClick={() => handleSelect(idx, option)}
               disabled={selectedOption !== null}
               className={`w-full text-left p-4 rounded-xl border transition-all flex items-center justify-between ${bgColor}`}
             >
@@ -94,7 +109,7 @@ export function QuizRunner({ questions, onComplete }) {
         })}
       </div>
 
-      {selectedOption !== null && (
+      {selectedOption !== null && question.explanation && (
         <div className="mb-6 p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
           <p className="text-sm"><strong>Explanation:</strong> {question.explanation}</p>
         </div>
@@ -110,3 +125,4 @@ export function QuizRunner({ questions, onComplete }) {
     </div>
   );
 }
+

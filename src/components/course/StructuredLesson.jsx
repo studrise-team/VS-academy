@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Bookmark, BookmarkCheck, CheckCircle2, Download, Play, Copy, Clock, Target, ChevronRight, Check, XCircle, AlertCircle, ExternalLink } from 'lucide-react';
+import { Bookmark, BookmarkCheck, CheckCircle2, Download, Clock, Target, Check, XCircle, AlertCircle, ExternalLink, RotateCcw } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
@@ -7,10 +7,11 @@ import { db } from '../../lib/firebase';
 export function StructuredLesson({ content, chapterId, subjectId }) {
   const { currentUser } = useAuth();
   
-  // Local storage keys
+  // Storage keys
   const notesKey = `notes_${subjectId}_${chapterId}`;
   const completedKey = `completed_${subjectId}_${chapterId}`;
   const bookmarkKey = `bookmark_${subjectId}_${chapterId}`;
+  const quizStorageKey = `quiz_${subjectId}_${chapterId}`;
 
   const [notes, setNotes] = useState('');
   const [isCompleted, setIsCompleted] = useState(false);
@@ -19,47 +20,101 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
 
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showQuizResults, setShowQuizResults] = useState(false);
+  const [quizScore, setQuizScore] = useState(null);
+  const [quizValidationMsg, setQuizValidationMsg] = useState('');
+  
   const [copied, setCopied] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
   const [expandedInterviewQ, setExpandedInterviewQ] = useState(null);
 
-  // Load from DB
+  // Normalize quiz question list
+  const quizList = Array.isArray(content?.quiz) 
+    ? content.quiz 
+    : (content?.quickQuiz ? [content.quickQuiz] : []);
+
+  // Helper to check if an option is correct
+  const checkIsCorrect = (q, selectedOption) => {
+    if (selectedOption === undefined || selectedOption === null) return false;
+    if (q.answer !== undefined && String(selectedOption).trim() === String(q.answer).trim()) return true;
+    if (q.correctAnswer !== undefined && String(selectedOption).trim() === String(q.correctAnswer).trim()) return true;
+    if (typeof q.correct === 'number' && Array.isArray(q.options) && q.options[q.correct] === selectedOption) return true;
+    if (typeof q.correctAnswer === 'number' && Array.isArray(q.options) && q.options[q.correctAnswer] === selectedOption) return true;
+    return false;
+  };
+
+  // Helper to get correct answer text display
+  const getCorrectAnswerText = (q) => {
+    if (q.answer !== undefined && typeof q.answer === 'string') return q.answer;
+    if (q.correctAnswer !== undefined && typeof q.correctAnswer === 'string') return q.correctAnswer;
+    if (typeof q.correct === 'number' && Array.isArray(q.options) && q.options[q.correct]) return q.options[q.correct];
+    if (typeof q.correctAnswer === 'number' && Array.isArray(q.options) && q.options[q.correctAnswer]) return q.options[q.correctAnswer];
+    return q.answer || q.correctAnswer || '';
+  };
+
+  // Load from DB or Local Storage cleanly on chapter change
   useEffect(() => {
     let isMounted = true;
+    setDbLoading(true);
+    setQuizValidationMsg('');
+    setShowSolution(false);
+    setExpandedInterviewQ(null);
     
     const loadProgress = async () => {
+      let loadedNotes = '';
+      let loadedCompleted = false;
+      let loadedBookmarked = false;
+      let loadedQuizAnswers = {};
+      let loadedShowResults = false;
+      let loadedScore = null;
+
       if (currentUser) {
         try {
           const docRef = doc(db, 'users', currentUser.uid, 'progress', completedKey);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists() && isMounted) {
             const data = docSnap.data();
-            setNotes(data.notes || '');
-            setIsCompleted(data.isCompleted || false);
-            setIsBookmarked(data.isBookmarked || false);
-          } else if (isMounted) {
-            setNotes(localStorage.getItem(notesKey) || '');
-            setIsCompleted(localStorage.getItem(completedKey) === 'true');
-            setIsBookmarked(localStorage.getItem(bookmarkKey) === 'true');
+            loadedNotes = data.notes || '';
+            loadedCompleted = data.isCompleted || false;
+            loadedBookmarked = data.isBookmarked || false;
+            loadedQuizAnswers = data.quizAnswers || {};
+            loadedShowResults = data.showQuizResults || false;
+            loadedScore = data.quizScore !== undefined ? data.quizScore : null;
           }
         } catch (e) {
           console.error("Error loading progress", e);
         }
       } else {
-        if (isMounted) {
-          setNotes(localStorage.getItem(notesKey) || '');
-          setIsCompleted(localStorage.getItem(completedKey) === 'true');
-          setIsBookmarked(localStorage.getItem(bookmarkKey) === 'true');
+        loadedNotes = localStorage.getItem(notesKey) || '';
+        loadedCompleted = localStorage.getItem(completedKey) === 'true';
+        loadedBookmarked = localStorage.getItem(bookmarkKey) === 'true';
+        const localQuiz = localStorage.getItem(quizStorageKey);
+        if (localQuiz) {
+          try {
+            const parsed = JSON.parse(localQuiz);
+            loadedQuizAnswers = parsed.quizAnswers || {};
+            loadedShowResults = parsed.showQuizResults || false;
+            loadedScore = parsed.quizScore !== undefined ? parsed.quizScore : null;
+          } catch (err) {
+            console.error("Error parsing local quiz data", err);
+          }
         }
       }
-      if (isMounted) setDbLoading(false);
+
+      if (isMounted) {
+        setNotes(loadedNotes);
+        setIsCompleted(loadedCompleted);
+        setIsBookmarked(loadedBookmarked);
+        setQuizAnswers(loadedQuizAnswers);
+        setShowQuizResults(loadedShowResults);
+        setQuizScore(loadedScore);
+        setDbLoading(false);
+      }
     };
 
-    setDbLoading(true);
     loadProgress();
 
     return () => { isMounted = false; };
-  }, [currentUser, completedKey, notesKey, bookmarkKey]);
+  }, [currentUser, completedKey, notesKey, bookmarkKey, quizStorageKey, subjectId, chapterId, content]);
 
   // Sync notes with Debounce
   useEffect(() => { 
@@ -74,34 +129,129 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
     return () => clearTimeout(timeoutId);
   }, [notes, notesKey, currentUser, dbLoading, completedKey, subjectId, chapterId]);
 
-  // Sync completion
-  useEffect(() => { 
-    if (dbLoading) return;
+  // Explicit completion toggle handler
+  const handleToggleCompleted = async () => {
+    const nextCompleted = !isCompleted;
+    setIsCompleted(nextCompleted);
+    
     if (currentUser) {
-      setDoc(doc(db, 'users', currentUser.uid, 'progress', completedKey), { isCompleted, subjectId, chapterId }, { merge: true }).catch(console.error);
+      try {
+        await setDoc(doc(db, 'users', currentUser.uid, 'progress', completedKey), { 
+          isCompleted: nextCompleted, 
+          subjectId, 
+          chapterId 
+        }, { merge: true });
+      } catch (e) {
+        console.error("Failed to update completion in Firestore", e);
+      }
     } else {
-      localStorage.setItem(completedKey, isCompleted);
+      localStorage.setItem(completedKey, nextCompleted);
     }
     window.dispatchEvent(new Event('progressUpdate'));
-  }, [isCompleted, completedKey, currentUser, dbLoading, subjectId, chapterId]);
+  };
 
-  // Sync bookmark
-  useEffect(() => { 
-    if (dbLoading) return;
+  // Explicit bookmark toggle handler
+  const handleToggleBookmarked = async () => {
+    const nextBookmarked = !isBookmarked;
+    setIsBookmarked(nextBookmarked);
+    
     if (currentUser) {
-      setDoc(doc(db, 'users', currentUser.uid, 'progress', completedKey), { isBookmarked, subjectId, chapterId }, { merge: true }).catch(console.error);
+      try {
+        await setDoc(doc(db, 'users', currentUser.uid, 'progress', completedKey), { 
+          isBookmarked: nextBookmarked, 
+          subjectId, 
+          chapterId 
+        }, { merge: true });
+      } catch (e) {
+        console.error("Failed to update bookmark in Firestore", e);
+      }
     } else {
-      localStorage.setItem(bookmarkKey, isBookmarked); 
+      localStorage.setItem(bookmarkKey, nextBookmarked);
     }
-  }, [isBookmarked, bookmarkKey, currentUser, dbLoading, subjectId, chapterId]);
+  };
 
-  // Reset states when content changes
-  useEffect(() => {
+  // Quiz submission handler
+  const handleQuizSubmit = async () => {
+    if (quizList.length === 0) return;
+
+    // Check unanswered questions
+    const unanswered = [];
+    quizList.forEach((q, idx) => {
+      if (quizAnswers[idx] === undefined || quizAnswers[idx] === null) {
+        unanswered.push(idx + 1);
+      }
+    });
+
+    if (unanswered.length > 0) {
+      setQuizValidationMsg(`Please answer all questions before submitting. Unanswered: Question ${unanswered.join(', ')}`);
+      return;
+    }
+
+    setQuizValidationMsg('');
+
+    // Calculate score
+    let calculatedScore = 0;
+    quizList.forEach((q, idx) => {
+      if (checkIsCorrect(q, quizAnswers[idx])) {
+        calculatedScore += 1;
+      }
+    });
+
+    setQuizScore(calculatedScore);
+    setShowQuizResults(true);
+
+    const quizPayload = {
+      quizAnswers,
+      quizScore: calculatedScore,
+      quizTotal: quizList.length,
+      showQuizResults: true,
+      subjectId,
+      chapterId,
+      updatedAt: new Date().toISOString()
+    };
+
+    if (currentUser) {
+      try {
+        await setDoc(
+          doc(db, 'users', currentUser.uid, 'progress', completedKey),
+          quizPayload,
+          { merge: true }
+        );
+      } catch (e) {
+        console.error("Failed to save quiz progress", e);
+      }
+    } else {
+      localStorage.setItem(quizStorageKey, JSON.stringify(quizPayload));
+    }
+  };
+
+  // Retake quiz handler
+  const handleRetakeQuiz = async () => {
     setQuizAnswers({});
     setShowQuizResults(false);
-    setShowSolution(false);
-    setExpandedInterviewQ(null);
-  }, [content]);
+    setQuizScore(null);
+    setQuizValidationMsg('');
+
+    const resetPayload = {
+      quizAnswers: {},
+      showQuizResults: false,
+      quizScore: 0
+    };
+
+    if (currentUser) {
+      try {
+        await setDoc(
+          doc(db, 'users', currentUser.uid, 'progress', completedKey),
+          resetPayload,
+          { merge: true }
+        );
+      } catch (e) {
+        console.error("Failed to reset quiz state", e);
+      }
+    } else {
+      localStorage.removeItem(quizStorageKey);
+    }
+  };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(content.codeExample);
@@ -120,7 +270,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
         <div className="flex justify-between items-start">
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">{content.title}</h1>
           <div className="flex space-x-2 no-print">
-            <button onClick={() => setIsBookmarked(!isBookmarked)} className={`p-2.5 rounded-xl border ${isBookmarked ? 'bg-primary/10 text-primary border-primary/20' : 'bg-card border-borderGlass text-textSecondary hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800'} transition-all`}>
+            <button onClick={handleToggleBookmarked} className={`p-2.5 rounded-xl border ${isBookmarked ? 'bg-primary/10 text-primary border-primary/20' : 'bg-card border-borderGlass text-textSecondary hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800'} transition-all`}>
               {isBookmarked ? <BookmarkCheck className="w-5 h-5" /> : <Bookmark className="w-5 h-5" />}
             </button>
             <button onClick={handlePrint} className="p-2.5 rounded-xl border bg-card border-borderGlass text-textSecondary hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
@@ -150,141 +300,81 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
         )}
         {content.whyUseIt && (
           <section className="space-y-4 bg-card p-6 rounded-2xl border border-borderGlass">
-            <h2 className="text-lg font-bold text-foreground">Why do we use it?</h2>
+            <h2 className="text-lg font-bold text-foreground">Why use it?</h2>
             <p className="text-textSecondary leading-relaxed">{content.whyUseIt}</p>
           </section>
         )}
       </div>
 
-      {/* Syntax */}
-      {content.syntax && (
-        <section className="space-y-4">
-          <h2 className="text-xl font-bold border-b border-borderGlass pb-2">Syntax</h2>
-          <div className="bg-slate-900 rounded-xl p-5 overflow-x-auto text-sm text-sky-300 font-mono leading-relaxed border border-slate-800">
-            <pre>{content.syntax.split('\\n').join('\n')}</pre>
-          </div>
-        </section>
-      )}
-
-      {/* Code Example & Preview */}
-      {content.codeExample && (
-        <section className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end border-b border-borderGlass pb-2 gap-4">
-            <h2 className="text-xl font-bold">Code Example</h2>
-            <div className="flex space-x-2 no-print">
-              <button onClick={handleCopy} className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 text-sm font-semibold transition-all shadow-sm">
-                {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-primary" />}
+      {/* Syntax & Code Example */}
+      {(content.syntax || content.codeExample) && (
+        <section className="space-y-6">
+          <div className="flex justify-between items-center">
+            <h2 className="text-2xl font-bold">Code Example</h2>
+            {content.codeExample && (
+              <button onClick={handleCopy} className="no-print text-sm font-semibold text-primary hover:underline flex items-center space-x-1">
                 <span>{copied ? 'Copied!' : 'Copy Code'}</span>
               </button>
-            </div>
+            )}
           </div>
-          <div className="bg-slate-900 rounded-xl p-5 overflow-x-auto text-sm text-green-400 font-mono leading-relaxed border border-slate-800">
-            <pre>{content.codeExample.split('\\n').join('\n')}</pre>
-          </div>
-
-          {/* Expected Output Box — shown for all SQL topics */}
-          {content.expectedOutput && (
-            <div className="mt-4 rounded-xl overflow-hidden border border-slate-700 shadow-lg">
-              <div className="bg-slate-800 px-4 py-2.5 flex items-center space-x-2 border-b border-slate-700">
-                <div className="flex space-x-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                </div>
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest ml-3">⚡ Expected Output</span>
-              </div>
-              <div className="bg-slate-950 p-5 overflow-x-auto">
-                <pre className="text-sm text-amber-300 font-mono leading-relaxed whitespace-pre">{content.expectedOutput.split('\\n').join('\n')}</pre>
-              </div>
+          {content.syntax && (
+            <div className="p-4 rounded-xl bg-slate-900 text-slate-100 font-mono text-sm overflow-x-auto border border-borderGlass">
+              <span className="text-slate-400 select-none">// Syntax Overview: </span>
+              {content.syntax}
             </div>
           )}
-
-          {content.hasLiveOutput && (
-            <div className="mt-6 border border-borderGlass rounded-xl overflow-hidden bg-white no-print shadow-xl">
-              <div className="bg-slate-100 dark:bg-slate-800 px-4 py-2.5 border-b border-borderGlass flex items-center space-x-2">
-                <div className="flex space-x-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                </div>
-                <span className="text-xs font-semibold text-textSecondary uppercase tracking-wider ml-4">Sample Output</span>
-              </div>
-              <iframe 
-                srcDoc={content.codeExample.split('\\n').join('\n').replace('</head>', '  <base target="_blank">\\n</head>')} 
-                className="w-full min-h-[200px] resize-y bg-white"
-                sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-top-navigation-by-user-activation allow-forms"
-                title="Sample Output"
-                onLoad={(e) => {
-                  // Auto-adjust height based on content if possible, fallback to 200px
-                  const iframe = e.target;
-                  try {
-                    iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
-                  } catch(err) {
-                    // Cross-origin or sandbox restriction
-                  }
-                }}
-              />
+          {content.codeExample && (
+            <div className="rounded-2xl overflow-hidden border border-borderGlass bg-slate-950 no-print">
+              <pre className="p-6 text-slate-100 font-mono text-sm overflow-x-auto">
+                <code>{content.codeExample}</code>
+              </pre>
             </div>
           )}
         </section>
       )}
 
-      {/* Explanation */}
-      {content.explanation && (
+      {/* Explanation Table */}
+      {content.explanation && content.explanation.length > 0 && (
         <section className="space-y-4">
-          <h2 className="text-xl font-bold border-b border-borderGlass pb-2">Line by Line Explanation</h2>
+          <h2 className="text-xl font-bold">Key Components Explained</h2>
+          <div className="border border-borderGlass rounded-2xl overflow-hidden bg-card">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-borderGlass bg-slate-50 dark:bg-slate-900">
+                  <th className="p-4 font-bold text-sm">Code / Concept</th>
+                  <th className="p-4 font-bold text-sm">Description</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-borderGlass">
+                {content.explanation.map((item, idx) => (
+                  <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
+                    <td className="p-4 font-mono text-sm font-semibold text-primary">{item.code}</td>
+                    <td className="p-4 text-sm text-textSecondary">{item.desc}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      {/* Real-World Analogy */}
+      {content.realWorldExample && (
+        <section className="p-6 rounded-2xl bg-amber-500/10 border border-amber-500/20 space-y-2">
+          <h2 className="text-lg font-bold text-amber-700 dark:text-amber-400">💡 Real-World Analogy</h2>
+          <p className="text-textSecondary leading-relaxed">{content.realWorldExample}</p>
+        </section>
+      )}
+
+      {/* Common Mistakes */}
+      {content.commonMistakes && content.commonMistakes.length > 0 && (
+        <section className="space-y-4">
+          <h2 className="text-xl font-bold text-red-600 dark:text-red-400">⚠️ Common Mistakes to Avoid</h2>
           <div className="space-y-3">
-            {content.explanation.map((item, idx) => (
-              <div key={idx} className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4 p-4 rounded-xl bg-card border border-borderGlass">
-                <code className="px-2 py-1 bg-primary/10 text-primary rounded font-mono text-sm shrink-0 whitespace-nowrap">
-                  {item.code}
-                </code>
-                <span className="text-textSecondary">{item.desc}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Real World Example & Common Mistakes */}
-      <div className="grid md:grid-cols-2 gap-8">
-        {content.realWorldExample && (
-          <section className="space-y-4">
-            <h2 className="text-xl font-bold border-b border-borderGlass pb-2">Real World Example</h2>
-            <div className="p-6 bg-blue-500/5 border border-blue-500/20 rounded-2xl h-full">
-              <p className="text-blue-700 dark:text-blue-300 leading-relaxed">{content.realWorldExample}</p>
-            </div>
-          </section>
-        )}
-        
-        {content.commonMistakes && (
-          <section className="space-y-4">
-            <h2 className="text-xl font-bold border-b border-borderGlass pb-2">Common Mistakes</h2>
-            <ul className="space-y-3">
-              {content.commonMistakes.map((mistake, idx) => (
-                <li key={idx} className="flex items-start space-x-3 text-textSecondary">
-                  <XCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
-                  <span>
-                    {mistake.error}{' '}
-                    {mistake.code && <code className="px-1.5 py-0.5 bg-red-500/10 text-red-500 rounded text-sm">{mistake.code}</code>}{' '}
-                    {mistake.suffix}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-      </div>
-
-      {/* Best Practices */}
-      {content.bestPractices && (
-        <section className="space-y-4">
-          <h2 className="text-xl font-bold border-b border-borderGlass pb-2">Best Practices</h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {content.bestPractices.map((practice, idx) => (
-              <div key={idx} className="flex items-center space-x-3 p-4 bg-green-500/5 border border-green-500/20 rounded-xl">
-                <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
-                <span className="text-green-800 dark:text-green-200 font-medium">{practice}</span>
+            {content.commonMistakes.map((item, idx) => (
+              <div key={idx} className="p-4 rounded-xl bg-red-500/5 border border-red-500/20 space-y-1">
+                <p className="font-semibold text-red-700 dark:text-red-300 text-sm">❌ {item.error}</p>
+                {item.suffix && <p className="text-xs text-textSecondary leading-relaxed pl-5">{item.suffix}</p>}
               </div>
             ))}
           </div>
@@ -292,95 +382,49 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
       )}
 
       {/* Practice Exercise */}
-      {(content.practiceExercise || content.miniExercise) && (
-        <section className="space-y-4 p-8 bg-card border border-borderGlass rounded-3xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-2 h-full bg-primary"></div>
-          <h2 className="text-2xl font-bold mb-4">Practice Exercise</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-semibold text-textSecondary uppercase tracking-wider text-sm mb-2">Your Task</h3>
-                <div className="text-slate-900 dark:text-slate-100 font-medium">
-                  {(content.practiceExercise || content.miniExercise).task.split('\\n').map((line, i) => (
-                    <p key={i} className="my-1">{line}</p>
-                  ))}
-                </div>
-              </div>
-              {(content.practiceExercise?.solution) && (
-                <div className="pt-4 border-t border-borderGlass">
-                  <button 
-                    onClick={() => setShowSolution(!showSolution)}
-                    className="px-4 py-2 bg-primary text-white hover:bg-primary/90 rounded-xl font-semibold transition-all text-sm shadow-md"
-                  >
-                    {showSolution ? 'Hide Solution' : 'Show Solution'}
-                  </button>
-                  
-                  {showSolution && (
-                    <div className="mt-4 bg-slate-900 rounded-xl p-4 border border-slate-800">
-                      <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap">{content.practiceExercise.solution}</pre>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-            <div className="space-y-2">
-              <h3 className="font-semibold text-textSecondary uppercase tracking-wider text-sm mb-2">Expected Output</h3>
-              <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 overflow-x-auto shadow-inner">
-                 <pre className="text-sm text-green-400 font-mono leading-relaxed whitespace-pre">
-                   {((content.practiceExercise && content.practiceExercise.expectedOutput) || (content.miniExercise && content.miniExercise.expectedOutput) || '').split('\\n').join('\n')}
-                 </pre>
-              </div>
-            </div>
+      {content.practiceExercise && (
+        <section className="space-y-4 p-6 rounded-2xl bg-blue-500/10 border border-blue-500/20 no-print">
+          <h2 className="text-xl font-bold text-blue-600 dark:text-blue-400">🎯 Hands-on Practice</h2>
+          <p className="text-textSecondary leading-relaxed">{content.practiceExercise.task}</p>
+          
+          <div className="pt-2">
+            <button 
+              onClick={() => setShowSolution(!showSolution)}
+              className="px-4 py-2 rounded-xl bg-blue-500 text-white font-semibold text-sm hover:bg-blue-600 transition-colors"
+            >
+              {showSolution ? 'Hide Solution' : 'Show Solution'}
+            </button>
           </div>
-        </section>
-      )}
 
-      {/* Summary */}
-      {content.summary && (
-        <section className="space-y-4">
-          <h2 className="text-xl font-bold border-b border-borderGlass pb-2">Summary</h2>
-          {Array.isArray(content.summary) ? (
-            <ul className="list-disc list-inside space-y-2 text-textSecondary marker:text-primary">
-              {content.summary.map((item, idx) => (
-                <li key={idx} className="leading-relaxed">{item}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-textSecondary leading-relaxed">{content.summary}</p>
+          {showSolution && content.practiceExercise.solution && (
+            <div className="p-4 rounded-xl bg-slate-900 text-slate-100 font-mono text-sm overflow-x-auto mt-4 border border-blue-500/30">
+              <pre><code>{content.practiceExercise.solution}</code></pre>
+            </div>
           )}
         </section>
       )}
 
       {/* Interview Questions */}
-      {content.interviewQuestions && (
+      {content.interviewQuestions && content.interviewQuestions.length > 0 && (
         <section className="space-y-4">
-          <h2 className="text-xl font-bold border-b border-borderGlass pb-2">Interview Questions</h2>
+          <h2 className="text-xl font-bold">💼 Interview Questions</h2>
           <div className="space-y-3">
-            {content.interviewQuestions.map((q, idx) => {
-              // Support both old string format and new object {q, a} format
-              const isObject = typeof q === 'object';
-              const questionText = isObject ? q.q : q;
-              const answerText = isObject ? q.a : null;
+            {content.interviewQuestions.map((iq, idx) => {
               const isExpanded = expandedInterviewQ === idx;
-
+              const questionText = iq.q || iq.question;
+              const answerText = iq.a || iq.answer;
               return (
-                <div key={idx} className="bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-borderGlass overflow-hidden transition-all">
+                <div key={idx} className="border border-borderGlass rounded-xl overflow-hidden bg-card">
                   <button 
                     onClick={() => setExpandedInterviewQ(isExpanded ? null : idx)}
-                    className="w-full flex items-start space-x-3 p-4 text-left hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                    disabled={!answerText}
+                    className="w-full p-4 text-left font-semibold flex justify-between items-center hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
                   >
-                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-sm shrink-0">
-                      {idx + 1}
-                    </span>
-                    <span className="text-slate-900 dark:text-slate-100 font-medium flex-1">{questionText}</span>
-                    {answerText && (
-                      <ChevronRight className={`w-5 h-5 text-textSecondary shrink-0 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
-                    )}
+                    <span>{idx + 1}. {questionText}</span>
+                    <span className="text-xs text-primary font-bold">{isExpanded ? 'Hide Answer' : 'Show Answer'}</span>
                   </button>
                   {isExpanded && answerText && (
-                    <div className="px-4 pb-4 pt-2 ml-9 border-t border-borderGlass border-dashed">
-                      <p className="text-textSecondary leading-relaxed whitespace-pre-line">{answerText}</p>
+                    <div className="px-4 pb-4 pt-2 ml-4 border-t border-borderGlass border-dashed">
+                      <p className="text-textSecondary leading-relaxed whitespace-pre-line text-sm">{answerText}</p>
                     </div>
                   )}
                 </div>
@@ -390,88 +434,202 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
         </section>
       )}
 
-      {/* Quiz Section (5 MCQs) */}
-      {(content.quiz || content.quickQuiz) && (
-        <section className="space-y-6 p-8 bg-indigo-500/5 border border-indigo-500/20 rounded-3xl no-print">
-          <div className="flex items-center space-x-3 mb-6">
-            <div className="p-2 bg-indigo-500/20 rounded-lg text-indigo-600 dark:text-indigo-400">
-              <AlertCircle className="w-6 h-6" />
+      {/* Quiz Section */}
+      {quizList.length > 0 && (
+        <section className="space-y-6 p-6 md:p-8 bg-indigo-500/5 border border-indigo-500/20 rounded-3xl no-print">
+          <div className="flex items-center justify-between flex-wrap gap-4 mb-2">
+            <div className="flex items-center space-x-3">
+              <div className="p-2.5 bg-indigo-500/20 rounded-xl text-indigo-600 dark:text-indigo-400">
+                <AlertCircle className="w-6 h-6" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-foreground">Concept Quiz</h2>
+                <p className="text-sm text-textSecondary">Test your knowledge of this lesson ({quizList.length} Questions)</p>
+              </div>
             </div>
-            <h2 className="text-2xl font-bold">Concept Quiz</h2>
+            {showQuizResults && (
+              <button 
+                onClick={handleRetakeQuiz}
+                className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 font-semibold text-sm transition-all"
+              >
+                <RotateCcw className="w-4 h-4" />
+                <span>Retake Quiz</span>
+              </button>
+            )}
           </div>
-          
-          <div className="space-y-8">
-            {(content.quiz || [content.quickQuiz]).map((q, qIdx) => (
-              <div key={qIdx} className="space-y-4">
-                <p className="text-lg font-medium text-foreground">
-                  <span className="text-indigo-500 font-bold mr-2">{qIdx + 1}.</span> 
-                  {q.question}
-                </p>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {q.options.map((option, idx) => {
-                    const isSelected = quizAnswers[qIdx] === option;
-                    const isCorrect = option === (q.answer || q.correctAnswer);
-                    
-                    let buttonStyle = "bg-card border-borderGlass hover:border-primary hover:bg-primary/5 text-foreground";
-                    if (showQuizResults) {
-                      if (isCorrect) {
-                        buttonStyle = "bg-green-500/10 border-green-500 text-green-700 dark:text-green-300 ring-2 ring-green-500/20";
-                      } else if (isSelected) {
-                        buttonStyle = "bg-red-500/10 border-red-500 text-red-700 dark:text-red-300 ring-2 ring-red-500/20";
-                      } else {
-                        buttonStyle = "bg-card border-borderGlass opacity-50";
-                      }
-                    } else if (isSelected) {
-                      buttonStyle = "bg-indigo-500/10 border-indigo-500 text-indigo-700 dark:text-indigo-300 ring-2 ring-indigo-500/20";
-                    }
 
-                    return (
-                      <button
-                        key={idx}
-                        disabled={showQuizResults}
-                        onClick={() => setQuizAnswers(prev => ({ ...prev, [qIdx]: option }))}
-                        className={`p-4 rounded-xl border-2 text-left font-semibold transition-all ${buttonStyle} flex justify-between items-center`}
-                      >
-                        <span>{option}</span>
-                        {showQuizResults && isCorrect && <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 ml-2" />}
-                        {showQuizResults && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-500 shrink-0 ml-2" />}
-                      </button>
-                    );
-                  })}
+          {/* Quiz Score Summary Card when submitted */}
+          {showQuizResults && (
+            <div className="p-6 rounded-2xl bg-card border border-indigo-500/30 shadow-md space-y-4 animate-in fade-in duration-300">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center space-x-4">
+                  <div className="w-16 h-16 rounded-2xl bg-indigo-500/10 flex items-center justify-center font-extrabold text-2xl text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                    {quizScore !== null ? quizScore : Object.keys(quizAnswers).filter(k => checkIsCorrect(quizList[k], quizAnswers[k])).length}/{quizList.length}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground">
+                      {(quizScore !== null ? quizScore : 0) === quizList.length 
+                        ? '🎉 Perfect Score! Outstanding job!' 
+                        : (quizScore || 0) >= Math.ceil(quizList.length / 2)
+                        ? '👏 Good Job! You passed the quiz.'
+                        : '💪 Good Effort! Review the answers below.'}
+                    </h3>
+                    <p className="text-sm text-textSecondary">
+                      Score Percentage: {Math.round(((quizScore || 0) / quizList.length) * 100)}%
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-3 text-sm">
+                  <span className="px-3.5 py-1.5 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 font-bold border border-green-500/20 flex items-center space-x-1">
+                    <CheckCircle2 className="w-4 h-4 mr-1" />
+                    <span>{quizScore !== null ? quizScore : 0} Correct</span>
+                  </span>
+                  <span className="px-3.5 py-1.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400 font-bold border border-red-500/20 flex items-center space-x-1">
+                    <XCircle className="w-4 h-4 mr-1" />
+                    <span>{quizList.length - (quizScore !== null ? quizScore : 0)} Incorrect</span>
+                  </span>
                 </div>
               </div>
-            ))}
+            </div>
+          )}
+
+          {/* Questions List */}
+          <div className="space-y-8 pt-4">
+            {quizList.map((q, qIdx) => {
+              const selectedOption = quizAnswers[qIdx];
+              const isUserCorrect = checkIsCorrect(q, selectedOption);
+              const correctAnswerText = getCorrectAnswerText(q);
+
+              return (
+                <div key={qIdx} className="space-y-4 p-6 rounded-2xl bg-card border border-borderGlass">
+                  <div className="flex justify-between items-start gap-4">
+                    <p className="text-lg font-semibold text-foreground leading-snug">
+                      <span className="text-indigo-500 font-bold mr-2">{qIdx + 1}.</span> 
+                      {q.question}
+                    </p>
+                    {showQuizResults && (
+                      <span className={`inline-flex items-center space-x-1 px-3 py-1 rounded-full text-xs font-bold shrink-0 ${
+                        isUserCorrect 
+                          ? 'bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20' 
+                          : 'bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20'
+                      }`}>
+                        {isUserCorrect ? (
+                          <>
+                            <CheckCircle2 className="w-3.5 h-3.5 mr-1 text-green-500" />
+                            <span>Correct</span>
+                          </>
+                        ) : (
+                          <>
+                            <XCircle className="w-3.5 h-3.5 mr-1 text-red-500" />
+                            <span>Incorrect</span>
+                          </>
+                        )}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-3.5">
+                    {q.options.map((option, idx) => {
+                      const isOptionSelected = selectedOption === option;
+                      const isOptionCorrect = (q.answer !== undefined && String(option).trim() === String(q.answer).trim()) ||
+                        (q.correctAnswer !== undefined && String(option).trim() === String(q.correctAnswer).trim()) ||
+                        (typeof q.correct === 'number' && q.correct === idx) ||
+                        (typeof q.correctAnswer === 'number' && q.correctAnswer === idx);
+                      
+                      let buttonStyle = "bg-card border-borderGlass hover:border-indigo-400 hover:bg-indigo-500/5 text-foreground";
+                      
+                      if (showQuizResults) {
+                        if (isOptionCorrect) {
+                          buttonStyle = "bg-green-500/10 border-green-500 text-green-700 dark:text-green-300 ring-2 ring-green-500/20 font-bold";
+                        } else if (isOptionSelected && !isOptionCorrect) {
+                          buttonStyle = "bg-red-500/10 border-red-500 text-red-700 dark:text-red-300 ring-2 ring-red-500/20 font-bold";
+                        } else {
+                          buttonStyle = "bg-card border-borderGlass opacity-50";
+                        }
+                      } else if (isOptionSelected) {
+                        buttonStyle = "bg-indigo-500/10 border-indigo-500 text-indigo-700 dark:text-indigo-300 ring-2 ring-indigo-500/20 font-bold";
+                      }
+
+                      return (
+                        <button
+                          key={idx}
+                          disabled={showQuizResults}
+                          onClick={() => {
+                            setQuizAnswers(prev => ({ ...prev, [qIdx]: option }));
+                            setQuizValidationMsg('');
+                          }}
+                          className={`p-4 rounded-xl border-2 text-left font-medium transition-all ${buttonStyle} flex justify-between items-center`}
+                        >
+                          <span>{option}</span>
+                          {showQuizResults && isOptionCorrect && <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 ml-2" />}
+                          {showQuizResults && isOptionSelected && !isOptionCorrect && <XCircle className="w-5 h-5 text-red-500 shrink-0 ml-2" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Answer Explanation Box */}
+                  {showQuizResults && (
+                    <div className="mt-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-borderGlass space-y-2">
+                      {!isUserCorrect && (
+                        <p className="text-sm font-semibold text-green-600 dark:text-green-400 flex items-center">
+                          <Check className="w-4 h-4 mr-1.5 text-green-500" />
+                          Correct Answer: <span className="ml-1 text-foreground font-bold">{correctAnswerText}</span>
+                        </p>
+                      )}
+                      {q.explanation && (
+                        <div className="text-xs sm:text-sm text-textSecondary leading-relaxed pt-1 border-t border-borderGlass/50">
+                          <span className="font-semibold text-foreground">Explanation: </span>
+                          {Array.isArray(q.explanation) ? (
+                            <ul className="list-disc pl-5 mt-1 space-y-1">
+                              {q.explanation.map((item, i) => (
+                                <li key={i}>{typeof item === 'object' ? `${item.code || ''}: ${item.desc || ''}` : item}</li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <span>{q.explanation}</span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
+          {/* Validation Error Message */}
+          {quizValidationMsg && (
+            <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm font-semibold flex items-center space-x-2">
+              <AlertCircle className="w-5 h-5 shrink-0 text-red-500" />
+              <span>{quizValidationMsg}</span>
+            </div>
+          )}
+
+          {/* Submit / Retake Bottom Controls */}
           <div className="mt-8 pt-6 border-t border-indigo-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
             {!showQuizResults ? (
               <button 
-                onClick={() => setShowQuizResults(true)}
-                disabled={Object.keys(quizAnswers).length < (content.quiz?.length || 1)}
-                className="w-full sm:w-auto px-8 py-3 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-colors"
+                onClick={handleQuizSubmit}
+                className="w-full sm:w-auto px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white rounded-xl font-bold transition-all shadow-lg shadow-indigo-500/20 flex items-center justify-center space-x-2"
               >
-                Submit Answers
+                <Check className="w-5 h-5" />
+                <span>Submit Answers</span>
               </button>
             ) : (
-              <>
-                <div className="text-lg font-bold">
-                  Score: <span className="text-indigo-500">
-                    {Object.keys(quizAnswers).filter(k => {
-                      const quizItem = (content.quiz || [content.quickQuiz])[k];
-                      return quizAnswers[k] === (quizItem.answer || quizItem.correctAnswer);
-                    }).length}
-                  </span> / {(content.quiz || [content.quickQuiz]).length}
-                </div>
+              <div className="flex items-center justify-between w-full flex-wrap gap-4">
+                <span className="text-sm font-semibold text-textSecondary">
+                  Quiz results stored. You can retake anytime.
+                </span>
                 <button 
-                  onClick={() => {
-                    setQuizAnswers({});
-                    setShowQuizResults(false);
-                  }}
-                  className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 underline"
+                  onClick={handleRetakeQuiz}
+                  className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold transition-all shadow-md flex items-center space-x-2"
                 >
-                  Retake Quiz
+                  <RotateCcw className="w-4 h-4" />
+                  <span>Retake Quiz</span>
                 </button>
-              </>
+              </div>
             )}
           </div>
         </section>
@@ -488,7 +646,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
                 href={ref.url} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-card border border-borderGlass hover:border-primary hover:text-primary transition-all text-textSecondary font-medium"
+                className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-card border border-borderGlass hover:border-primary hover:text-primary transition-all text-textSecondary font-medium text-sm"
               >
                 <span>{ref.name || ref.label}</span>
                 <ExternalLink className="w-4 h-4" />
@@ -498,7 +656,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
         </section>
       )}
 
-      {/* Notes Section (Local Storage) */}
+      {/* Personal Notes */}
       <section className="space-y-4 pt-8 border-t border-borderGlass no-print">
         <h2 className="text-xl font-bold">Personal Notes</h2>
         <textarea
@@ -512,7 +670,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
       {/* Mark as Completed */}
       <div className="pt-8 border-t border-borderGlass flex justify-center no-print">
         <button
-          onClick={() => setIsCompleted(!isCompleted)}
+          onClick={handleToggleCompleted}
           className={`inline-flex items-center space-x-3 px-8 py-4 rounded-2xl font-bold text-lg transition-all transform hover:scale-105 ${
             isCompleted 
               ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' 
