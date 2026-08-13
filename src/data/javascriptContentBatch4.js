@@ -81,7 +81,7 @@ export const javascriptContentBatch4 = {
     references: commonReferences
   },
 
-  'js_do_while': {
+  'js_do_while_loop': {
     isStructured: true,
     title: '33. do...while Loop',
     difficulty: 'Intermediate',
@@ -306,7 +306,7 @@ export const javascriptContentBatch4 = {
     references: commonReferences
   },
 
-  'js_loop_practice': {
+  'js_loop_practice_problems': {
     isStructured: true,
     title: '39. Loop Practice Problems',
     difficulty: 'Intermediate',

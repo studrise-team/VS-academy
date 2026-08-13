@@ -43,7 +43,7 @@ export const javascriptContentBatch13 = {
     references: commonReferences
   },
 
-  'js_template_literals': {
+  'js_template_literals_1': {
     isStructured: true,
     title: '174. Template Literals',
     difficulty: 'Beginner',
@@ -81,7 +81,7 @@ export const javascriptContentBatch13 = {
     references: commonReferences
   },
 
-  'js_spread_rest': {
+  'js_spread_rest_operators': {
     isStructured: true,
     title: '176-177. Spread & Rest Operators',
     difficulty: 'Intermediate',

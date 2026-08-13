@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch12 = {
-  'js_reading_form_data': {
+  'js_reading_form_data_submission': {
     isStructured: true,
     title: '163 & 170. Reading Form Data & Submission',
     difficulty: 'Intermediate',
@@ -43,7 +43,7 @@ export const javascriptContentBatch12 = {
     references: commonReferences
   },
 
-  'js_input_validation': {
+  'js_form_validation': {
     isStructured: true,
     title: '164-169. Form Validation',
     difficulty: 'Intermediate',

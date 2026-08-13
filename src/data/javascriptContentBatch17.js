@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch17 = {
-  'js_errors_types': {
+  'js_javascript_errors': {
     isStructured: true,
     title: '229-232. JavaScript Errors',
     difficulty: 'Beginner',
@@ -43,7 +43,7 @@ export const javascriptContentBatch17 = {
     references: commonReferences
   },
 
-  'js_try_catch_throw': {
+  'js_try_catch_throw_finally': {
     isStructured: true,
     title: '233-235. try...catch, throw, finally',
     difficulty: 'Intermediate',
@@ -83,7 +83,7 @@ export const javascriptContentBatch17 = {
     references: commonReferences
   },
 
-  'js_debugging_console': {
+  'js_debugging_console_methods': {
     isStructured: true,
     title: '236-237. Debugging & Console Methods',
     difficulty: 'Beginner',

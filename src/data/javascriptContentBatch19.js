@@ -42,7 +42,7 @@ export const javascriptContentBatch19 = {
     references: commonReferences
   },
 
-  'js_projects_ideas': {
+  'js_javascript_projects_ideas': {
     isStructured: true,
     title: '255-267. JavaScript Projects (Ideas)',
     difficulty: 'All Levels',

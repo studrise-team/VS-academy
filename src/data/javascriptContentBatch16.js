@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch16 = {
-  'js_local_storage': {
+  'js_localstorage_sessionstorage': {
     isStructured: true,
     title: '220-225. localStorage & sessionStorage',
     difficulty: 'Beginner',
@@ -43,7 +43,7 @@ export const javascriptContentBatch16 = {
     references: commonReferences
   },
 
-  'js_storage_json': {
+  'js_storage_with_json': {
     isStructured: true,
     title: '226-227. Storage with JSON',
     difficulty: 'Intermediate',

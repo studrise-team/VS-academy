@@ -194,7 +194,7 @@ export const javascriptContentBatch3 = {
     references: commonReferences
   },
 
-  'js_truthy_falsy': {
+  'js_truthy_and_falsy_values': {
     isStructured: true,
     title: '29. Truthy and Falsy Values',
     difficulty: 'Advanced',
@@ -232,7 +232,7 @@ export const javascriptContentBatch3 = {
     references: commonReferences
   },
 
-  'js_conditional_practice': {
+  'js_practice_problems': {
     isStructured: true,
     title: '30. Practice Problems',
     difficulty: 'Intermediate',

@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch21 = {
-  'js_for_react': {
+  'js_javascript_for_react': {
     isStructured: true,
     title: '268-280. JavaScript for React',
     difficulty: 'Advanced',
@@ -44,7 +44,7 @@ export const javascriptContentBatch21 = {
     references: commonReferences
   },
 
-  'js_interview_prep': {
+  'js_interview_preparation': {
     isStructured: true,
     title: '281-296. Interview Preparation',
     difficulty: 'All Levels',

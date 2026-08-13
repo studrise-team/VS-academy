@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch18 = {
-  'js_classes_objects': {
+  'js_classes_constructors_objects': {
     isStructured: true,
     title: '238-241. Classes, Constructors & Objects',
     difficulty: 'Intermediate',

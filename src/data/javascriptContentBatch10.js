@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch10 = {
-  'js_what_is_dom': {
+  'js_what_is_the_dom': {
     isStructured: true,
     title: '133-134. What is the DOM?',
     difficulty: 'Beginner',
@@ -82,7 +82,7 @@ export const javascriptContentBatch10 = {
     references: commonReferences
   },
 
-  'js_changing_content_styles': {
+  'js_changing_content_and_styles': {
     isStructured: true,
     title: '140-144. Changing Content and Styles',
     difficulty: 'Intermediate',
@@ -122,7 +122,7 @@ export const javascriptContentBatch10 = {
     references: commonReferences
   },
 
-  'js_creating_elements': {
+  'js_creating_and_adding_elements': {
     isStructured: true,
     title: '145-147. Creating and Adding Elements',
     difficulty: 'Intermediate',

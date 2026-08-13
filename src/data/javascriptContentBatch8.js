@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch8 = {
-  'js_what_is_object': {
+  'js_what_is_an_object': {
     isStructured: true,
     title: '97. What is an Object?',
     difficulty: 'Beginner',
@@ -80,7 +80,7 @@ export const javascriptContentBatch8 = {
     references: commonReferences
   },
 
-  'js_object_methods': {
+  'js_methods': {
     isStructured: true,
     title: '104. Methods & this Keyword',
     difficulty: 'Intermediate',
@@ -119,7 +119,7 @@ export const javascriptContentBatch8 = {
     references: commonReferences
   },
 
-  'js_object_keys_values': {
+  'js_object_keys_object_values': {
     isStructured: true,
     title: '106-107. Object.keys() & Object.values()',
     difficulty: 'Intermediate',

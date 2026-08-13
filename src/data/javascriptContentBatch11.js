@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch11 = {
-  'js_what_are_events': {
+  'js_events_addeventlistener': {
     isStructured: true,
     title: '150-152. Events & addEventListener()',
     difficulty: 'Intermediate',
@@ -44,7 +44,7 @@ export const javascriptContentBatch11 = {
     references: commonReferences
   },
 
-  'js_event_object': {
+  'js_event_object_preventdefault': {
     isStructured: true,
     title: '158 & 161. Event Object & preventDefault()',
     difficulty: 'Intermediate',

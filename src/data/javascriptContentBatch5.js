@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch5 = {
-  'js_what_is_string': {
+  'js_what_is_a_string': {
     isStructured: true,
     title: '40. What is a String?',
     difficulty: 'Beginner',
@@ -118,7 +118,7 @@ export const javascriptContentBatch5 = {
     references: commonReferences
   },
 
-  'js_toupper_tolower': {
+  'js_touppercase': {
     isStructured: true,
     title: '43. toUpperCase() & toLowerCase()',
     difficulty: 'Beginner',
@@ -156,7 +156,7 @@ export const javascriptContentBatch5 = {
     references: commonReferences
   },
 
-  'js_string_trim': {
+  'js_tolowercase': {
     isStructured: true,
     title: '44. trim()',
     difficulty: 'Beginner',
@@ -193,7 +193,7 @@ export const javascriptContentBatch5 = {
     references: commonReferences
   },
 
-  'js_string_includes': {
+  'js_includes': {
     isStructured: true,
     title: '46. includes()',
     difficulty: 'Beginner',
@@ -231,7 +231,7 @@ export const javascriptContentBatch5 = {
     references: commonReferences
   },
 
-  'js_string_slice': {
+  'js_slice': {
     isStructured: true,
     title: '50. slice()',
     difficulty: 'Intermediate',

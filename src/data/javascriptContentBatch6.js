@@ -161,7 +161,7 @@ export const javascriptContentBatch6 = {
     references: commonReferences
   },
 
-  'js_isnan': {
+  'js_number_isnan': {
     isStructured: true,
     title: '60. Number.isNaN()',
     difficulty: 'Intermediate',
@@ -199,7 +199,7 @@ export const javascriptContentBatch6 = {
     references: commonReferences
   },
 
-  'js_math_round_floor_ceil': {
+  'js_math_round_math_floor_math_ceil': {
     isStructured: true,
     title: '61-63. Math.round(), Math.floor(), Math.ceil()',
     difficulty: 'Beginner',

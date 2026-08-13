@@ -42,7 +42,7 @@ export const javascriptContentBatch1 = {
     references: commonReferences
   },
 
-  'js_history': {
+  'js_javascript_history': {
     isStructured: true,
     title: '2. JavaScript History',
     difficulty: 'Beginner',
@@ -80,7 +80,7 @@ export const javascriptContentBatch1 = {
     references: commonReferences
   },
 
-  'js_vs_html_css': {
+  'js_javascript_vs_html_vs_css': {
     isStructured: true,
     title: '3. JavaScript vs HTML vs CSS',
     difficulty: 'Beginner',
@@ -118,7 +118,7 @@ export const javascriptContentBatch1 = {
     references: commonReferences
   },
 
-  'js_how_it_works': {
+  'js_how_javascript_works': {
     isStructured: true,
     title: '4. How JavaScript Works',
     difficulty: 'Intermediate',
@@ -157,7 +157,7 @@ export const javascriptContentBatch1 = {
     references: commonReferences
   },
 
-  'js_adding_to_html': {
+  'js_adding_javascript_to_html': {
     isStructured: true,
     title: '5. Adding JavaScript to HTML',
     difficulty: 'Beginner',
@@ -310,7 +310,7 @@ export const javascriptContentBatch1 = {
     references: commonReferences
   },
 
-  'js_var_let_const': {
+  'js_var_vs_let_vs_const': {
     isStructured: true,
     title: '9. var vs let vs const',
     difficulty: 'Intermediate',
@@ -388,7 +388,7 @@ export const javascriptContentBatch1 = {
     references: commonReferences
   },
 
-  'js_primitive_vs_reference': {
+  'js_primitive_vs_reference_data_types': {
     isStructured: true,
     title: '11. Primitive vs Reference Data Types',
     difficulty: 'Intermediate',
@@ -427,7 +427,7 @@ export const javascriptContentBatch1 = {
     references: commonReferences
   },
 
-  'js_typeof': {
+  'js_type_checking_with_typeof': {
     isStructured: true,
     title: '12. Type Checking with typeof',
     difficulty: 'Beginner',

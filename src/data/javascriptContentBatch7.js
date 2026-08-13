@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch7 = {
-  'js_what_is_array': {
+  'js_what_is_an_array': {
     isStructured: true,
     title: '69. What is an Array?',
     difficulty: 'Beginner',
@@ -42,7 +42,7 @@ export const javascriptContentBatch7 = {
     references: commonReferences
   },
 
-  'js_accessing_array': {
+  'js_accessing_array_elements': {
     isStructured: true,
     title: '71. Accessing Array Elements',
     difficulty: 'Beginner',
@@ -156,7 +156,7 @@ export const javascriptContentBatch7 = {
     references: commonReferences
   },
 
-  'js_array_slice_splice': {
+  'js_slice_vs_splice': {
     isStructured: true,
     title: '78-79. slice() vs splice()',
     difficulty: 'Intermediate',
@@ -194,7 +194,7 @@ export const javascriptContentBatch7 = {
     references: commonReferences
   },
 
-  'js_array_map_filter': {
+  'js_map_filter': {
     isStructured: true,
     title: '87-88. map() & filter()',
     difficulty: 'Advanced',

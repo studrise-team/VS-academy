@@ -399,7 +399,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_slice': {
+  'js_slice_1': {
     isStructured: true,
     title: '78. slice()',
     difficulty: 'Beginner',
@@ -435,7 +435,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_includes': {
+  'js_includes_1': {
     isStructured: true,
     title: '82. includes()',
     difficulty: 'Beginner',
@@ -2919,7 +2919,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_arrow_functions': {
+  'js_arrow_functions_1': {
     isStructured: true,
     title: '173. Arrow Functions',
     difficulty: 'Beginner',
@@ -2991,7 +2991,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_spread_operator': {
+  'js_spread_operator_1': {
     isStructured: true,
     title: '176. Spread Operator',
     difficulty: 'Beginner',
@@ -3027,7 +3027,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_default_parameters': {
+  'js_default_parameters_1': {
     isStructured: true,
     title: '178. Default Parameters',
     difficulty: 'Beginner',
@@ -3135,7 +3135,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_optional_chaining': {
+  'js_optional_chaining_1': {
     isStructured: true,
     title: '182. Optional Chaining',
     difficulty: 'Beginner',
@@ -4647,7 +4647,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_try_catch': {
+  'js_try_catch_1': {
     isStructured: true,
     title: '233. try...catch',
     difficulty: 'Beginner',
@@ -5079,7 +5079,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_export': {
+  'js_export_1': {
     isStructured: true,
     title: '249. export',
     difficulty: 'Beginner',
@@ -5115,7 +5115,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_import': {
+  'js_import_1': {
     isStructured: true,
     title: '250. import',
     difficulty: 'Beginner',
@@ -5763,7 +5763,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_filter': {
+  'js_filter_1': {
     isStructured: true,
     title: '270. filter()',
     difficulty: 'Beginner',
@@ -5799,7 +5799,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_reduce': {
+  'js_reduce_1': {
     isStructured: true,
     title: '271. reduce()',
     difficulty: 'Beginner',
@@ -5835,7 +5835,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_destructuring': {
+  'js_destructuring_1': {
     isStructured: true,
     title: '272. Destructuring',
     difficulty: 'Beginner',
@@ -5871,7 +5871,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_spread_operator': {
+  'js_spread_operator_2': {
     isStructured: true,
     title: '273. Spread Operator',
     difficulty: 'Beginner',
@@ -5907,7 +5907,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_arrow_functions': {
+  'js_arrow_functions_2': {
     isStructured: true,
     title: '274. Arrow Functions',
     difficulty: 'Beginner',
@@ -5943,7 +5943,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_modules': {
+  'js_modules_1': {
     isStructured: true,
     title: '275. Modules',
     difficulty: 'Beginner',
@@ -5979,7 +5979,7 @@ export const javascriptContentBatchMissing = {
     summary: ['Point 1', 'Point 2', 'Point 3'],
     references: commonReferences
   },
-  'js_promises': {
+  'js_promises_1': {
     isStructured: true,
     title: '276. Promises',
     difficulty: 'Beginner',

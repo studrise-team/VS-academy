@@ -5,7 +5,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch9 = {
-  'js_what_is_function': {
+  'js_what_is_a_function': {
     isStructured: true,
     title: '114. What is a Function?',
     difficulty: 'Beginner',
@@ -44,7 +44,7 @@ export const javascriptContentBatch9 = {
     references: commonReferences
   },
 
-  'js_parameters_arguments': {
+  'js_parameters_and_arguments': {
     isStructured: true,
     title: '117-118. Parameters and Arguments',
     difficulty: 'Beginner',

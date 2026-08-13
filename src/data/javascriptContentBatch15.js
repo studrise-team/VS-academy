@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch15 = {
-  'js_apis_and_json': {
+  'js_apis_json': {
     isStructured: true,
     title: '204-205, 213. APIs & JSON',
     difficulty: 'Beginner',
@@ -43,7 +43,7 @@ export const javascriptContentBatch15 = {
     references: commonReferences
   },
 
-  'js_fetch_api': {
+  'js_the_fetch_api_get_requests': {
     isStructured: true,
     title: '214-215, 217. The fetch() API (GET Requests)',
     difficulty: 'Intermediate',
@@ -82,7 +82,7 @@ export const javascriptContentBatch15 = {
     references: commonReferences
   },
 
-  'js_fetch_post': {
+  'js_post_requests': {
     isStructured: true,
     title: '216, 208. POST Requests',
     difficulty: 'Intermediate',

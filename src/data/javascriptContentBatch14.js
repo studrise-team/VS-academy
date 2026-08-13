@@ -4,7 +4,7 @@ const commonReferences = [
 ];
 
 export const javascriptContentBatch14 = {
-  'js_sync_vs_async': {
+  'js_sync_vs_async_timers': {
     isStructured: true,
     title: '185-188. Sync vs Async & Timers',
     difficulty: 'Beginner',

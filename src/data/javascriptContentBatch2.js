@@ -156,7 +156,7 @@ export const javascriptContentBatch2 = {
     references: commonReferences
   },
 
-  'js_increment_decrement': {
+  'js_increment_and_decrement': {
     isStructured: true,
     title: '19. Increment and Decrement',
     difficulty: 'Beginner',
@@ -233,7 +233,7 @@ export const javascriptContentBatch2 = {
     references: commonReferences
   },
 
-  'js_nullish_coalescing': {
+  'js_nullish_coalescing_operator': {
     isStructured: true,
     title: '21. Nullish Coalescing Operator',
     difficulty: 'Advanced',
