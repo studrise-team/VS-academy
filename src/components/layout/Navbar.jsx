@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTheme } from '../theme-provider';
-import { Moon, Sun, Search, BookOpen } from 'lucide-react';
+import { Moon, Sun, Search } from 'lucide-react';
 
 export function Navbar() {
   const { theme, setTheme } = useTheme();
@@ -9,9 +9,9 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 w-full glass border-b">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center space-x-2 text-primary">
-          <BookOpen className="w-8 h-8" />
+          <img src="/logo.png" alt="VS Academy Logo" className="w-9 h-9 object-contain rounded-lg" />
           <span className="font-bold text-xl text-foreground">Swarnandhra Academy</span>
-        </Link>  
+        </Link>
         
 
         <div className="hidden md:flex flex-1 max-w-md mx-8 relative">
