@@ -1,0 +1,1186 @@
+[
+  {
+    "id": "js_what_is_javascript",
+    "title": "1. What is JavaScript?"
+  },
+  {
+    "id": "js_javascript_history",
+    "title": "2. JavaScript History"
+  },
+  {
+    "id": "js_javascript_vs_html_vs_css",
+    "title": "3. JavaScript vs HTML vs CSS"
+  },
+  {
+    "id": "js_how_javascript_works",
+    "title": "4. How JavaScript Works"
+  },
+  {
+    "id": "js_adding_javascript_to_html",
+    "title": "5. Adding JavaScript to HTML"
+  },
+  {
+    "id": "js_console_log",
+    "title": "6. console.log()"
+  },
+  {
+    "id": "js_comments",
+    "title": "7. Comments"
+  },
+  {
+    "id": "js_variables",
+    "title": "8. Variables"
+  },
+  {
+    "id": "js_var_vs_let_vs_const",
+    "title": "9. var vs let vs const"
+  },
+  {
+    "id": "js_data_types",
+    "title": "10. Data Types"
+  },
+  {
+    "id": "js_primitive_vs_reference_data_types",
+    "title": "11. Primitive vs Reference Data Types"
+  },
+  {
+    "id": "js_type_checking_with_typeof",
+    "title": "12. Type Checking with typeof"
+  },
+  {
+    "id": "js_type_conversion",
+    "title": "13. Type Conversion"
+  },
+  {
+    "id": "js_type_coercion",
+    "title": "14. Type Coercion"
+  },
+  {
+    "id": "js_arithmetic_operators",
+    "title": "15. Arithmetic Operators"
+  },
+  {
+    "id": "js_assignment_operators",
+    "title": "16. Assignment Operators"
+  },
+  {
+    "id": "js_comparison_operators",
+    "title": "17. Comparison Operators"
+  },
+  {
+    "id": "js_logical_operators",
+    "title": "18. Logical Operators"
+  },
+  {
+    "id": "js_increment_and_decrement",
+    "title": "19. Increment and Decrement"
+  },
+  {
+    "id": "js_ternary_operator",
+    "title": "20. Ternary Operator"
+  },
+  {
+    "id": "js_nullish_coalescing_operator",
+    "title": "21. Nullish Coalescing Operator"
+  },
+  {
+    "id": "js_optional_chaining",
+    "title": "22. Optional Chaining"
+  },
+  {
+    "id": "js_operator_precedence",
+    "title": "23. Operator Precedence"
+  },
+  {
+    "id": "js_if_statement",
+    "title": "24. if Statement"
+  },
+  {
+    "id": "js_if_else",
+    "title": "25. if...else"
+  },
+  {
+    "id": "js_else_if",
+    "title": "26. else if"
+  },
+  {
+    "id": "js_nested_conditions",
+    "title": "27. Nested Conditions"
+  },
+  {
+    "id": "js_switch_statement",
+    "title": "28. switch Statement"
+  },
+  {
+    "id": "js_truthy_and_falsy_values",
+    "title": "29. Truthy and Falsy Values"
+  },
+  {
+    "id": "js_practice_problems",
+    "title": "30. Practice Problems"
+  },
+  {
+    "id": "js_for_loop",
+    "title": "31. for Loop"
+  },
+  {
+    "id": "js_while_loop",
+    "title": "32. while Loop"
+  },
+  {
+    "id": "js_do_while_loop",
+    "title": "33. do...while Loop"
+  },
+  {
+    "id": "js_nested_loops",
+    "title": "34. Nested Loops"
+  },
+  {
+    "id": "js_break",
+    "title": "35. break"
+  },
+  {
+    "id": "js_continue",
+    "title": "36. continue"
+  },
+  {
+    "id": "js_for_of",
+    "title": "37. for...of"
+  },
+  {
+    "id": "js_for_in",
+    "title": "38. for...in"
+  },
+  {
+    "id": "js_loop_practice_problems",
+    "title": "39. Loop Practice Problems"
+  },
+  {
+    "id": "js_what_is_a_string",
+    "title": "40. What is a String?"
+  },
+  {
+    "id": "js_string_length",
+    "title": "41. String Length"
+  },
+  {
+    "id": "js_string_indexing",
+    "title": "42. String Indexing"
+  },
+  {
+    "id": "js_touppercase",
+    "title": "43. toUpperCase()"
+  },
+  {
+    "id": "js_tolowercase",
+    "title": "44. toLowerCase()"
+  },
+  {
+    "id": "js_trim",
+    "title": "45. trim()"
+  },
+  {
+    "id": "js_includes",
+    "title": "46. includes()"
+  },
+  {
+    "id": "js_startswith",
+    "title": "47. startsWith()"
+  },
+  {
+    "id": "js_endswith",
+    "title": "48. endsWith()"
+  },
+  {
+    "id": "js_indexof",
+    "title": "49. indexOf()"
+  },
+  {
+    "id": "js_slice",
+    "title": "50. slice()"
+  },
+  {
+    "id": "js_substring",
+    "title": "51. substring()"
+  },
+  {
+    "id": "js_replace",
+    "title": "52. replace()"
+  },
+  {
+    "id": "js_split",
+    "title": "53. split()"
+  },
+  {
+    "id": "js_template_literals",
+    "title": "54. Template Literals"
+  },
+  {
+    "id": "js_string_practice_problems",
+    "title": "55. String Practice Problems"
+  },
+  {
+    "id": "js_numbers",
+    "title": "56. Numbers"
+  },
+  {
+    "id": "js_number_conversion",
+    "title": "57. Number Conversion"
+  },
+  {
+    "id": "js_parseint",
+    "title": "58. parseInt()"
+  },
+  {
+    "id": "js_parsefloat",
+    "title": "59. parseFloat()"
+  },
+  {
+    "id": "js_number_isnan",
+    "title": "60. Number.isNaN()"
+  },
+  {
+    "id": "js_math_round",
+    "title": "61. Math.round()"
+  },
+  {
+    "id": "js_math_floor",
+    "title": "62. Math.floor()"
+  },
+  {
+    "id": "js_math_ceil",
+    "title": "63. Math.ceil()"
+  },
+  {
+    "id": "js_math_random",
+    "title": "64. Math.random()"
+  },
+  {
+    "id": "js_math_max",
+    "title": "65. Math.max()"
+  },
+  {
+    "id": "js_math_min",
+    "title": "66. Math.min()"
+  },
+  {
+    "id": "js_math_pow",
+    "title": "67. Math.pow()"
+  },
+  {
+    "id": "js_math_object_practice",
+    "title": "68. Math Object Practice"
+  },
+  {
+    "id": "js_what_is_an_array",
+    "title": "69. What is an Array?"
+  },
+  {
+    "id": "js_creating_arrays",
+    "title": "70. Creating Arrays"
+  },
+  {
+    "id": "js_accessing_array_elements",
+    "title": "71. Accessing Array Elements"
+  },
+  {
+    "id": "js_updating_array_elements",
+    "title": "72. Updating Array Elements"
+  },
+  {
+    "id": "js_array_length",
+    "title": "73. Array Length"
+  },
+  {
+    "id": "js_push",
+    "title": "74. push()"
+  },
+  {
+    "id": "js_pop",
+    "title": "75. pop()"
+  },
+  {
+    "id": "js_shift",
+    "title": "76. shift()"
+  },
+  {
+    "id": "js_unshift",
+    "title": "77. unshift()"
+  },
+  {
+    "id": "js_slice_1",
+    "title": "78. slice()"
+  },
+  {
+    "id": "js_splice",
+    "title": "79. splice()"
+  },
+  {
+    "id": "js_concat",
+    "title": "80. concat()"
+  },
+  {
+    "id": "js_indexof_1",
+    "title": "81. indexOf()"
+  },
+  {
+    "id": "js_includes_1",
+    "title": "82. includes()"
+  },
+  {
+    "id": "js_join",
+    "title": "83. join()"
+  },
+  {
+    "id": "js_reverse",
+    "title": "84. reverse()"
+  },
+  {
+    "id": "js_sort",
+    "title": "85. sort()"
+  },
+  {
+    "id": "js_foreach",
+    "title": "86. forEach()"
+  },
+  {
+    "id": "js_map",
+    "title": "87. map()"
+  },
+  {
+    "id": "js_filter",
+    "title": "88. filter()"
+  },
+  {
+    "id": "js_find",
+    "title": "89. find()"
+  },
+  {
+    "id": "js_findindex",
+    "title": "90. findIndex()"
+  },
+  {
+    "id": "js_some",
+    "title": "91. some()"
+  },
+  {
+    "id": "js_every",
+    "title": "92. every()"
+  },
+  {
+    "id": "js_reduce",
+    "title": "93. reduce()"
+  },
+  {
+    "id": "js_array_destructuring",
+    "title": "94. Array Destructuring"
+  },
+  {
+    "id": "js_spread_operator",
+    "title": "95. Spread Operator"
+  },
+  {
+    "id": "js_array_practice_problems",
+    "title": "96. Array Practice Problems"
+  },
+  {
+    "id": "js_what_is_an_object",
+    "title": "97. What is an Object?"
+  },
+  {
+    "id": "js_creating_objects",
+    "title": "98. Creating Objects"
+  },
+  {
+    "id": "js_properties",
+    "title": "99. Properties"
+  },
+  {
+    "id": "js_accessing_properties",
+    "title": "100. Accessing Properties"
+  },
+  {
+    "id": "js_updating_properties",
+    "title": "101. Updating Properties"
+  },
+  {
+    "id": "js_adding_properties",
+    "title": "102. Adding Properties"
+  },
+  {
+    "id": "js_deleting_properties",
+    "title": "103. Deleting Properties"
+  },
+  {
+    "id": "js_methods",
+    "title": "104. Methods"
+  },
+  {
+    "id": "js_this_keyword",
+    "title": "105. this Keyword"
+  },
+  {
+    "id": "js_object_keys",
+    "title": "106. Object.keys()"
+  },
+  {
+    "id": "js_object_values",
+    "title": "107. Object.values()"
+  },
+  {
+    "id": "js_object_entries",
+    "title": "108. Object.entries()"
+  },
+  {
+    "id": "js_object_destructuring",
+    "title": "109. Object Destructuring"
+  },
+  {
+    "id": "js_spread_operator_with_objects",
+    "title": "110. Spread Operator with Objects"
+  },
+  {
+    "id": "js_nested_objects",
+    "title": "111. Nested Objects"
+  },
+  {
+    "id": "js_array_of_objects",
+    "title": "112. Array of Objects"
+  },
+  {
+    "id": "js_object_practice_problems",
+    "title": "113. Object Practice Problems"
+  },
+  {
+    "id": "js_what_is_a_function",
+    "title": "114. What is a Function?"
+  },
+  {
+    "id": "js_function_declaration",
+    "title": "115. Function Declaration"
+  },
+  {
+    "id": "js_function_expression",
+    "title": "116. Function Expression"
+  },
+  {
+    "id": "js_parameters",
+    "title": "117. Parameters"
+  },
+  {
+    "id": "js_arguments",
+    "title": "118. Arguments"
+  },
+  {
+    "id": "js_return_statement",
+    "title": "119. Return Statement"
+  },
+  {
+    "id": "js_default_parameters",
+    "title": "120. Default Parameters"
+  },
+  {
+    "id": "js_arrow_functions",
+    "title": "121. Arrow Functions"
+  },
+  {
+    "id": "js_anonymous_functions",
+    "title": "122. Anonymous Functions"
+  },
+  {
+    "id": "js_callback_functions",
+    "title": "123. Callback Functions"
+  },
+  {
+    "id": "js_higher_order_functions",
+    "title": "124. Higher-Order Functions"
+  },
+  {
+    "id": "js_scope",
+    "title": "125. Scope"
+  },
+  {
+    "id": "js_global_scope",
+    "title": "126. Global Scope"
+  },
+  {
+    "id": "js_local_scope",
+    "title": "127. Local Scope"
+  },
+  {
+    "id": "js_block_scope",
+    "title": "128. Block Scope"
+  },
+  {
+    "id": "js_function_scope",
+    "title": "129. Function Scope"
+  },
+  {
+    "id": "js_closures",
+    "title": "130. Closures"
+  },
+  {
+    "id": "js_recursion",
+    "title": "131. Recursion"
+  },
+  {
+    "id": "js_function_practice_problems",
+    "title": "132. Function Practice Problems"
+  },
+  {
+    "id": "js_what_is_the_dom",
+    "title": "133. What is the DOM?"
+  },
+  {
+    "id": "js_dom_tree",
+    "title": "134. DOM Tree"
+  },
+  {
+    "id": "js_selecting_elements",
+    "title": "135. Selecting Elements"
+  },
+  {
+    "id": "js_getelementbyid",
+    "title": "136. getElementById()"
+  },
+  {
+    "id": "js_getelementsbyclassname",
+    "title": "137. getElementsByClassName()"
+  },
+  {
+    "id": "js_queryselector",
+    "title": "138. querySelector()"
+  },
+  {
+    "id": "js_queryselectorall",
+    "title": "139. querySelectorAll()"
+  },
+  {
+    "id": "js_changing_text",
+    "title": "140. Changing Text"
+  },
+  {
+    "id": "js_changing_html",
+    "title": "141. Changing HTML"
+  },
+  {
+    "id": "js_changing_styles",
+    "title": "142. Changing Styles"
+  },
+  {
+    "id": "js_adding_classes",
+    "title": "143. Adding Classes"
+  },
+  {
+    "id": "js_removing_classes",
+    "title": "144. Removing Classes"
+  },
+  {
+    "id": "js_creating_elements",
+    "title": "145. Creating Elements"
+  },
+  {
+    "id": "js_removing_elements",
+    "title": "146. Removing Elements"
+  },
+  {
+    "id": "js_adding_elements",
+    "title": "147. Adding Elements"
+  },
+  {
+    "id": "js_attributes",
+    "title": "148. Attributes"
+  },
+  {
+    "id": "js_dom_traversal",
+    "title": "149. DOM Traversal"
+  },
+  {
+    "id": "js_what_are_events",
+    "title": "150. What are Events?"
+  },
+  {
+    "id": "js_onclick",
+    "title": "151. onclick"
+  },
+  {
+    "id": "js_addeventlistener",
+    "title": "152. addEventListener()"
+  },
+  {
+    "id": "js_mouse_events",
+    "title": "153. Mouse Events"
+  },
+  {
+    "id": "js_keyboard_events",
+    "title": "154. Keyboard Events"
+  },
+  {
+    "id": "js_form_events",
+    "title": "155. Form Events"
+  },
+  {
+    "id": "js_input_events",
+    "title": "156. Input Events"
+  },
+  {
+    "id": "js_submit_events",
+    "title": "157. Submit Events"
+  },
+  {
+    "id": "js_event_object",
+    "title": "158. Event Object"
+  },
+  {
+    "id": "js_event_bubbling",
+    "title": "159. Event Bubbling"
+  },
+  {
+    "id": "js_event_capturing",
+    "title": "160. Event Capturing"
+  },
+  {
+    "id": "js_preventdefault",
+    "title": "161. preventDefault()"
+  },
+  {
+    "id": "js_event_delegation",
+    "title": "162. Event Delegation"
+  },
+  {
+    "id": "js_reading_form_data",
+    "title": "163. Reading Form Data"
+  },
+  {
+    "id": "js_input_validation",
+    "title": "164. Input Validation"
+  },
+  {
+    "id": "js_required_fields",
+    "title": "165. Required Fields"
+  },
+  {
+    "id": "js_email_validation",
+    "title": "166. Email Validation"
+  },
+  {
+    "id": "js_password_validation",
+    "title": "167. Password Validation"
+  },
+  {
+    "id": "js_custom_validation",
+    "title": "168. Custom Validation"
+  },
+  {
+    "id": "js_error_messages",
+    "title": "169. Error Messages"
+  },
+  {
+    "id": "js_form_submission",
+    "title": "170. Form Submission"
+  },
+  {
+    "id": "js_building_a_registration_form",
+    "title": "171. Building a Registration Form"
+  },
+  {
+    "id": "js_let_and_const",
+    "title": "172. let and const"
+  },
+  {
+    "id": "js_arrow_functions_1",
+    "title": "173. Arrow Functions"
+  },
+  {
+    "id": "js_template_literals_1",
+    "title": "174. Template Literals"
+  },
+  {
+    "id": "js_destructuring",
+    "title": "175. Destructuring"
+  },
+  {
+    "id": "js_spread_operator_1",
+    "title": "176. Spread Operator"
+  },
+  {
+    "id": "js_rest_operator",
+    "title": "177. Rest Operator"
+  },
+  {
+    "id": "js_default_parameters_1",
+    "title": "178. Default Parameters"
+  },
+  {
+    "id": "js_modules",
+    "title": "179. Modules"
+  },
+  {
+    "id": "js_import",
+    "title": "180. import"
+  },
+  {
+    "id": "js_export",
+    "title": "181. export"
+  },
+  {
+    "id": "js_optional_chaining_1",
+    "title": "182. Optional Chaining"
+  },
+  {
+    "id": "js_nullish_coalescing",
+    "title": "183. Nullish Coalescing"
+  },
+  {
+    "id": "js_enhanced_object_literals",
+    "title": "184. Enhanced Object Literals"
+  },
+  {
+    "id": "js_synchronous_vs_asynchronous_javascript",
+    "title": "185. Synchronous vs Asynchronous JavaScript"
+  },
+  {
+    "id": "js_callbacks",
+    "title": "186. Callbacks"
+  },
+  {
+    "id": "js_settimeout",
+    "title": "187. setTimeout()"
+  },
+  {
+    "id": "js_setinterval",
+    "title": "188. setInterval()"
+  },
+  {
+    "id": "js_callback_hell",
+    "title": "189. Callback Hell"
+  },
+  {
+    "id": "js_promises",
+    "title": "190. Promises"
+  },
+  {
+    "id": "js_promise_states",
+    "title": "191. Promise States"
+  },
+  {
+    "id": "js_then",
+    "title": "192. then()"
+  },
+  {
+    "id": "js_catch",
+    "title": "193. catch()"
+  },
+  {
+    "id": "js_finally",
+    "title": "194. finally()"
+  },
+  {
+    "id": "js_async",
+    "title": "195. async"
+  },
+  {
+    "id": "js_await",
+    "title": "196. await"
+  },
+  {
+    "id": "js_try_catch",
+    "title": "197. try...catch"
+  },
+  {
+    "id": "js_promise_all",
+    "title": "198. Promise.all()"
+  },
+  {
+    "id": "js_promise_race",
+    "title": "199. Promise.race()"
+  },
+  {
+    "id": "js_event_loop",
+    "title": "200. Event Loop"
+  },
+  {
+    "id": "js_call_stack",
+    "title": "201. Call Stack"
+  },
+  {
+    "id": "js_callback_queue",
+    "title": "202. Callback Queue"
+  },
+  {
+    "id": "js_microtask_queue",
+    "title": "203. Microtask Queue"
+  },
+  {
+    "id": "js_what_is_an_api",
+    "title": "204. What is an API?"
+  },
+  {
+    "id": "js_rest_api_basics",
+    "title": "205. REST API Basics"
+  },
+  {
+    "id": "js_http_methods",
+    "title": "206. HTTP Methods"
+  },
+  {
+    "id": "js_get",
+    "title": "207. GET"
+  },
+  {
+    "id": "js_post",
+    "title": "208. POST"
+  },
+  {
+    "id": "js_put",
+    "title": "209. PUT"
+  },
+  {
+    "id": "js_patch",
+    "title": "210. PATCH"
+  },
+  {
+    "id": "js_delete",
+    "title": "211. DELETE"
+  },
+  {
+    "id": "js_http_status_codes",
+    "title": "212. HTTP Status Codes"
+  },
+  {
+    "id": "js_json",
+    "title": "213. JSON"
+  },
+  {
+    "id": "js_fetch",
+    "title": "214. fetch()"
+  },
+  {
+    "id": "js_sending_get_requests",
+    "title": "215. Sending GET Requests"
+  },
+  {
+    "id": "js_sending_post_requests",
+    "title": "216. Sending POST Requests"
+  },
+  {
+    "id": "js_handling_api_errors",
+    "title": "217. Handling API Errors"
+  },
+  {
+    "id": "js_loading_states",
+    "title": "218. Loading States"
+  },
+  {
+    "id": "js_building_an_api_based_project",
+    "title": "219. Building an API-Based Project"
+  },
+  {
+    "id": "js_localstorage",
+    "title": "220. localStorage"
+  },
+  {
+    "id": "js_sessionstorage",
+    "title": "221. sessionStorage"
+  },
+  {
+    "id": "js_setitem",
+    "title": "222. setItem()"
+  },
+  {
+    "id": "js_getitem",
+    "title": "223. getItem()"
+  },
+  {
+    "id": "js_removeitem",
+    "title": "224. removeItem()"
+  },
+  {
+    "id": "js_clear",
+    "title": "225. clear()"
+  },
+  {
+    "id": "js_json_stringify",
+    "title": "226. JSON.stringify()"
+  },
+  {
+    "id": "js_json_parse",
+    "title": "227. JSON.parse()"
+  },
+  {
+    "id": "js_building_a_notes_app",
+    "title": "228. Building a Notes App"
+  },
+  {
+    "id": "js_javascript_errors",
+    "title": "229. JavaScript Errors"
+  },
+  {
+    "id": "js_syntax_errors",
+    "title": "230. Syntax Errors"
+  },
+  {
+    "id": "js_runtime_errors",
+    "title": "231. Runtime Errors"
+  },
+  {
+    "id": "js_logical_errors",
+    "title": "232. Logical Errors"
+  },
+  {
+    "id": "js_try_catch_1",
+    "title": "233. try...catch"
+  },
+  {
+    "id": "js_throw",
+    "title": "234. throw"
+  },
+  {
+    "id": "js_finally_1",
+    "title": "235. finally"
+  },
+  {
+    "id": "js_debugging_with_browser_devtools",
+    "title": "236. Debugging with Browser DevTools"
+  },
+  {
+    "id": "js_console_methods",
+    "title": "237. console Methods"
+  },
+  {
+    "id": "js_classes",
+    "title": "238. Classes"
+  },
+  {
+    "id": "js_constructors",
+    "title": "239. Constructors"
+  },
+  {
+    "id": "js_objects",
+    "title": "240. Objects"
+  },
+  {
+    "id": "js_methods_1",
+    "title": "241. Methods"
+  },
+  {
+    "id": "js_inheritance",
+    "title": "242. Inheritance"
+  },
+  {
+    "id": "js_encapsulation",
+    "title": "243. Encapsulation"
+  },
+  {
+    "id": "js_polymorphism",
+    "title": "244. Polymorphism"
+  },
+  {
+    "id": "js_getters",
+    "title": "245. Getters"
+  },
+  {
+    "id": "js_setters",
+    "title": "246. Setters"
+  },
+  {
+    "id": "js_static_methods",
+    "title": "247. Static Methods"
+  },
+  {
+    "id": "js_why_modules",
+    "title": "248. Why Modules?"
+  },
+  {
+    "id": "js_export_1",
+    "title": "249. export"
+  },
+  {
+    "id": "js_import_1",
+    "title": "250. import"
+  },
+  {
+    "id": "js_named_exports",
+    "title": "251. Named Exports"
+  },
+  {
+    "id": "js_default_exports",
+    "title": "252. Default Exports"
+  },
+  {
+    "id": "js_dynamic_imports",
+    "title": "253. Dynamic Imports"
+  },
+  {
+    "id": "js_organizing_javascript_projects",
+    "title": "254. Organizing JavaScript Projects"
+  },
+  {
+    "id": "js_calculator",
+    "title": "255. Calculator"
+  },
+  {
+    "id": "js_digital_clock",
+    "title": "256. Digital Clock"
+  },
+  {
+    "id": "js_to_do_list",
+    "title": "257. To-Do List"
+  },
+  {
+    "id": "js_counter_app",
+    "title": "258. Counter App"
+  },
+  {
+    "id": "js_quiz_application",
+    "title": "259. Quiz Application"
+  },
+  {
+    "id": "js_weather_application",
+    "title": "260. Weather Application"
+  },
+  {
+    "id": "js_expense_tracker",
+    "title": "261. Expense Tracker"
+  },
+  {
+    "id": "js_notes_application",
+    "title": "262. Notes Application"
+  },
+  {
+    "id": "js_movie_search_application",
+    "title": "263. Movie Search Application"
+  },
+  {
+    "id": "js_student_management_system",
+    "title": "264. Student Management System"
+  },
+  {
+    "id": "js_e_commerce_cart",
+    "title": "265. E-Commerce Cart"
+  },
+  {
+    "id": "js_portfolio_website",
+    "title": "266. Portfolio Website"
+  },
+  {
+    "id": "js_api_dashboard",
+    "title": "267. API Dashboard"
+  },
+  {
+    "id": "js_why_learn_javascript_before_react",
+    "title": "268. Why Learn JavaScript Before React?"
+  },
+  {
+    "id": "js_array_map",
+    "title": "269. Array map()"
+  },
+  {
+    "id": "js_filter_1",
+    "title": "270. filter()"
+  },
+  {
+    "id": "js_reduce_1",
+    "title": "271. reduce()"
+  },
+  {
+    "id": "js_destructuring_1",
+    "title": "272. Destructuring"
+  },
+  {
+    "id": "js_spread_operator_2",
+    "title": "273. Spread Operator"
+  },
+  {
+    "id": "js_arrow_functions_2",
+    "title": "274. Arrow Functions"
+  },
+  {
+    "id": "js_modules_1",
+    "title": "275. Modules"
+  },
+  {
+    "id": "js_promises_1",
+    "title": "276. Promises"
+  },
+  {
+    "id": "js_async_await",
+    "title": "277. async/await"
+  },
+  {
+    "id": "js_api_calls",
+    "title": "278. API Calls"
+  },
+  {
+    "id": "js_components_thinking",
+    "title": "279. Components Thinking"
+  },
+  {
+    "id": "js_javascript_concepts_required_for_react",
+    "title": "280. JavaScript Concepts Required for React"
+  },
+  {
+    "id": "js_javascript_basics_interview_questions",
+    "title": "281. JavaScript Basics Interview Questions"
+  },
+  {
+    "id": "js_variables_interview_questions",
+    "title": "282. Variables Interview Questions"
+  },
+  {
+    "id": "js_data_types_interview_questions",
+    "title": "283. Data Types Interview Questions"
+  },
+  {
+    "id": "js_functions_interview_questions",
+    "title": "284. Functions Interview Questions"
+  },
+  {
+    "id": "js_array_interview_questions",
+    "title": "285. Array Interview Questions"
+  },
+  {
+    "id": "js_object_interview_questions",
+    "title": "286. Object Interview Questions"
+  },
+  {
+    "id": "js_dom_interview_questions",
+    "title": "287. DOM Interview Questions"
+  },
+  {
+    "id": "js_event_interview_questions",
+    "title": "288. Event Interview Questions"
+  },
+  {
+    "id": "js_async_javascript_questions",
+    "title": "289. Async JavaScript Questions"
+  },
+  {
+    "id": "js_promise_questions",
+    "title": "290. Promise Questions"
+  },
+  {
+    "id": "js_api_questions",
+    "title": "291. API Questions"
+  },
+  {
+    "id": "js_es6_questions",
+    "title": "292. ES6 Questions"
+  },
+  {
+    "id": "js_output_based_questions",
+    "title": "293. Output-Based Questions"
+  },
+  {
+    "id": "js_coding_interview_questions",
+    "title": "294. Coding Interview Questions"
+  },
+  {
+    "id": "js_common_javascript_mistakes",
+    "title": "295. Common JavaScript Mistakes"
+  },
+  {
+    "id": "js_javascript_cheat_sheet",
+    "title": "296. JavaScript Cheat Sheet\""
+  }
+]

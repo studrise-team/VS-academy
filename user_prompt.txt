@@ -1,0 +1,468 @@
+﻿<USER_REQUEST>
+now create a new topic for java script and add these all topic "ðŸ“– Module 1: JavaScript Fundamentals
+
+1. What is JavaScript?
+2. JavaScript History
+3. JavaScript vs HTML vs CSS
+4. How JavaScript Works
+5. Adding JavaScript to HTML
+6. console.log()
+7. Comments
+8. Variables
+9. var vs let vs const
+10. Data Types
+11. Primitive vs Reference Data Types
+12. Type Checking with typeof
+13. Type Conversion
+14. Type Coercion
+
+
+ðŸ“– Module 2: Operators
+
+15. Arithmetic Operators
+16. Assignment Operators
+17. Comparison Operators
+18. Logical Operators
+19. Increment and Decrement
+20. Ternary Operator
+21. Nullish Coalescing Operator
+22. Optional Chaining
+23. Operator Precedence
+
+
+ðŸ“– Module 3: Conditional Statements
+
+24. if Statement
+25. if...else
+26. else if
+27. Nested Conditions
+28. switch Statement
+29. Truthy and Falsy Values
+30. Practice Problems
+
+
+ðŸ“– Module 4: Loops
+
+31. for Loop
+32. while Loop
+33. do...while Loop
+34. Nested Loops
+35. break
+36. continue
+37. for...of
+38. for...in
+39. Loop Practice Problems
+
+
+ðŸ“– Module 5: Strings
+
+40. What is a String?
+41. String Length
+42. String Indexing
+43. toUpperCase()
+44. toLowerCase()
+45. trim()
+46. includes()
+47. startsWith()
+48. endsWith()
+49. indexOf()
+50. slice()
+51. substring()
+52. replace()
+53. split()
+54. Template Literals
+55. String Practice Problems
+
+
+ðŸ“– Module 6: Numbers and Math
+
+56. Numbers
+57. Number Conversion
+58. parseInt()
+59. parseFloat()
+60. Number.isNaN()
+61. Math.round()
+62. Math.floor()
+63. Math.ceil()
+64. Math.random()
+65. Math.max()
+66. Math.min()
+67. Math.pow()
+68. Math Object Practice
+
+
+ðŸ“– Module 7: Arrays
+
+69. What is an Array?
+70. Creating Arrays
+71. Accessing Array Elements
+72. Updating Array Elements
+73. Array Length
+74. push()
+75. pop()
+76. shift()
+77. unshift()
+78. slice()
+79. splice()
+80. concat()
+81. indexOf()
+82. includes()
+83. join()
+84. reverse()
+85. sort()
+86. forEach()
+87. map()
+88. filter()
+89. find()
+90. findIndex()
+91. some()
+92. every()
+93. reduce()
+94. Array Destructuring
+95. Spread Operator
+96. Array Practice Problems
+
+
+ðŸ“– Module 8: Objects
+
+97. What is an Object?
+98. Creating Objects
+99. Properties
+100. Accessing Properties
+101. Updating Properties
+102. Adding Properties
+103. Deleting Properties
+104. Methods
+105. this Keyword
+106. Object.keys()
+107. Object.values()
+108. Object.entries()
+109. Object Destructuring
+110. Spread Operator with Objects
+111. Nested Objects
+112. Array of Objects
+113. Object Practice Problems
+
+
+ðŸ“– Module 9: Functions
+
+114. What is a Function?
+115. Function Declaration
+116. Function Expression
+117. Parameters
+118. Arguments
+119. Return Statement
+120. Default Parameters
+121. Arrow Functions
+122. Anonymous Functions
+123. Callback Functions
+124. Higher-Order Functions
+125. Scope
+126. Global Scope
+127. Local Scope
+128. Block Scope
+129. Function Scope
+130. Closures
+131. Recursion
+132. Function Practice Problems
+
+
+ðŸ“– Module 10: DOM
+
+133. What is the DOM?
+134. DOM Tree
+135. Selecting Elements
+136. getElementById()
+137. getElementsByClassName()
+138. querySelector()
+139. querySelectorAll()
+140. Changing Text
+141. Changing HTML
+142. Changing Styles
+143. Adding Classes
+144. Removing Classes
+145. Creating Elements
+146. Removing Elements
+147. Adding Elements
+148. Attributes
+149. DOM Traversal
+
+
+ðŸ“– Module 11: Events
+
+150. What are Events?
+151. onclick
+152. addEventListener()
+153. Mouse Events
+154. Keyboard Events
+155. Form Events
+156. Input Events
+157. Submit Events
+158. Event Object
+159. Event Bubbling
+160. Event Capturing
+161. preventDefault()
+162. Event Delegation
+
+
+ðŸ“– Module 12: Forms and Validation
+
+163. Reading Form Data
+164. Input Validation
+165. Required Fields
+166. Email Validation
+167. Password Validation
+168. Custom Validation
+169. Error Messages
+170. Form Submission
+171. Building a Registration Form
+
+
+ðŸ“– Module 13: Modern JavaScript (ES6+)
+
+172. let and const
+173. Arrow Functions
+174. Template Literals
+175. Destructuring
+176. Spread Operator
+177. Rest Operator
+178. Default Parameters
+179. Modules
+180. import
+181. export
+182. Optional Chaining
+183. Nullish Coalescing
+184. Enhanced Object Literals
+
+
+ðŸ“– Module 14: Asynchronous JavaScript
+
+185. Synchronous vs Asynchronous JavaScript
+186. Callbacks
+187. setTimeout()
+188. setInterval()
+189. Callback Hell
+190. Promises
+191. Promise States
+192. then()
+193. catch()
+194. finally()
+195. async
+196. await
+197. try...catch
+198. Promise.all()
+199. Promise.race()
+200. Event Loop
+201. Call Stack
+202. Callback Queue
+203. Microtask Queue
+
+
+ðŸ“– Module 15: APIs and Fetch
+
+204. What is an API?
+205. REST API Basics
+206. HTTP Methods
+207. GET
+208. POST
+209. PUT
+210. PATCH
+211. DELETE
+212. HTTP Status Codes
+213. JSON
+214. fetch()
+215. Sending GET Requests
+216. Sending POST Requests
+217. Handling API Errors
+218. Loading States
+219. Building an API-Based Project
+
+
+ðŸ“– Module 16: Browser Storage
+
+220. localStorage
+221. sessionStorage
+222. setItem()
+223. getItem()
+224. removeItem()
+225. clear()
+226. JSON.stringify()
+227. JSON.parse()
+228. Building a Notes App
+
+
+ðŸ“– Module 17: Error Handling
+
+229. JavaScript Errors
+230. Syntax Errors
+231. Runtime Errors
+232. Logical Errors
+233. try...catch
+234. throw
+235. finally
+236. Debugging with Browser DevTools
+237. console Methods
+
+
+ðŸ“– Module 18: Object-Oriented JavaScript
+
+238. Classes
+239. Constructors
+240. Objects
+241. Methods
+242. Inheritance
+243. Encapsulation
+244. Polymorphism
+245. Getters
+246. Setters
+247. Static Methods
+
+
+ðŸ“– Module 19: JavaScript Modules
+
+248. Why Modules?
+249. export
+250. import
+251. Named Exports
+252. Default Exports
+253. Dynamic Imports
+254. Organizing JavaScript Projects
+
+
+ðŸ“– Module 20: JavaScript Projects
+
+255. Calculator
+256. Digital Clock
+257. To-Do List
+258. Counter App
+259. Quiz Application
+260. Weather Application
+261. Expense Tracker
+262. Notes Application
+263. Movie Search Application
+264. Student Management System
+265. E-Commerce Cart
+266. Portfolio Website
+267. API Dashboard
+
+
+ðŸ“– Module 21: JavaScript for React
+
+268. Why Learn JavaScript Before React?
+269. Array map()
+270. filter()
+271. reduce()
+272. Destructuring
+273. Spread Operator
+274. Arrow Functions
+275. Modules
+276. Promises
+277. async/await
+278. API Calls
+279. Components Thinking
+280. JavaScript Concepts Required for React
+
+
+ðŸ“– Module 22: Interview Preparation
+
+281. JavaScript Basics Interview Questions
+282. Variables Interview Questions
+283. Data Types Interview Questions
+284. Functions Interview Questions
+285. Array Interview Questions
+286. Object Interview Questions
+287. DOM Interview Questions
+288. Event Interview Questions
+289. Async JavaScript Questions
+290. Promise Questions
+291. API Questions
+292. ES6 Questions
+293. Output-Based Questions
+294. Coding Interview Questions
+295. Common JavaScript Mistakes
+296. JavaScript Cheat Sheet"
+
+in this formate "ðŸ“Œ Topic Title
+
+ðŸŽ¯ Difficulty
+ðŸ•’ Reading Time
+
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+
+1. What is this Topic?
+
+Simple beginner-friendly explanation.
+
+2. Why do we use it?
+
+Explain the purpose in simple language.
+
+3. Syntax
+
+Show the basic syntax.
+
+4. Sample Code
+
+Provide a small working example.
+
+5. Output
+
+Show exactly what the student will see.
+
+6. Code Explanation
+
+Explain the code line by line.
+
+7. Real-World Example
+
+Explain where developers actually use it.
+
+8. Common Mistakes
+
+Show mistakes beginners commonly make.
+
+9. Best Practices
+
+Show how professionals use it.
+
+10. Practice Exercise
+
+Give students something to build themselves.
+
+11. Expected Output
+
+Show what their solution should produce.
+
+12. Interview Questions
+
+5 beginner/intermediate questions.
+
+13. Quick Quiz
+
+5 MCQs with answers and explanations.
+
+14. Summary
+
+3â€“5 important points.
+
+15. References
+
+W3Schools
+MDN Web Docs"
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-08-13T20:16:57+05:30.
+
+The user's current state is as follows:
+Active Document: d:\Btech\PROJECTS\Techwing\swarnandhra-academy\.env (LANGUAGE_UNSPECIFIED)
+Cursor is on line: 1
+Other open documents:
+- d:\Btech\PROJECTS\Techwing\swarnandhra-academy\src\data\gitContentBatch1.js (LANGUAGE_JAVASCRIPT)
+- d:\Btech\PROJECTS\Techwing\swarnandhra-academy\src\data\linuxContentBatch4.js (LANGUAGE_JAVASCRIPT)
+- d:\Btech\PROJECTS\Techwing\swarnandhra-academy\src\data\gitContentBatch5.js (LANGUAGE_JAVASCRIPT)
+- d:\Btech\PROJECTS\Techwing\swarnandhra-academy\src\data\gitContentBatch6.js (LANGUAGE_JAVASCRIPT)
+- d:\Btech\PROJECTS\Techwing\swarnandhra-academy\src\data\linuxContentBatch3.js (LANGUAGE_JAVASCRIPT)
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from None to Gemini 3.1 Pro (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>

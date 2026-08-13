@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Code2, Database, Layout, Terminal, GitBranch, Server, BrainCircuit, Globe, Layers } from 'lucide-react';
+import { Code2, Database, Layout, Terminal, GitBranch, Server, BrainCircuit, Globe, Layers, FileCode } from 'lucide-react';
 
 const subjects = [
   { id: 'html', name: 'HTML', chapters: 12, difficulty: 'Beginner', time: '10h', icon: Layout, color: 'text-orange-500', bg: 'bg-orange-500/10' },
   { id: 'css', name: 'CSS', chapters: 15, difficulty: 'Beginner', time: '20h', icon: Layers, color: 'text-blue-400', bg: 'bg-blue-400/10' },
+  { id: 'javascript', name: 'JavaScript', chapters: 22, difficulty: 'Intermediate', time: '35h', icon: FileCode, color: 'text-yellow-400', bg: 'bg-yellow-400/10' },
   { id: 'java', name: 'Java', chapters: 28, difficulty: 'Intermediate', time: '45h', icon: Code2, color: 'text-red-500', bg: 'bg-red-500/10' },
   { id: 'mysql', name: 'MySQL', chapters: 16, difficulty: 'Intermediate', time: '25h', icon: Database, color: 'text-blue-600', bg: 'bg-blue-600/10' },
   { id: 'linux', name: 'Linux', chapters: 10, difficulty: 'Beginner', time: '15h', icon: Terminal, color: 'text-yellow-500', bg: 'bg-yellow-500/10' },

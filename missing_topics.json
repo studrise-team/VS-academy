@@ -1,0 +1,742 @@
+[
+  {
+    "num": 45,
+    "title": "trim()"
+  },
+  {
+    "num": 48,
+    "title": "endsWith()"
+  },
+  {
+    "num": 49,
+    "title": "indexOf()"
+  },
+  {
+    "num": 51,
+    "title": "substring()"
+  },
+  {
+    "num": 53,
+    "title": "split()"
+  },
+  {
+    "num": 55,
+    "title": "String Practice Problems"
+  },
+  {
+    "num": 65,
+    "title": "Math.max()"
+  },
+  {
+    "num": 66,
+    "title": "Math.min()"
+  },
+  {
+    "num": 68,
+    "title": "Math Object Practice"
+  },
+  {
+    "num": 73,
+    "title": "Array Length"
+  },
+  {
+    "num": 76,
+    "title": "shift()"
+  },
+  {
+    "num": 78,
+    "title": "slice()"
+  },
+  {
+    "num": 82,
+    "title": "includes()"
+  },
+  {
+    "num": 83,
+    "title": "join()"
+  },
+  {
+    "num": 84,
+    "title": "reverse()"
+  },
+  {
+    "num": 85,
+    "title": "sort()"
+  },
+  {
+    "num": 86,
+    "title": "forEach()"
+  },
+  {
+    "num": 87,
+    "title": "map()"
+  },
+  {
+    "num": 89,
+    "title": "find()"
+  },
+  {
+    "num": 90,
+    "title": "findIndex()"
+  },
+  {
+    "num": 91,
+    "title": "some()"
+  },
+  {
+    "num": 92,
+    "title": "every()"
+  },
+  {
+    "num": 93,
+    "title": "reduce()"
+  },
+  {
+    "num": 95,
+    "title": "Spread Operator"
+  },
+  {
+    "num": 98,
+    "title": "Creating Objects"
+  },
+  {
+    "num": 99,
+    "title": "Properties"
+  },
+  {
+    "num": 101,
+    "title": "Updating Properties"
+  },
+  {
+    "num": 102,
+    "title": "Adding Properties"
+  },
+  {
+    "num": 103,
+    "title": "Deleting Properties"
+  },
+  {
+    "num": 105,
+    "title": "this Keyword"
+  },
+  {
+    "num": 106,
+    "title": "Object.keys()"
+  },
+  {
+    "num": 108,
+    "title": "Object.entries()"
+  },
+  {
+    "num": 110,
+    "title": "Spread Operator with Objects"
+  },
+  {
+    "num": 111,
+    "title": "Nested Objects"
+  },
+  {
+    "num": 112,
+    "title": "Array of Objects"
+  },
+  {
+    "num": 113,
+    "title": "Object Practice Problems"
+  },
+  {
+    "num": 115,
+    "title": "Function Declaration"
+  },
+  {
+    "num": 116,
+    "title": "Function Expression"
+  },
+  {
+    "num": 117,
+    "title": "Parameters"
+  },
+  {
+    "num": 120,
+    "title": "Default Parameters"
+  },
+  {
+    "num": 122,
+    "title": "Anonymous Functions"
+  },
+  {
+    "num": 123,
+    "title": "Callback Functions"
+  },
+  {
+    "num": 124,
+    "title": "Higher-Order Functions"
+  },
+  {
+    "num": 125,
+    "title": "Scope"
+  },
+  {
+    "num": 126,
+    "title": "Global Scope"
+  },
+  {
+    "num": 127,
+    "title": "Local Scope"
+  },
+  {
+    "num": 128,
+    "title": "Block Scope"
+  },
+  {
+    "num": 129,
+    "title": "Function Scope"
+  },
+  {
+    "num": 130,
+    "title": "Closures"
+  },
+  {
+    "num": 131,
+    "title": "Recursion"
+  },
+  {
+    "num": 132,
+    "title": "Function Practice Problems"
+  },
+  {
+    "num": 133,
+    "title": "What is the DOM?"
+  },
+  {
+    "num": 135,
+    "title": "Selecting Elements"
+  },
+  {
+    "num": 136,
+    "title": "getElementById()"
+  },
+  {
+    "num": 137,
+    "title": "getElementsByClassName()"
+  },
+  {
+    "num": 138,
+    "title": "querySelector()"
+  },
+  {
+    "num": 140,
+    "title": "Changing Text"
+  },
+  {
+    "num": 141,
+    "title": "Changing HTML"
+  },
+  {
+    "num": 142,
+    "title": "Changing Styles"
+  },
+  {
+    "num": 143,
+    "title": "Adding Classes"
+  },
+  {
+    "num": 145,
+    "title": "Creating Elements"
+  },
+  {
+    "num": 146,
+    "title": "Removing Elements"
+  },
+  {
+    "num": 148,
+    "title": "Attributes"
+  },
+  {
+    "num": 149,
+    "title": "DOM Traversal"
+  },
+  {
+    "num": 150,
+    "title": "What are Events?"
+  },
+  {
+    "num": 151,
+    "title": "onclick"
+  },
+  {
+    "num": 153,
+    "title": "Mouse Events"
+  },
+  {
+    "num": 154,
+    "title": "Keyboard Events"
+  },
+  {
+    "num": 155,
+    "title": "Form Events"
+  },
+  {
+    "num": 156,
+    "title": "Input Events"
+  },
+  {
+    "num": 157,
+    "title": "Submit Events"
+  },
+  {
+    "num": 158,
+    "title": "Event Object"
+  },
+  {
+    "num": 159,
+    "title": "Event Bubbling"
+  },
+  {
+    "num": 160,
+    "title": "Event Capturing"
+  },
+  {
+    "num": 163,
+    "title": "Reading Form Data"
+  },
+  {
+    "num": 164,
+    "title": "Input Validation"
+  },
+  {
+    "num": 165,
+    "title": "Required Fields"
+  },
+  {
+    "num": 166,
+    "title": "Email Validation"
+  },
+  {
+    "num": 167,
+    "title": "Password Validation"
+  },
+  {
+    "num": 168,
+    "title": "Custom Validation"
+  },
+  {
+    "num": 171,
+    "title": "Building a Registration Form"
+  },
+  {
+    "num": 173,
+    "title": "Arrow Functions"
+  },
+  {
+    "num": 175,
+    "title": "Destructuring"
+  },
+  {
+    "num": 176,
+    "title": "Spread Operator"
+  },
+  {
+    "num": 178,
+    "title": "Default Parameters"
+  },
+  {
+    "num": 179,
+    "title": "Modules"
+  },
+  {
+    "num": 180,
+    "title": "import"
+  },
+  {
+    "num": 182,
+    "title": "Optional Chaining"
+  },
+  {
+    "num": 183,
+    "title": "Nullish Coalescing"
+  },
+  {
+    "num": 184,
+    "title": "Enhanced Object Literals"
+  },
+  {
+    "num": 185,
+    "title": "Synchronous vs Asynchronous JavaScript"
+  },
+  {
+    "num": 186,
+    "title": "Callbacks"
+  },
+  {
+    "num": 187,
+    "title": "setTimeout()"
+  },
+  {
+    "num": 189,
+    "title": "Callback Hell"
+  },
+  {
+    "num": 190,
+    "title": "Promises"
+  },
+  {
+    "num": 191,
+    "title": "Promise States"
+  },
+  {
+    "num": 192,
+    "title": "then()"
+  },
+  {
+    "num": 193,
+    "title": "catch()"
+  },
+  {
+    "num": 195,
+    "title": "async"
+  },
+  {
+    "num": 196,
+    "title": "await"
+  },
+  {
+    "num": 198,
+    "title": "Promise.all()"
+  },
+  {
+    "num": 199,
+    "title": "Promise.race()"
+  },
+  {
+    "num": 200,
+    "title": "Event Loop"
+  },
+  {
+    "num": 201,
+    "title": "Call Stack"
+  },
+  {
+    "num": 202,
+    "title": "Callback Queue"
+  },
+  {
+    "num": 203,
+    "title": "Microtask Queue"
+  },
+  {
+    "num": 204,
+    "title": "What is an API?"
+  },
+  {
+    "num": 205,
+    "title": "REST API Basics"
+  },
+  {
+    "num": 206,
+    "title": "HTTP Methods"
+  },
+  {
+    "num": 207,
+    "title": "GET"
+  },
+  {
+    "num": 209,
+    "title": "PUT"
+  },
+  {
+    "num": 210,
+    "title": "PATCH"
+  },
+  {
+    "num": 211,
+    "title": "DELETE"
+  },
+  {
+    "num": 212,
+    "title": "HTTP Status Codes"
+  },
+  {
+    "num": 214,
+    "title": "fetch()"
+  },
+  {
+    "num": 215,
+    "title": "Sending GET Requests"
+  },
+  {
+    "num": 216,
+    "title": "Sending POST Requests"
+  },
+  {
+    "num": 218,
+    "title": "Loading States"
+  },
+  {
+    "num": 219,
+    "title": "Building an API-Based Project"
+  },
+  {
+    "num": 220,
+    "title": "localStorage"
+  },
+  {
+    "num": 221,
+    "title": "sessionStorage"
+  },
+  {
+    "num": 222,
+    "title": "setItem()"
+  },
+  {
+    "num": 223,
+    "title": "getItem()"
+  },
+  {
+    "num": 224,
+    "title": "removeItem()"
+  },
+  {
+    "num": 226,
+    "title": "JSON.stringify()"
+  },
+  {
+    "num": 228,
+    "title": "Building a Notes App"
+  },
+  {
+    "num": 229,
+    "title": "JavaScript Errors"
+  },
+  {
+    "num": 230,
+    "title": "Syntax Errors"
+  },
+  {
+    "num": 231,
+    "title": "Runtime Errors"
+  },
+  {
+    "num": 233,
+    "title": "try...catch"
+  },
+  {
+    "num": 234,
+    "title": "throw"
+  },
+  {
+    "num": 236,
+    "title": "Debugging with Browser DevTools"
+  },
+  {
+    "num": 238,
+    "title": "Classes"
+  },
+  {
+    "num": 239,
+    "title": "Constructors"
+  },
+  {
+    "num": 240,
+    "title": "Objects"
+  },
+  {
+    "num": 243,
+    "title": "Encapsulation"
+  },
+  {
+    "num": 244,
+    "title": "Polymorphism"
+  },
+  {
+    "num": 245,
+    "title": "Getters"
+  },
+  {
+    "num": 246,
+    "title": "Setters"
+  },
+  {
+    "num": 247,
+    "title": "Static Methods"
+  },
+  {
+    "num": 248,
+    "title": "Why Modules?"
+  },
+  {
+    "num": 249,
+    "title": "export"
+  },
+  {
+    "num": 250,
+    "title": "import"
+  },
+  {
+    "num": 251,
+    "title": "Named Exports"
+  },
+  {
+    "num": 252,
+    "title": "Default Exports"
+  },
+  {
+    "num": 253,
+    "title": "Dynamic Imports"
+  },
+  {
+    "num": 255,
+    "title": "Calculator"
+  },
+  {
+    "num": 256,
+    "title": "Digital Clock"
+  },
+  {
+    "num": 257,
+    "title": "To-Do List"
+  },
+  {
+    "num": 258,
+    "title": "Counter App"
+  },
+  {
+    "num": 259,
+    "title": "Quiz Application"
+  },
+  {
+    "num": 260,
+    "title": "Weather Application"
+  },
+  {
+    "num": 261,
+    "title": "Expense Tracker"
+  },
+  {
+    "num": 262,
+    "title": "Notes Application"
+  },
+  {
+    "num": 263,
+    "title": "Movie Search Application"
+  },
+  {
+    "num": 264,
+    "title": "Student Management System"
+  },
+  {
+    "num": 265,
+    "title": "E-Commerce Cart"
+  },
+  {
+    "num": 266,
+    "title": "Portfolio Website"
+  },
+  {
+    "num": 268,
+    "title": "Why Learn JavaScript Before React?"
+  },
+  {
+    "num": 269,
+    "title": "Array map()"
+  },
+  {
+    "num": 270,
+    "title": "filter()"
+  },
+  {
+    "num": 271,
+    "title": "reduce()"
+  },
+  {
+    "num": 272,
+    "title": "Destructuring"
+  },
+  {
+    "num": 273,
+    "title": "Spread Operator"
+  },
+  {
+    "num": 274,
+    "title": "Arrow Functions"
+  },
+  {
+    "num": 275,
+    "title": "Modules"
+  },
+  {
+    "num": 276,
+    "title": "Promises"
+  },
+  {
+    "num": 277,
+    "title": "async/await"
+  },
+  {
+    "num": 278,
+    "title": "API Calls"
+  },
+  {
+    "num": 279,
+    "title": "Components Thinking"
+  },
+  {
+    "num": 281,
+    "title": "JavaScript Basics Interview Questions"
+  },
+  {
+    "num": 282,
+    "title": "Variables Interview Questions"
+  },
+  {
+    "num": 283,
+    "title": "Data Types Interview Questions"
+  },
+  {
+    "num": 284,
+    "title": "Functions Interview Questions"
+  },
+  {
+    "num": 285,
+    "title": "Array Interview Questions"
+  },
+  {
+    "num": 286,
+    "title": "Object Interview Questions"
+  },
+  {
+    "num": 287,
+    "title": "DOM Interview Questions"
+  },
+  {
+    "num": 288,
+    "title": "Event Interview Questions"
+  },
+  {
+    "num": 289,
+    "title": "Async JavaScript Questions"
+  },
+  {
+    "num": 290,
+    "title": "Promise Questions"
+  },
+  {
+    "num": 291,
+    "title": "API Questions"
+  },
+  {
+    "num": 292,
+    "title": "ES6 Questions"
+  },
+  {
+    "num": 293,
+    "title": "Output-Based Questions"
+  },
+  {
+    "num": 294,
+    "title": "Coding Interview Questions"
+  },
+  {
+    "num": 295,
+    "title": "Common JavaScript Mistakes"
+  }
+]
