@@ -1,9 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '../theme-provider';
-import { Moon, Sun, Search } from 'lucide-react';
+import { Moon, Sun, Search, LogOut } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 export function Navbar() {
   const { theme, setTheme } = useTheme();
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login');
+    } catch (error) {
+      console.error('Failed to log out:', error);
+    }
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full glass border-b">
@@ -33,6 +45,16 @@ export function Navbar() {
           >
             {theme === "dark" ? <Sun className="w-5 h-5 text-warning" /> : <Moon className="w-5 h-5 text-secondary" />}
           </button>
+          {currentUser && (
+            <button
+              onClick={handleLogout}
+              title="Logout"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 border border-red-200 dark:border-red-800 hover:border-red-400 transition-all duration-200"
+            >
+              <LogOut className="w-4 h-4" />
+              <span className="hidden sm:inline">Logout</span>
+            </button>
+          )}
         </div>
       </div>
     </nav>
