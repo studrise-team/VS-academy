@@ -2246,4 +2246,196 @@ export const devopsContentBatch6 = {
         "Jenkins Docs — https://www.jenkins.io/doc/"
     ]
 },
+  "devops_ssl_tls": {
+    "id": "devops_ssl_tls",
+    "title": "138. SSL/TLS",
+    "difficulty": "BeginnerReading time: 5–8 min",
+    "readingTime": "5–8 min",
+    "osSpecific": false,
+    "definition": "SSL/TLS is a practical DevOps concept that helps make software delivery or operations more repeatable.",
+    "whyUseIt": "It reduces manual effort or improves reliability, feedback, collaboration or security.",
+    "keyConcepts": [
+        {
+            "term": "Syntax / Workflow",
+            "desc": "Understanding the command or workflow steps."
+        },
+        {
+            "term": "Output",
+            "desc": "Verifying the expected result."
+        }
+    ],
+    "codeExample": "SSL/TLS\\nUnderstand → Configure → Verify → Automate",
+    "expectedOutput": "The student can demonstrate the basic behavior of SSL/TLS and explain where it fits.",
+    "explanation": [
+        {
+            "code": "Explanation",
+            "desc": "Start with the problem addressed by SSL/TLS, perform the smallest working example, verify the result, then automate it."
+        }
+    ],
+    "realWorldExample": "A software team uses SSL/TLS as one step in a larger build, release or operations workflow.",
+    "commonMistakes": [
+        {
+            "error": "Skipping verification",
+            "code": "",
+            "suffix": ""
+        },
+        {
+            "error": "copying production configuration into a lab",
+            "code": "",
+            "suffix": ""
+        },
+        {
+            "error": "ignoring security and cleanup.",
+            "code": "",
+            "suffix": ""
+        }
+    ],
+    "bestPractices": [
+        "Use least privilege, version-control configuration, verify changes, automate repeatable work, protect secrets, document rollback, and test safely",
+        "before production."
+    ],
+    "practiceExercise": {
+        "task": "Create a small lab for SSL/TLS, change one variable, observe the result and write down what you learned.",
+        "expectedOutput": "Completed successfully",
+        "solution": "See explanation"
+    },
+    "interviewQuestions": [
+        {
+            "q": "What is SSL/TLS?",
+            "a": ""
+        },
+        {
+            "q": "Why is SSL/TLS useful in DevOps?",
+            "a": ""
+        },
+        {
+            "q": "Give a real-world example of SSL/TLS.",
+            "a": ""
+        },
+        {
+            "q": "What can go wrong and how would you troubleshoot it?",
+            "a": ""
+        },
+        {
+            "q": "What security or reliability consideration should you remember?",
+            "a": ""
+        }
+    ],
+    "quiz": [
+        {
+            "question": "Which approach is best when learning SSL/TLS?",
+            "options": [
+                "A. Memorize commands without understanding them",
+                "B. Understand the purpose, practice safely, verify the result and automate repeatable work",
+                "C. Use production settings immediately",
+                "D. Skip troubleshooting"
+            ],
+            "answer": "B",
+            "explanation": ""
+        }
+    ],
+    "quickRevision": [
+        "Key idea: SSL/TLS is a practical DevOps concept that helps make software delivery or operations more repeatable. Remember the purpose, working",
+        "example, verification, failure handling and safe automation."
+    ],
+    "references": [
+        ""
+    ]
+},
+  "devops_package": {
+    "id": "devops_package",
+    "title": "149. Package",
+    "difficulty": "BeginnerReading time: 5–8 min",
+    "readingTime": "5–8 min",
+    "osSpecific": false,
+    "definition": "Package is a practical DevOps concept that helps make software delivery or operations more repeatable.",
+    "whyUseIt": "It reduces manual effort or improves reliability, feedback, collaboration or security.",
+    "keyConcepts": [
+        {
+            "term": "Syntax / Workflow",
+            "desc": "Understanding the command or workflow steps."
+        },
+        {
+            "term": "Output",
+            "desc": "Verifying the expected result."
+        }
+    ],
+    "codeExample": "Package\\nUnderstand → Configure → Verify → Automate",
+    "expectedOutput": "The student can demonstrate the basic behavior of Package and explain where it fits.",
+    "explanation": [
+        {
+            "code": "Explanation",
+            "desc": "Start with the problem addressed by Package, perform the smallest working example, verify the result, then automate it."
+        }
+    ],
+    "realWorldExample": "A software team uses Package as one step in a larger build, release or operations workflow.",
+    "commonMistakes": [
+        {
+            "error": "Skipping verification",
+            "code": "",
+            "suffix": ""
+        },
+        {
+            "error": "copying production configuration into a lab",
+            "code": "",
+            "suffix": ""
+        },
+        {
+            "error": "ignoring security and cleanup.",
+            "code": "",
+            "suffix": ""
+        }
+    ],
+    "bestPractices": [
+        "Use least privilege, version-control configuration, verify changes, automate repeatable work, protect secrets, document rollback, and test safely",
+        "before production."
+    ],
+    "practiceExercise": {
+        "task": "Create a small lab for Package, change one variable, observe the result and write down what you learned.",
+        "expectedOutput": "Completed successfully",
+        "solution": "See explanation"
+    },
+    "interviewQuestions": [
+        {
+            "q": "What is Package?",
+            "a": ""
+        },
+        {
+            "q": "Why is Package useful in DevOps?",
+            "a": ""
+        },
+        {
+            "q": "Give a real-world example of Package.",
+            "a": ""
+        },
+        {
+            "q": "What can go wrong and how would you troubleshoot it?",
+            "a": ""
+        },
+        {
+            "q": "What security or reliability consideration should you remember?",
+            "a": ""
+        }
+    ],
+    "quiz": [
+        {
+            "question": "Which approach is best when learning Package?",
+            "options": [
+                "A. Memorize commands without understanding them",
+                "B. Understand the purpose, practice safely, verify the result and automate repeatable work",
+                "C. Use production settings immediately",
+                "D. Skip troubleshooting"
+            ],
+            "answer": "B",
+            "explanation": ""
+        }
+    ],
+    "quickRevision": [
+        "Key idea: Package is a practical DevOps concept that helps make software delivery or operations more repeatable. Remember the purpose, working",
+        "example, verification, failure handling and safe automation."
+    ],
+    "references": [
+        ""
+    ]
+},
 };

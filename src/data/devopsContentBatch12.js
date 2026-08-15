@@ -2227,4 +2227,196 @@ export const devopsContentBatch12 = {
         "AWS DevOps Guidance — https://aws.amazon.com/devops/"
     ]
 },
+  "devops_vulnerability_scanning": {
+    "id": "devops_vulnerability_scanning",
+    "title": "285. Vulnerability Scanning",
+    "difficulty": "BeginnerReading time: 5–8 min",
+    "readingTime": "5–8 min",
+    "osSpecific": false,
+    "definition": "Vulnerability Scanning is a practical DevOps concept that helps make software delivery or operations more repeatable.",
+    "whyUseIt": "It reduces manual effort or improves reliability, feedback, collaboration or security.",
+    "keyConcepts": [
+        {
+            "term": "Syntax / Workflow",
+            "desc": "Understanding the command or workflow steps."
+        },
+        {
+            "term": "Output",
+            "desc": "Verifying the expected result."
+        }
+    ],
+    "codeExample": "Vulnerability Scanning\\nUnderstand → Configure → Verify → Automate",
+    "expectedOutput": "The student can demonstrate the basic behavior of Vulnerability Scanning and explain where it fits.",
+    "explanation": [
+        {
+            "code": "Explanation",
+            "desc": "Start with the problem addressed by Vulnerability Scanning, perform the smallest working example, verify the result, then automate it."
+        }
+    ],
+    "realWorldExample": "A software team uses Vulnerability Scanning as one step in a larger build, release or operations workflow.",
+    "commonMistakes": [
+        {
+            "error": "Skipping verification",
+            "code": "",
+            "suffix": ""
+        },
+        {
+            "error": "copying production configuration into a lab",
+            "code": "",
+            "suffix": ""
+        },
+        {
+            "error": "ignoring security and cleanup.",
+            "code": "",
+            "suffix": ""
+        }
+    ],
+    "bestPractices": [
+        "Use least privilege, version-control configuration, verify changes, automate repeatable work, protect secrets, document rollback, and test safely",
+        "before production."
+    ],
+    "practiceExercise": {
+        "task": "Create a small lab for Vulnerability Scanning, change one variable, observe the result and write down what you learned.",
+        "expectedOutput": "Completed successfully",
+        "solution": "See explanation"
+    },
+    "interviewQuestions": [
+        {
+            "q": "What is Vulnerability Scanning?",
+            "a": ""
+        },
+        {
+            "q": "Why is Vulnerability Scanning useful in DevOps?",
+            "a": ""
+        },
+        {
+            "q": "Give a real-world example of Vulnerability Scanning.",
+            "a": ""
+        },
+        {
+            "q": "What can go wrong and how would you troubleshoot it?",
+            "a": ""
+        },
+        {
+            "q": "What security or reliability consideration should you remember?",
+            "a": ""
+        }
+    ],
+    "quiz": [
+        {
+            "question": "Which approach is best when learning Vulnerability Scanning?",
+            "options": [
+                "A. Memorize commands without understanding them",
+                "B. Understand the purpose, practice safely, verify the result and automate repeatable work",
+                "C. Use production settings immediately",
+                "D. Skip troubleshooting"
+            ],
+            "answer": "B",
+            "explanation": ""
+        }
+    ],
+    "quickRevision": [
+        "Key idea: Vulnerability Scanning is a practical DevOps concept that helps make software delivery or operations more repeatable. Remember the",
+        "purpose, working example, verification, failure handling and safe automation."
+    ],
+    "references": [
+        ""
+    ]
+},
+  "devops_fault_tolerance": {
+    "id": "devops_fault_tolerance",
+    "title": "296. Fault Tolerance",
+    "difficulty": "AdvancedReading time: 12–18 min",
+    "readingTime": "12–18 min",
+    "osSpecific": false,
+    "definition": "Fault Tolerance is a practical DevOps concept that helps make software delivery or operations more repeatable.",
+    "whyUseIt": "It reduces manual effort or improves reliability, feedback, collaboration or security.",
+    "keyConcepts": [
+        {
+            "term": "Syntax / Workflow",
+            "desc": "Understanding the command or workflow steps."
+        },
+        {
+            "term": "Output",
+            "desc": "Verifying the expected result."
+        }
+    ],
+    "codeExample": "Fault Tolerance\\nUnderstand → Configure → Verify → Automate",
+    "expectedOutput": "The student can demonstrate the basic behavior of Fault Tolerance and explain where it fits.",
+    "explanation": [
+        {
+            "code": "Explanation",
+            "desc": "Start with the problem addressed by Fault Tolerance, perform the smallest working example, verify the result, then automate it."
+        }
+    ],
+    "realWorldExample": "A software team uses Fault Tolerance as one step in a larger build, release or operations workflow.",
+    "commonMistakes": [
+        {
+            "error": "Skipping verification",
+            "code": "",
+            "suffix": ""
+        },
+        {
+            "error": "copying production configuration into a lab",
+            "code": "",
+            "suffix": ""
+        },
+        {
+            "error": "ignoring security and cleanup.",
+            "code": "",
+            "suffix": ""
+        }
+    ],
+    "bestPractices": [
+        "Use least privilege, version-control configuration, verify changes, automate repeatable work, protect secrets, document rollback, and test safely",
+        "before production."
+    ],
+    "practiceExercise": {
+        "task": "Create a small lab for Fault Tolerance, change one variable, observe the result and write down what you learned.",
+        "expectedOutput": "Completed successfully",
+        "solution": "See explanation"
+    },
+    "interviewQuestions": [
+        {
+            "q": "What is Fault Tolerance?",
+            "a": ""
+        },
+        {
+            "q": "Why is Fault Tolerance useful in DevOps?",
+            "a": ""
+        },
+        {
+            "q": "Give a real-world example of Fault Tolerance.",
+            "a": ""
+        },
+        {
+            "q": "What can go wrong and how would you troubleshoot it?",
+            "a": ""
+        },
+        {
+            "q": "What security or reliability consideration should you remember?",
+            "a": ""
+        }
+    ],
+    "quiz": [
+        {
+            "question": "Which approach is best when learning Fault Tolerance?",
+            "options": [
+                "A. Memorize commands without understanding them",
+                "B. Understand the purpose, practice safely, verify the result and automate repeatable work",
+                "C. Use production settings immediately",
+                "D. Skip troubleshooting"
+            ],
+            "answer": "B",
+            "explanation": ""
+        }
+    ],
+    "quickRevision": [
+        "Key idea: Fault Tolerance is a practical DevOps concept that helps make software delivery or operations more repeatable. Remember the purpose,",
+        "working example, verification, failure handling and safe automation."
+    ],
+    "references": [
+        ""
+    ]
+},
 };
