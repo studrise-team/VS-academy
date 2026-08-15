@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Code2, Database, Layout, Terminal, GitBranch, BrainCircuit, Layers, FileCode, ArrowRight, Clock, BookOpen } from 'lucide-react';
+import { Code2, Database, Layout, Terminal, GitBranch, BrainCircuit, Layers, FileCode, ArrowRight, Clock, BookOpen, Server } from 'lucide-react';
 
 const subjects = [
   {
@@ -131,6 +131,22 @@ const subjects = [
     accent: '#ec4899',
     image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800',
     tags: ['ML', 'Neural Nets', 'Prompting'],
+  },
+  {
+    id: 'devops',
+    name: 'DevOps',
+    label: 'CI/CD & Infrastructure',
+    chapters: 22,
+    difficulty: 'Intermediate',
+    time: '40h',
+    icon: Server,
+    color: 'text-indigo-400',
+    glow: 'shadow-indigo-500/40',
+    border: 'hover:border-indigo-500/60',
+    bg: 'bg-indigo-500/10',
+    accent: '#6366f1',
+    image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=800',
+    tags: ['Docker', 'AWS', 'Kubernetes'],
   },
 ];
 

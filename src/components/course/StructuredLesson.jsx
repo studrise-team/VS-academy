@@ -10,6 +10,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
   const [notes, setNotes] = useState(() => localStorage.getItem(notesKey) || '');
   const [isCompleted, setIsCompleted] = useState(() => localStorage.getItem(completedKey) === 'true');
   const [isBookmarked, setIsBookmarked] = useState(() => localStorage.getItem(bookmarkKey) === 'true');
+  const [selectedOS, setSelectedOS] = useState(() => localStorage.getItem('preferred_os') || 'ubuntu');
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showQuizResults, setShowQuizResults] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -20,10 +21,10 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
   useEffect(() => { localStorage.setItem(notesKey, notes); }, [notes, notesKey]);
   useEffect(() => { 
     localStorage.setItem(completedKey, isCompleted);
-    // Dispatch custom event to notify parent (SubjectView) of progress change
     window.dispatchEvent(new Event('progressUpdate'));
   }, [isCompleted, completedKey]);
   useEffect(() => { localStorage.setItem(bookmarkKey, isBookmarked); }, [isBookmarked, bookmarkKey]);
+  useEffect(() => { localStorage.setItem('preferred_os', selectedOS); }, [selectedOS]);
 
   // Reset states when content changes
   useEffect(() => {
@@ -33,8 +34,17 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
     setExpandedInterviewQ(null);
   }, [content]);
 
+  const getOSContent = (field) => {
+    if (!field) return null;
+    if (typeof field === 'string') return field;
+    if (typeof field === 'object') return field[selectedOS] || field['ubuntu'] || Object.values(field)[0];
+    return String(field);
+  };
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(content.codeExample);
+    const codeToCopy = getOSContent(content.codeExample);
+    if (!codeToCopy) return;
+    navigator.clipboard.writeText(codeToCopy);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -58,7 +68,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
             </button>
           </div>
         </div>
-        <div className="flex space-x-4">
+        <div className="flex flex-wrap items-center gap-4">
           <span className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-sm font-semibold">
             <Target className="w-4 h-4" />
             <span>{content.difficulty || 'Beginner'}</span>
@@ -67,6 +77,23 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
             <Clock className="w-4 h-4" />
             <span>{content.readingTime || '5 min'}</span>
           </span>
+          
+          {content.osSpecific && (
+            <div className="inline-flex items-center space-x-1 bg-slate-100 dark:bg-slate-800 rounded-lg p-1 border border-borderGlass no-print">
+              <button 
+                onClick={() => setSelectedOS('ubuntu')}
+                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${selectedOS === 'ubuntu' ? 'bg-primary text-white shadow-sm' : 'text-textSecondary hover:text-foreground'}`}
+              >
+                Ubuntu
+              </button>
+              <button 
+                onClick={() => setSelectedOS('amazon_linux')}
+                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${selectedOS === 'amazon_linux' ? 'bg-orange-500 text-white shadow-sm' : 'text-textSecondary hover:text-foreground'}`}
+              >
+                AWS Linux
+              </button>
+            </div>
+          )}
         </div>
       </header>
 
@@ -91,7 +118,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
         <section className="space-y-4">
           <h2 className="text-xl font-bold border-b border-borderGlass pb-2">Syntax</h2>
           <div className="bg-slate-900 rounded-xl p-5 overflow-x-auto text-sm text-sky-300 font-mono leading-relaxed border border-slate-800">
-            <pre>{content.syntax.split('\\n').join('\n')}</pre>
+            <pre>{getOSContent(content.syntax)?.split('\\n').join('\n')}</pre>
           </div>
         </section>
       )}
@@ -109,7 +136,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
             </div>
           </div>
           <div className="bg-slate-900 rounded-xl p-5 overflow-x-auto text-sm text-green-400 font-mono leading-relaxed border border-slate-800">
-            <pre>{content.codeExample.split('\\n').join('\n')}</pre>
+            <pre>{getOSContent(content.codeExample)?.split('\\n').join('\n')}</pre>
           </div>
 
           {/* Expected Output Box — shown for all SQL topics */}
@@ -124,7 +151,7 @@ export function StructuredLesson({ content, chapterId, subjectId }) {
                 <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest ml-3">⚡ Expected Output</span>
               </div>
               <div className="bg-slate-950 p-5 overflow-x-auto">
-                <pre className="text-sm text-amber-300 font-mono leading-relaxed whitespace-pre">{content.expectedOutput.split('\\n').join('\n')}</pre>
+                <pre className="text-sm text-amber-300 font-mono leading-relaxed whitespace-pre">{getOSContent(content.expectedOutput)?.split('\\n').join('\n')}</pre>
               </div>
             </div>
           )}

@@ -1,0 +1,1270 @@
+[
+  {
+    "id": "devops_what_is_devops",
+    "title": "1. What is DevOps?"
+  },
+  {
+    "id": "devops_why_devops",
+    "title": "2. Why DevOps?"
+  },
+  {
+    "id": "devops_problems_before_devops",
+    "title": "3. Problems Before DevOps"
+  },
+  {
+    "id": "devops_devops_culture",
+    "title": "4. DevOps Culture"
+  },
+  {
+    "id": "devops_devops_lifecycle",
+    "title": "5. DevOps Lifecycle"
+  },
+  {
+    "id": "devops_dev_vs_ops",
+    "title": "6. Dev vs Ops"
+  },
+  {
+    "id": "devops_devops_engineer_role",
+    "title": "7. DevOps Engineer Role"
+  },
+  {
+    "id": "devops_devops_tools_overview",
+    "title": "8. DevOps Tools Overview"
+  },
+  {
+    "id": "devops_ci_vs_cd",
+    "title": "9. CI vs CD"
+  },
+  {
+    "id": "devops_continuous_integration",
+    "title": "10. Continuous Integration"
+  },
+  {
+    "id": "devops_continuous_delivery",
+    "title": "11. Continuous Delivery"
+  },
+  {
+    "id": "devops_continuous_deployment",
+    "title": "12. Continuous Deployment"
+  },
+  {
+    "id": "devops_devops_vs_agile",
+    "title": "13. DevOps vs Agile"
+  },
+  {
+    "id": "devops_devops_in_real_companies",
+    "title": "14. DevOps in Real Companies"
+  },
+  {
+    "id": "devops_linux_fundamentals",
+    "title": "15. Linux Fundamentals"
+  },
+  {
+    "id": "devops_linux_file_system",
+    "title": "16. Linux File System"
+  },
+  {
+    "id": "devops_linux_users_and_groups",
+    "title": "17. Linux Users and Groups"
+  },
+  {
+    "id": "devops_file_permissions",
+    "title": "18. File Permissions"
+  },
+  {
+    "id": "devops_chmod",
+    "title": "19. chmod"
+  },
+  {
+    "id": "devops_chown",
+    "title": "20. chown"
+  },
+  {
+    "id": "devops_processes",
+    "title": "21. Processes"
+  },
+  {
+    "id": "devops_services",
+    "title": "22. Services"
+  },
+  {
+    "id": "devops_systemctl",
+    "title": "23. systemctl"
+  },
+  {
+    "id": "devops_journalctl",
+    "title": "24. journalctl"
+  },
+  {
+    "id": "devops_ssh",
+    "title": "25. SSH"
+  },
+  {
+    "id": "devops_scp",
+    "title": "26. SCP"
+  },
+  {
+    "id": "devops_environment_variables",
+    "title": "27. Environment Variables"
+  },
+  {
+    "id": "devops_bash_scripting",
+    "title": "28. Bash Scripting"
+  },
+  {
+    "id": "devops_cron_jobs",
+    "title": "29. Cron Jobs"
+  },
+  {
+    "id": "devops_linux_networking_commands",
+    "title": "30. Linux Networking Commands"
+  },
+  {
+    "id": "devops_linux_log_management",
+    "title": "31. Linux Log Management"
+  },
+  {
+    "id": "devops_what_is_computer_networking",
+    "title": "32. What is Computer Networking?"
+  },
+  {
+    "id": "devops_ip_address",
+    "title": "33. IP Address"
+  },
+  {
+    "id": "devops_public_vs_private_ip",
+    "title": "34. Public vs Private IP"
+  },
+  {
+    "id": "devops_ipv4_vs_ipv6",
+    "title": "35. IPv4 vs IPv6"
+  },
+  {
+    "id": "devops_mac_address",
+    "title": "36. MAC Address"
+  },
+  {
+    "id": "devops_dns",
+    "title": "37. DNS"
+  },
+  {
+    "id": "devops_dhcp",
+    "title": "38. DHCP"
+  },
+  {
+    "id": "devops_http_vs_https",
+    "title": "39. HTTP vs HTTPS"
+  },
+  {
+    "id": "devops_tcp_vs_udp",
+    "title": "40. TCP vs UDP"
+  },
+  {
+    "id": "devops_ports",
+    "title": "41. Ports"
+  },
+  {
+    "id": "devops_firewalls",
+    "title": "42. Firewalls"
+  },
+  {
+    "id": "devops_nat",
+    "title": "43. NAT"
+  },
+  {
+    "id": "devops_load_balancing",
+    "title": "44. Load Balancing"
+  },
+  {
+    "id": "devops_reverse_proxy",
+    "title": "45. Reverse Proxy"
+  },
+  {
+    "id": "devops_proxy_vs_reverse_proxy",
+    "title": "46. Proxy vs Reverse Proxy"
+  },
+  {
+    "id": "devops_ssh",
+    "title": "47. SSH"
+  },
+  {
+    "id": "devops_common_networking_commands",
+    "title": "48. Common Networking Commands"
+  },
+  {
+    "id": "devops_what_is_version_control",
+    "title": "49. What is Version Control?"
+  },
+  {
+    "id": "devops_git_vs_github",
+    "title": "50. Git vs GitHub"
+  },
+  {
+    "id": "devops_git_installation",
+    "title": "51. Git Installation"
+  },
+  {
+    "id": "devops_git_init",
+    "title": "52. git init"
+  },
+  {
+    "id": "devops_git_status",
+    "title": "53. git status"
+  },
+  {
+    "id": "devops_git_add",
+    "title": "54. git add"
+  },
+  {
+    "id": "devops_git_commit",
+    "title": "55. git commit"
+  },
+  {
+    "id": "devops_git_push",
+    "title": "56. git push"
+  },
+  {
+    "id": "devops_git_pull",
+    "title": "57. git pull"
+  },
+  {
+    "id": "devops_git_clone",
+    "title": "58. git clone"
+  },
+  {
+    "id": "devops_branches",
+    "title": "59. Branches"
+  },
+  {
+    "id": "devops_merge",
+    "title": "60. Merge"
+  },
+  {
+    "id": "devops_merge_conflicts",
+    "title": "61. Merge Conflicts"
+  },
+  {
+    "id": "devops_git_rebase",
+    "title": "62. Git Rebase"
+  },
+  {
+    "id": "devops_git_stash",
+    "title": "63. Git Stash"
+  },
+  {
+    "id": "devops_git_tags",
+    "title": "64. Git Tags"
+  },
+  {
+    "id": "devops_github_repository",
+    "title": "65. GitHub Repository"
+  },
+  {
+    "id": "devops_pull_requests",
+    "title": "66. Pull Requests"
+  },
+  {
+    "id": "devops_code_review",
+    "title": "67. Code Review"
+  },
+  {
+    "id": "devops_github_actions_introduction",
+    "title": "68. GitHub Actions Introduction"
+  },
+  {
+    "id": "devops_what_is_a_build_tool",
+    "title": "69. What is a Build Tool?"
+  },
+  {
+    "id": "devops_maven_introduction",
+    "title": "70. Maven Introduction"
+  },
+  {
+    "id": "devops_maven_installation",
+    "title": "71. Maven Installation"
+  },
+  {
+    "id": "devops_maven_project_structure",
+    "title": "72. Maven Project Structure"
+  },
+  {
+    "id": "devops_pom_xml",
+    "title": "73. pom.xml"
+  },
+  {
+    "id": "devops_maven_lifecycle",
+    "title": "74. Maven Lifecycle"
+  },
+  {
+    "id": "devops_dependencies",
+    "title": "75. Dependencies"
+  },
+  {
+    "id": "devops_plugins",
+    "title": "76. Plugins"
+  },
+  {
+    "id": "devops_mvn_clean",
+    "title": "77. mvn clean"
+  },
+  {
+    "id": "devops_mvn_compile",
+    "title": "78. mvn compile"
+  },
+  {
+    "id": "devops_mvn_test",
+    "title": "79. mvn test"
+  },
+  {
+    "id": "devops_mvn_package",
+    "title": "80. mvn package"
+  },
+  {
+    "id": "devops_artifact_management",
+    "title": "81. Artifact Management"
+  },
+  {
+    "id": "devops_nexus_repository",
+    "title": "82. Nexus Repository"
+  },
+  {
+    "id": "devops_why_testing",
+    "title": "83. Why Testing?"
+  },
+  {
+    "id": "devops_unit_testing",
+    "title": "84. Unit Testing"
+  },
+  {
+    "id": "devops_integration_testing",
+    "title": "85. Integration Testing"
+  },
+  {
+    "id": "devops_functional_testing",
+    "title": "86. Functional Testing"
+  },
+  {
+    "id": "devops_automated_testing",
+    "title": "87. Automated Testing"
+  },
+  {
+    "id": "devops_test_automation_in_ci_cd",
+    "title": "88. Test Automation in CI/CD"
+  },
+  {
+    "id": "devops_test_reports",
+    "title": "89. Test Reports"
+  },
+  {
+    "id": "devops_code_quality",
+    "title": "90. Code Quality"
+  },
+  {
+    "id": "devops_sonarqube_introduction",
+    "title": "91. SonarQube Introduction"
+  },
+  {
+    "id": "devops_static_code_analysis",
+    "title": "92. Static Code Analysis"
+  },
+  {
+    "id": "devops_quality_gates",
+    "title": "93. Quality Gates"
+  },
+  {
+    "id": "devops_what_is_docker",
+    "title": "94. What is Docker?"
+  },
+  {
+    "id": "devops_why_docker",
+    "title": "95. Why Docker?"
+  },
+  {
+    "id": "devops_virtual_machines_vs_containers",
+    "title": "96. Virtual Machines vs Containers"
+  },
+  {
+    "id": "devops_docker_architecture",
+    "title": "97. Docker Architecture"
+  },
+  {
+    "id": "devops_docker_engine",
+    "title": "98. Docker Engine"
+  },
+  {
+    "id": "devops_docker_cli",
+    "title": "99. Docker CLI"
+  },
+  {
+    "id": "devops_images",
+    "title": "100. Images"
+  },
+  {
+    "id": "devops_containers",
+    "title": "101. Containers"
+  },
+  {
+    "id": "devops_docker_hub",
+    "title": "102. Docker Hub"
+  },
+  {
+    "id": "devops_docker_pull",
+    "title": "103. docker pull"
+  },
+  {
+    "id": "devops_docker_run",
+    "title": "104. docker run"
+  },
+  {
+    "id": "devops_docker_ps",
+    "title": "105. docker ps"
+  },
+  {
+    "id": "devops_docker_stop",
+    "title": "106. docker stop"
+  },
+  {
+    "id": "devops_docker_start",
+    "title": "107. docker start"
+  },
+  {
+    "id": "devops_docker_restart",
+    "title": "108. docker restart"
+  },
+  {
+    "id": "devops_docker_rm",
+    "title": "109. docker rm"
+  },
+  {
+    "id": "devops_docker_images",
+    "title": "110. docker images"
+  },
+  {
+    "id": "devops_docker_rmi",
+    "title": "111. docker rmi"
+  },
+  {
+    "id": "devops_docker_logs",
+    "title": "112. docker logs"
+  },
+  {
+    "id": "devops_docker_exec",
+    "title": "113. docker exec"
+  },
+  {
+    "id": "devops_dockerfile",
+    "title": "114. Dockerfile"
+  },
+  {
+    "id": "devops_docker_build",
+    "title": "115. Docker Build"
+  },
+  {
+    "id": "devops_docker_push",
+    "title": "116. Docker Push"
+  },
+  {
+    "id": "devops_docker_volumes",
+    "title": "117. Docker Volumes"
+  },
+  {
+    "id": "devops_docker_networks",
+    "title": "118. Docker Networks"
+  },
+  {
+    "id": "devops_docker_environment_variables",
+    "title": "119. Docker Environment Variables"
+  },
+  {
+    "id": "devops_what_is_docker_compose",
+    "title": "120. What is Docker Compose?"
+  },
+  {
+    "id": "devops_docker_compose_yml",
+    "title": "121. docker-compose.yml"
+  },
+  {
+    "id": "devops_multiple_containers",
+    "title": "122. Multiple Containers"
+  },
+  {
+    "id": "devops_environment_variables",
+    "title": "123. Environment Variables"
+  },
+  {
+    "id": "devops_volumes",
+    "title": "124. Volumes"
+  },
+  {
+    "id": "devops_networks",
+    "title": "125. Networks"
+  },
+  {
+    "id": "devops_service_dependencies",
+    "title": "126. Service Dependencies"
+  },
+  {
+    "id": "devops_build_vs_image",
+    "title": "127. Build vs Image"
+  },
+  {
+    "id": "devops_docker_compose_commands",
+    "title": "128. Docker Compose Commands"
+  },
+  {
+    "id": "devops_multi_container_application",
+    "title": "129. Multi-Container Application"
+  },
+  {
+    "id": "devops_deploying_application_with_compose",
+    "title": "130. Deploying Application with Compose"
+  },
+  {
+    "id": "devops_what_is_a_web_server",
+    "title": "131. What is a Web Server?"
+  },
+  {
+    "id": "devops_apache_vs_nginx",
+    "title": "132. Apache vs Nginx"
+  },
+  {
+    "id": "devops_installing_nginx",
+    "title": "133. Installing Nginx"
+  },
+  {
+    "id": "devops_nginx_configuration",
+    "title": "134. Nginx Configuration"
+  },
+  {
+    "id": "devops_serving_static_websites",
+    "title": "135. Serving Static Websites"
+  },
+  {
+    "id": "devops_reverse_proxy",
+    "title": "136. Reverse Proxy"
+  },
+  {
+    "id": "devops_load_balancing",
+    "title": "137. Load Balancing"
+  },
+  {
+    "id": "devops_ssl_tls",
+    "title": "138. SSL/TLS"
+  },
+  {
+    "id": "devops_https_configuration",
+    "title": "139. HTTPS Configuration"
+  },
+  {
+    "id": "devops_domain_configuration",
+    "title": "140. Domain Configuration"
+  },
+  {
+    "id": "devops_nginx_logs",
+    "title": "141. Nginx Logs"
+  },
+  {
+    "id": "devops_what_is_ci_cd",
+    "title": "142. What is CI/CD?"
+  },
+  {
+    "id": "devops_ci_cd_pipeline",
+    "title": "143. CI/CD Pipeline"
+  },
+  {
+    "id": "devops_pipeline_stages",
+    "title": "144. Pipeline Stages"
+  },
+  {
+    "id": "devops_source",
+    "title": "145. Source"
+  },
+  {
+    "id": "devops_build",
+    "title": "146. Build"
+  },
+  {
+    "id": "devops_test",
+    "title": "147. Test"
+  },
+  {
+    "id": "devops_code_quality",
+    "title": "148. Code Quality"
+  },
+  {
+    "id": "devops_package",
+    "title": "149. Package"
+  },
+  {
+    "id": "devops_docker_build",
+    "title": "150. Docker Build"
+  },
+  {
+    "id": "devops_docker_push",
+    "title": "151. Docker Push"
+  },
+  {
+    "id": "devops_deployment",
+    "title": "152. Deployment"
+  },
+  {
+    "id": "devops_monitoring",
+    "title": "153. Monitoring"
+  },
+  {
+    "id": "devops_jenkins_introduction",
+    "title": "154. Jenkins Introduction"
+  },
+  {
+    "id": "devops_jenkins_installation",
+    "title": "155. Jenkins Installation"
+  },
+  {
+    "id": "devops_jenkins_dashboard",
+    "title": "156. Jenkins Dashboard"
+  },
+  {
+    "id": "devops_jenkins_jobs",
+    "title": "157. Jenkins Jobs"
+  },
+  {
+    "id": "devops_jenkins_pipeline",
+    "title": "158. Jenkins Pipeline"
+  },
+  {
+    "id": "devops_jenkinsfile",
+    "title": "159. Jenkinsfile"
+  },
+  {
+    "id": "devops_webhooks",
+    "title": "160. Webhooks"
+  },
+  {
+    "id": "devops_github_jenkins",
+    "title": "161. GitHub + Jenkins"
+  },
+  {
+    "id": "devops_automated_deployment",
+    "title": "162. Automated Deployment"
+  },
+  {
+    "id": "devops_github_actions_introduction",
+    "title": "163. GitHub Actions Introduction"
+  },
+  {
+    "id": "devops_workflow",
+    "title": "164. Workflow"
+  },
+  {
+    "id": "devops_events",
+    "title": "165. Events"
+  },
+  {
+    "id": "devops_jobs",
+    "title": "166. Jobs"
+  },
+  {
+    "id": "devops_steps",
+    "title": "167. Steps"
+  },
+  {
+    "id": "devops_runners",
+    "title": "168. Runners"
+  },
+  {
+    "id": "devops_actions",
+    "title": "169. Actions"
+  },
+  {
+    "id": "devops_secrets",
+    "title": "170. Secrets"
+  },
+  {
+    "id": "devops_environment_variables",
+    "title": "171. Environment Variables"
+  },
+  {
+    "id": "devops_build_pipeline",
+    "title": "172. Build Pipeline"
+  },
+  {
+    "id": "devops_test_pipeline",
+    "title": "173. Test Pipeline"
+  },
+  {
+    "id": "devops_docker_pipeline",
+    "title": "174. Docker Pipeline"
+  },
+  {
+    "id": "devops_deployment_pipeline",
+    "title": "175. Deployment Pipeline"
+  },
+  {
+    "id": "devops_what_is_cloud_computing",
+    "title": "176. What is Cloud Computing?"
+  },
+  {
+    "id": "devops_iaas",
+    "title": "177. IaaS"
+  },
+  {
+    "id": "devops_paas",
+    "title": "178. PaaS"
+  },
+  {
+    "id": "devops_saas",
+    "title": "179. SaaS"
+  },
+  {
+    "id": "devops_aws_introduction",
+    "title": "180. AWS Introduction"
+  },
+  {
+    "id": "devops_aws_global_infrastructure",
+    "title": "181. AWS Global Infrastructure"
+  },
+  {
+    "id": "devops_regions",
+    "title": "182. Regions"
+  },
+  {
+    "id": "devops_availability_zones",
+    "title": "183. Availability Zones"
+  },
+  {
+    "id": "devops_aws_management_console",
+    "title": "184. AWS Management Console"
+  },
+  {
+    "id": "devops_iam",
+    "title": "185. IAM"
+  },
+  {
+    "id": "devops_users",
+    "title": "186. Users"
+  },
+  {
+    "id": "devops_groups",
+    "title": "187. Groups"
+  },
+  {
+    "id": "devops_policies",
+    "title": "188. Policies"
+  },
+  {
+    "id": "devops_roles",
+    "title": "189. Roles"
+  },
+  {
+    "id": "devops_ec2",
+    "title": "190. EC2"
+  },
+  {
+    "id": "devops_ec2_instance_types",
+    "title": "191. EC2 Instance Types"
+  },
+  {
+    "id": "devops_ami",
+    "title": "192. AMI"
+  },
+  {
+    "id": "devops_security_groups",
+    "title": "193. Security Groups"
+  },
+  {
+    "id": "devops_key_pairs",
+    "title": "194. Key Pairs"
+  },
+  {
+    "id": "devops_elastic_ip",
+    "title": "195. Elastic IP"
+  },
+  {
+    "id": "devops_ebs",
+    "title": "196. EBS"
+  },
+  {
+    "id": "devops_s3",
+    "title": "197. S3"
+  },
+  {
+    "id": "devops_s3_buckets",
+    "title": "198. S3 Buckets"
+  },
+  {
+    "id": "devops_s3_objects",
+    "title": "199. S3 Objects"
+  },
+  {
+    "id": "devops_s3_permissions",
+    "title": "200. S3 Permissions"
+  },
+  {
+    "id": "devops_cloudwatch",
+    "title": "201. CloudWatch"
+  },
+  {
+    "id": "devops_route_53",
+    "title": "202. Route 53"
+  },
+  {
+    "id": "devops_load_balancer",
+    "title": "203. Load Balancer"
+  },
+  {
+    "id": "devops_auto_scaling",
+    "title": "204. Auto Scaling"
+  },
+  {
+    "id": "devops_vpc",
+    "title": "205. VPC"
+  },
+  {
+    "id": "devops_vpc",
+    "title": "206. VPC"
+  },
+  {
+    "id": "devops_subnets",
+    "title": "207. Subnets"
+  },
+  {
+    "id": "devops_public_subnet",
+    "title": "208. Public Subnet"
+  },
+  {
+    "id": "devops_private_subnet",
+    "title": "209. Private Subnet"
+  },
+  {
+    "id": "devops_route_tables",
+    "title": "210. Route Tables"
+  },
+  {
+    "id": "devops_internet_gateway",
+    "title": "211. Internet Gateway"
+  },
+  {
+    "id": "devops_nat_gateway",
+    "title": "212. NAT Gateway"
+  },
+  {
+    "id": "devops_security_groups",
+    "title": "213. Security Groups"
+  },
+  {
+    "id": "devops_network_acl",
+    "title": "214. Network ACL"
+  },
+  {
+    "id": "devops_vpc_architecture",
+    "title": "215. VPC Architecture"
+  },
+  {
+    "id": "devops_multi_tier_architecture",
+    "title": "216. Multi-Tier Architecture"
+  },
+  {
+    "id": "devops_what_is_infrastructure_as_code",
+    "title": "217. What is Infrastructure as Code?"
+  },
+  {
+    "id": "devops_why_terraform",
+    "title": "218. Why Terraform?"
+  },
+  {
+    "id": "devops_terraform_architecture",
+    "title": "219. Terraform Architecture"
+  },
+  {
+    "id": "devops_installing_terraform",
+    "title": "220. Installing Terraform"
+  },
+  {
+    "id": "devops_providers",
+    "title": "221. Providers"
+  },
+  {
+    "id": "devops_resources",
+    "title": "222. Resources"
+  },
+  {
+    "id": "devops_variables",
+    "title": "223. Variables"
+  },
+  {
+    "id": "devops_outputs",
+    "title": "224. Outputs"
+  },
+  {
+    "id": "devops_terraform_init",
+    "title": "225. terraform init"
+  },
+  {
+    "id": "devops_terraform_plan",
+    "title": "226. terraform plan"
+  },
+  {
+    "id": "devops_terraform_apply",
+    "title": "227. terraform apply"
+  },
+  {
+    "id": "devops_terraform_destroy",
+    "title": "228. terraform destroy"
+  },
+  {
+    "id": "devops_state_files",
+    "title": "229. State Files"
+  },
+  {
+    "id": "devops_terraform_modules",
+    "title": "230. Terraform Modules"
+  },
+  {
+    "id": "devops_terraform_with_aws",
+    "title": "231. Terraform with AWS"
+  },
+  {
+    "id": "devops_provisioning_ec2",
+    "title": "232. Provisioning EC2"
+  },
+  {
+    "id": "devops_provisioning_vpc",
+    "title": "233. Provisioning VPC"
+  },
+  {
+    "id": "devops_terraform_best_practices",
+    "title": "234. Terraform Best Practices"
+  },
+  {
+    "id": "devops_what_is_kubernetes",
+    "title": "235. What is Kubernetes?"
+  },
+  {
+    "id": "devops_why_kubernetes",
+    "title": "236. Why Kubernetes?"
+  },
+  {
+    "id": "devops_docker_vs_kubernetes",
+    "title": "237. Docker vs Kubernetes"
+  },
+  {
+    "id": "devops_kubernetes_architecture",
+    "title": "238. Kubernetes Architecture"
+  },
+  {
+    "id": "devops_control_plane",
+    "title": "239. Control Plane"
+  },
+  {
+    "id": "devops_nodes",
+    "title": "240. Nodes"
+  },
+  {
+    "id": "devops_pods",
+    "title": "241. Pods"
+  },
+  {
+    "id": "devops_deployments",
+    "title": "242. Deployments"
+  },
+  {
+    "id": "devops_services",
+    "title": "243. Services"
+  },
+  {
+    "id": "devops_namespaces",
+    "title": "244. Namespaces"
+  },
+  {
+    "id": "devops_configmaps",
+    "title": "245. ConfigMaps"
+  },
+  {
+    "id": "devops_secrets",
+    "title": "246. Secrets"
+  },
+  {
+    "id": "devops_replicasets",
+    "title": "247. ReplicaSets"
+  },
+  {
+    "id": "devops_scaling",
+    "title": "248. Scaling"
+  },
+  {
+    "id": "devops_rolling_updates",
+    "title": "249. Rolling Updates"
+  },
+  {
+    "id": "devops_rollbacks",
+    "title": "250. Rollbacks"
+  },
+  {
+    "id": "devops_kubectl",
+    "title": "251. kubectl"
+  },
+  {
+    "id": "devops_creating_a_cluster",
+    "title": "252. Creating a Cluster"
+  },
+  {
+    "id": "devops_creating_a_pod",
+    "title": "253. Creating a Pod"
+  },
+  {
+    "id": "devops_creating_a_deployment",
+    "title": "254. Creating a Deployment"
+  },
+  {
+    "id": "devops_exposing_a_service",
+    "title": "255. Exposing a Service"
+  },
+  {
+    "id": "devops_configmap",
+    "title": "256. ConfigMap"
+  },
+  {
+    "id": "devops_secrets",
+    "title": "257. Secrets"
+  },
+  {
+    "id": "devops_volumes",
+    "title": "258. Volumes"
+  },
+  {
+    "id": "devops_persistent_volumes",
+    "title": "259. Persistent Volumes"
+  },
+  {
+    "id": "devops_ingress",
+    "title": "260. Ingress"
+  },
+  {
+    "id": "devops_health_checks",
+    "title": "261. Health Checks"
+  },
+  {
+    "id": "devops_resource_limits",
+    "title": "262. Resource Limits"
+  },
+  {
+    "id": "devops_horizontal_pod_autoscaling",
+    "title": "263. Horizontal Pod Autoscaling"
+  },
+  {
+    "id": "devops_deploying_docker_applications",
+    "title": "264. Deploying Docker Applications"
+  },
+  {
+    "id": "devops_what_is_monitoring",
+    "title": "265. What is Monitoring?"
+  },
+  {
+    "id": "devops_what_is_logging",
+    "title": "266. What is Logging?"
+  },
+  {
+    "id": "devops_metrics",
+    "title": "267. Metrics"
+  },
+  {
+    "id": "devops_logs",
+    "title": "268. Logs"
+  },
+  {
+    "id": "devops_alerts",
+    "title": "269. Alerts"
+  },
+  {
+    "id": "devops_application_monitoring",
+    "title": "270. Application Monitoring"
+  },
+  {
+    "id": "devops_server_monitoring",
+    "title": "271. Server Monitoring"
+  },
+  {
+    "id": "devops_aws_cloudwatch",
+    "title": "272. AWS CloudWatch"
+  },
+  {
+    "id": "devops_prometheus",
+    "title": "273. Prometheus"
+  },
+  {
+    "id": "devops_grafana",
+    "title": "274. Grafana"
+  },
+  {
+    "id": "devops_dashboards",
+    "title": "275. Dashboards"
+  },
+  {
+    "id": "devops_alerting",
+    "title": "276. Alerting"
+  },
+  {
+    "id": "devops_log_management",
+    "title": "277. Log Management"
+  },
+  {
+    "id": "devops_what_is_devsecops",
+    "title": "278. What is DevSecOps?"
+  },
+  {
+    "id": "devops_devops_vs_devsecops",
+    "title": "279. DevOps vs DevSecOps"
+  },
+  {
+    "id": "devops_security_in_ci_cd",
+    "title": "280. Security in CI/CD"
+  },
+  {
+    "id": "devops_secrets_management",
+    "title": "281. Secrets Management"
+  },
+  {
+    "id": "devops_dependency_scanning",
+    "title": "282. Dependency Scanning"
+  },
+  {
+    "id": "devops_container_security",
+    "title": "283. Container Security"
+  },
+  {
+    "id": "devops_code_scanning",
+    "title": "284. Code Scanning"
+  },
+  {
+    "id": "devops_vulnerability_scanning",
+    "title": "285. Vulnerability Scanning"
+  },
+  {
+    "id": "devops_security_testing",
+    "title": "286. Security Testing"
+  },
+  {
+    "id": "devops_least_privilege",
+    "title": "287. Least Privilege"
+  },
+  {
+    "id": "devops_secure_docker_images",
+    "title": "288. Secure Docker Images"
+  },
+  {
+    "id": "devops_microservices",
+    "title": "289. Microservices"
+  },
+  {
+    "id": "devops_monolith_vs_microservices",
+    "title": "290. Monolith vs Microservices"
+  },
+  {
+    "id": "devops_service_discovery",
+    "title": "291. Service Discovery"
+  },
+  {
+    "id": "devops_api_gateway",
+    "title": "292. API Gateway"
+  },
+  {
+    "id": "devops_load_balancing",
+    "title": "293. Load Balancing"
+  },
+  {
+    "id": "devops_high_availability",
+    "title": "294. High Availability"
+  },
+  {
+    "id": "devops_scalability",
+    "title": "295. Scalability"
+  },
+  {
+    "id": "devops_fault_tolerance",
+    "title": "296. Fault Tolerance"
+  },
+  {
+    "id": "devops_disaster_recovery",
+    "title": "297. Disaster Recovery"
+  },
+  {
+    "id": "devops_backup_strategy",
+    "title": "298. Backup Strategy"
+  },
+  {
+    "id": "devops_blue_green_deployment",
+    "title": "299. Blue-Green Deployment"
+  },
+  {
+    "id": "devops_canary_deployment",
+    "title": "300. Canary Deployment"
+  },
+  {
+    "id": "devops_rolling_deployment",
+    "title": "301. Rolling Deployment"
+  },
+  {
+    "id": "devops_infrastructure_automation",
+    "title": "302. Infrastructure Automation"
+  },
+  {
+    "id": "devops_deploy_html_website_on_linux",
+    "title": "303. Deploy HTML Website on Linux"
+  },
+  {
+    "id": "devops_deploy_react_application",
+    "title": "304. Deploy React Application"
+  },
+  {
+    "id": "devops_dockerize_react_application",
+    "title": "305. Dockerize React Application"
+  },
+  {
+    "id": "devops_dockerize_java_application",
+    "title": "306. Dockerize Java Application"
+  },
+  {
+    "id": "devops_java_mysql_docker_project",
+    "title": "307. Java + MySQL Docker Project"
+  },
+  {
+    "id": "devops_ci_pipeline_with_jenkins",
+    "title": "308. CI Pipeline with Jenkins"
+  },
+  {
+    "id": "devops_ci_cd_with_github_actions",
+    "title": "309. CI/CD with GitHub Actions"
+  },
+  {
+    "id": "devops_sonarqube_jenkins_pipeline",
+    "title": "310. SonarQube + Jenkins Pipeline"
+  },
+  {
+    "id": "devops_nexus_jenkins_pipeline",
+    "title": "311. Nexus + Jenkins Pipeline"
+  },
+  {
+    "id": "devops_aws_ec2_deployment",
+    "title": "312. AWS EC2 Deployment"
+  },
+  {
+    "id": "devops_aws_load_balanced_application",
+    "title": "313. AWS Load Balanced Application"
+  },
+  {
+    "id": "devops_terraform_aws_infrastructure",
+    "title": "314. Terraform AWS Infrastructure"
+  },
+  {
+    "id": "devops_kubernetes_application_deployment",
+    "title": "315. Kubernetes Application Deployment"
+  },
+  {
+    "id": "devops_monitoring_with_prometheus_grafana",
+    "title": "316. Monitoring with Prometheus + Grafana"
+  },
+  {
+    "id": "devops_complete_devops_project",
+    "title": "317. Complete DevOps Project"
+  }
+]
