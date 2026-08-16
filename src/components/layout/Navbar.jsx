@@ -22,7 +22,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center space-x-2 text-primary">
           <img src="/logo.png" alt="VS Academy Logo" className="w-9 h-9 object-contain rounded-lg" />
-          <span className="font-bold text-xl text-foreground">Swarnandhra Academy</span>
+          <span className="font-bold text-xl text-foreground">VS Academy</span>
         </Link>
         
 
